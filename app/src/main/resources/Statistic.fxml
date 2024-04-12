@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Statistic.fxml -->
+<?import javafx.scene.layout.AnchorPane?>
+
+<?import javafx.scene.layout.Pane?>
+<AnchorPane id="Statistic" prefHeight="112.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="StatisticController">
+    <children>
+        <Pane prefHeight="200.0" prefWidth="640.0" />
+    </children>
+</AnchorPane>
