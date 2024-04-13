@@ -1,13 +1,11 @@
 package ch.zhaw.it.pm2.jvmjourney.GameEngine;
 
 public class MovingObject extends Object {
-    private int x;
-    private int y;
+
     private int speed;
 
     public MovingObject(int x, int y, int speed) {
-        this.x = x;
-        this.y = y;
+        super(x, y);
         this.speed = speed;
     }
 
