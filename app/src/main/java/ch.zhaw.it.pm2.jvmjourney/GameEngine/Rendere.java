@@ -71,7 +71,6 @@ public class Renderer {
 
     private void transformContext(Object Object){
         Point2D centre = Object.getCenter();
-        Rotate r = new Rotate(Object.getRotation(), centre.getX(), centre.getY());
         context.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
     }
 }
