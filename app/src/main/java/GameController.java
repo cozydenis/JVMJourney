@@ -7,7 +7,8 @@ public class GameController {
     int level = 0;
 
     public GameController() {
-        Player player = new Player(0, 0, "src/main/resources/player.png", 1, 1, 1);
+        Player player = new Player(0, 0, "app/src/main/resources/Full.png", 6, 6, 1);
+        sprite = new ImageView(player.sprite[0][0]);
     }
 
 
