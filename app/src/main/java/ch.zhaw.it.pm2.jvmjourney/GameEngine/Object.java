@@ -10,9 +10,10 @@ public class Object {
     private int y;
     private BufferedImage[][] sprite;
 
-    public Object(int x, int y) {
+    public Object(int x, int y, String path, int rows, int cols) {
         this.x = x;
         this.y = y;
+        loadSprite(path, rows, cols);
     }
 
     public void loadSprite(String path, int rows, int cols) {
@@ -30,4 +31,6 @@ public class Object {
             e.printStackTrace();
         }
     }
+
+
 }

@@ -4,37 +4,12 @@ public class MovingObject extends Object {
 
     private int speed;
 
-    public MovingObject(int x, int y, int speed) {
-        super(x, y);
+    public MovingObject(int x, int y, String path, int rows, int cols, int speed) {
+        super(x, y, path, rows, cols);
         this.speed = speed;
     }
 
-    public void move() {
-        x += speed;
-        y += speed;
-    }
 
-    public void move(int x, int y) {
-        this.x += x;
-        this.y += y;
-    }
-
-    public void move(int x, int y, int speed) {
-        this.x += x * speed;
-        this.y += y * speed;
-    }
-
-
-
-    public void move(int x, int y, int speed, int time) {
-        this.x += x * speed * time;
-        this.y += y * speed * time;
-    }
-
-    public void move(int x, int y, int speed, int time, int acceleration) {
-        this.x += x * speed * time * acceleration;
-        this.y += y * speed * time * acceleration;
-    }
 
 
 
