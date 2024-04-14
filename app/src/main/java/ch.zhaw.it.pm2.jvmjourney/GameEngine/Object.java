@@ -6,13 +6,13 @@ import java.io.File;
 import java.io.IOException;
 
 public class Object {
-    private int x;
-    private int y;
+    protected PositionVector position;
+    protected PositionVector currentVelocity;
     private BufferedImage[][] sprite;
 
     public Object(int x, int y, String path, int rows, int cols) {
-        this.x = x;
-        this.y = y;
+        this.position = new PositionVector(x, y);
+        this.currentVelocity = Direction.NONE.vector;
         loadSprite(path, rows, cols);
     }
 
