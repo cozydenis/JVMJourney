@@ -13,41 +13,37 @@ public class GameController {
 
     public GameController() {
         player = new Player(0,0, "src/main/resources/player.png", 1, 1, 1);
+        setupKeyboardControls();
     }
 
     private void setupKeyboardControls() {
         sprite.getScene().setOnKeyPressed(this::handleKeyPressed);
         sprite.getScene().setOnKeyReleased(this::handleKeyReleased);
     }
-
     private void handleKeyPressed(KeyEvent event) {
-        switch (event.getCode()) {
-            case A:
-                player.accelerate(Direction.LEFT);
-                player.move();
-                break;
-            case D:
-                player.accelerate(Direction.RIGHT);
-                player.move();
-                break;
-            case SPACE:
-                //player.jump();
-                player.accelerate(Direction.UP);
-                player.move();
-                break;
-            case S:
-                //player.fastFall();
-                player.accelerate(Direction.DOWN);
-                player.move();
-                break;
-            default:
-                break;
+        if (!player.isInAir() || event.getCode() == KeyCode.SPACE) { // Allow horizontal movement always, vertical only if not in air or jumping
+            switch (event.getCode()) {
+                case A:
+                    player.accelerate(Direction.LEFT);
+                    break;
+                case D:
+                    player.accelerate(Direction.RIGHT);
+                    break;
+                case SPACE:
+                    player.jump();
+                    break;
+                case S:
+                    player.accelerate(Direction.DOWN);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
     private void handleKeyReleased(KeyEvent event) {
         if (event.getCode() == KeyCode.SPACE) {
-            player.endJump();
+            player.setInAir(true);  // Player remains in air after jumping until landing logic is triggered
         }
     }
 

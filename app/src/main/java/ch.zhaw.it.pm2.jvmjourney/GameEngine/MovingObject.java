@@ -3,6 +3,7 @@ package ch.zhaw.it.pm2.jvmjourney.GameEngine;
 public class MovingObject extends Object {
 
 
+    protected boolean inAir;
 
     private int speed;
 
@@ -16,10 +17,13 @@ public class MovingObject extends Object {
         int newX = position.getX() + currentVelocity.getX();
         int newY = position.getY() + currentVelocity.getY();
         position = new PositionVector(newX, newY);
+        if (inAir) {
+            accelerate(Direction.DOWN);  // Apply gravity if in the air
+        }
+    }
 
-
-        // Implement logic to check if player is touching the ground
-        // and set inAir to false accordingly
+    public boolean isInAir() {
+        return inAir;
     }
 
 
