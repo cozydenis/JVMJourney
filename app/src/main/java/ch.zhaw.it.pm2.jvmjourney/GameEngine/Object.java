@@ -33,4 +33,7 @@ public class Object {
     }
 
 
+    public PositionVector getPosition() {
+        return position;
+    }
 }

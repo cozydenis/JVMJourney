@@ -16,6 +16,14 @@ public class MovingObject extends Object {
     public void move() {
         int newX = position.getX() + currentVelocity.getX();
         int newY = position.getY() + currentVelocity.getY();
+
+        // Check boundaries for X
+        if (newX < GameConfig.MIN_X) {
+            newX = GameConfig.MIN_X;  // Prevent moving left beyond the left boundary
+        } else if (newX > GameConfig.MAX_X) {
+            newX = GameConfig.MAX_X;  // Prevent moving right beyond the right boundary
+        }
+
         position = new PositionVector(newX, newY);
         if (inAir) {
             accelerate(Direction.DOWN);  // Apply gravity if in the air
