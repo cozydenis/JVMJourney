@@ -12,6 +12,7 @@ public class Object {
     protected PositionVector position;
     protected PositionVector currentVelocity;
     private Image sprite;
+    float rotation = 0.1f;
 
     float scale = 1;
 
@@ -20,7 +21,7 @@ public class Object {
         this.currentVelocity = Direction.NONE.vector;
         //loadSprite(path, rows, cols);
         try {
-            sprite = new Image(new File(path).toURI().toString());
+            sprite = new Image(path);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -73,14 +74,18 @@ public class Object {
     }
 
     public double getWidth() {
-        return sprite.getWidth();
+        return sprite.getWidth() * scale;
     }
 
     public double getHeight() {
-        return sprite.getHeight();
+        return sprite.getHeight() * scale;
     }
 
     public Point2D getCenter() {
         return new Point2D(position.getX() + getWidth() / 2, position.getY() + getHeight() / 2);
+    }
+
+    public double getRotation() {
+        return rotation;
     }
 }

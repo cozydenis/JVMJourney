@@ -42,6 +42,10 @@ public class MovingObject extends Object {
         super.currentVelocity = currentVelocity.add(acceleration.vector);
     }
 
+    public void update() {
+        move();
+    }
+
 
 
 

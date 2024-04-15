@@ -8,6 +8,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -25,18 +26,18 @@ public class GameController implements Initializable {
 
 
     public GameController() {
-        player = new Player(0, 0, "app/src/main/resources/Basic_human_drawing.png", 1, 1, 1);
-        sprite = new ImageView(player.getImage());
-        //setupKeyboardControls();
+        player = new Player(0, 0, "Basic_human_drawing.png", 1, 1, 1);
+
     }
 
       @Override
    public void initialize(URL location, ResourceBundle resources) {
-//
         initialiseCanvas();
-//
-        player.setPosition(350, 200);
-//        //player.setScale(0.5f);
+
+        player.setPosition(50, 50);
+        player.setScale(0.2f);
+
+
 //
        Renderer renderer = new Renderer(this.gameCanvas);
        renderer.addObject(player);
@@ -46,12 +47,14 @@ public class GameController implements Initializable {
             public void tick(float secondsSinceLastFrame) {
                 renderer.prepare();
 //
-//                //updatePlayerMovement(secondsSinceLastFrame);
-//
+                updatePlayerMovement(secondsSinceLastFrame);
+                player.update();
                 renderer.render();
             }
         };
         timer.start();
+
+        //setupKeyboardControls();
     }
 
     private void initialiseCanvas() {
@@ -59,41 +62,58 @@ public class GameController implements Initializable {
         gameCanvas.heightProperty().bind(Game.heightProperty());
     }
 
-    private void setupKeyboardControls() {
-        sprite.getScene().setOnKeyPressed(this::handleKeyPressed);
-        sprite.getScene().setOnKeyReleased(this::handleKeyReleased);
-    }
+//    private void setupKeyboardControls() {
+//        sprite.getScene().setOnKeyPressed(this::handleKeyPressed);
+//        sprite.getScene().setOnKeyReleased(this::handleKeyReleased);
+//    }
 
-    private void handleKeyPressed(KeyEvent event) {
-        if (!player.isInAir() || event.getCode() == KeyCode.SPACE) { // Allow horizontal movement always, vertical only if not in air or jumping
-            switch (event.getCode()) {
-                case A:
-                    if (player.getPosition().getX() > GameConfig.MIN_X) {
-                        player.accelerate(Direction.LEFT);
-                    }
-                    break;
-                case D:
-                    if (player.getPosition().getX() < GameConfig.MAX_X) {
-                        player.accelerate(Direction.RIGHT);
-                    }
-                    break;
-                case SPACE:
-                    player.jump();
-                    break;
-                case S:
-                    player.accelerate(Direction.DOWN);
-                    break;
-                default:
-                    break;
-            }
+    private void updatePlayerMovement(float frameDuration) {
+        if (keys.isDown(KeyCode.UP)) {
+            player.jump();
+
+        } else if (keys.isDown(KeyCode.DOWN)) {
+            player.accelerate(Direction.DOWN);
         }
-    }
+        if (keys.isDown(KeyCode.RIGHT)) {
+            player.accelerate(Direction.RIGHT);
 
-    private void handleKeyReleased(KeyEvent event) {
-        if (event.getCode() == KeyCode.SPACE) {
-            player.setInAir(true);  // Player remains in air after jumping until landing logic is triggered
+        } else if (keys.isDown(KeyCode.LEFT)) {
+            player.accelerate(Direction.LEFT);
         }
+        player.update();
     }
-
-
 }
+
+//    private void handleKeyPressed(KeyEvent event) {
+//        if (!player.isInAir() || event.getCode() == KeyCode.SPACE) { // Allow horizontal movement always, vertical only if not in air or jumping
+//            switch (event.getCode()) {
+//                case A:
+//                    if (player.getPosition().getX() > GameConfig.MIN_X) {
+//                        player.accelerate(Direction.LEFT);
+//                    }
+//                    break;
+//                case D:
+//                    if (player.getPosition().getX() < GameConfig.MAX_X) {
+//                        player.accelerate(Direction.RIGHT);
+//                    }
+//                    break;
+//                case SPACE:
+//                    player.jump();
+//                    break;
+//                case S:
+//                    player.accelerate(Direction.DOWN);
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
+//    }
+//
+//    private void handleKeyReleased(KeyEvent event) {
+//        if (event.getCode() == KeyCode.SPACE) {
+//            player.setInAir(true);  // Player remains in air after jumping until landing logic is triggered
+//        }
+//    }
+
+
+
