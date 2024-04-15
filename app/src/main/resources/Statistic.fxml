@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Statistic.fxml -->
+
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<?import javafx.scene.layout.Pane?>
-<AnchorPane id="Statistic" prefHeight="112.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="StatisticController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="your.package.Controller">
     <children>
-        <Pane prefHeight="200.0" prefWidth="640.0" />
+        <LineChart fx:id="lineChart" title="Memory usage during time" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <xAxis>
+                <NumberAxis autoRanging="true" forceZeroInRange="false" label="Seconds" side="BOTTOM" upperBound="59.0" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis autoRanging="false" label="Memory usage (%)" side="LEFT" upperBound="100" />
+            </yAxis>
+        </LineChart>
     </children>
 </AnchorPane>
