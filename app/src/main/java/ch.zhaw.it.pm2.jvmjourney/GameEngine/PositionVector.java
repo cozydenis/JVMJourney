@@ -26,12 +26,12 @@ public final class PositionVector {
     /**
      * horizontal value (position / velocity).
      */
-    private final int x;
+    private int x;
 
     /**
      * vertical value (position / velocity).
      */
-    private final int y;
+    private int y;
 
 
     /**
@@ -118,5 +118,13 @@ public final class PositionVector {
 
     public Double distance(PositionVector a) {
         return Math.sqrt(Math.pow(a.getX() - this.getX(), 2) + Math.pow(a.getY() - this.getY(), 2));
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 }

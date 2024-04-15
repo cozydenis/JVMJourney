@@ -4,10 +4,13 @@
 
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.canvas.Canvas?>
 <AnchorPane fx:id="Game" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameController">
     <children>
         <Pane prefHeight="200.0" prefWidth="640.0" >
             <children>
+                <Canvas fx:id="gameCanvas" height="450.0" width="750.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                        AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
                 <ImageView fx:id="sprite" />
             </children>
     </Pane>

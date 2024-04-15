@@ -11,9 +11,8 @@ import java.io.IOException;
 public class Object {
     protected PositionVector position;
     protected PositionVector currentVelocity;
-    private BufferedImage[][] sprite;
-    //sprites not working so using another image
-    private Image image;
+    private Image sprite;
+
     float scale = 1;
 
     public Object(int x, int y, String path, int rows, int cols) {
@@ -21,31 +20,45 @@ public class Object {
         this.currentVelocity = Direction.NONE.vector;
         //loadSprite(path, rows, cols);
         try {
-            image = new Image(new File(path).toURI().toString());
+            sprite = new Image(new File(path).toURI().toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void loadSprite(String path, int rows, int cols) {
-        try {
-            BufferedImage spriteSheet = ImageIO.read(new File(path));
-            final int width = spriteSheet.getWidth();
-            final int height = spriteSheet.getHeight();
-            sprite = new BufferedImage[rows][cols];
-            for (int i = 0; i < rows; i++) {
-                for (int j = 0; j < cols; j++) {
-                    sprite[i][j] = spriteSheet.getSubimage(j * width/cols, i * height/rows, width/cols, height/rows);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    // TODO: Make for animation
+//    public void loadSprite(String path, int rows, int cols) {
+//        try {
+//            BufferedImage spriteSheet = ImageIO.read(new File(path));
+//            final int width = spriteSheet.getWidth();
+//            final int height = spriteSheet.getHeight();
+//            sprite = new BufferedImage[rows][cols];
+//            for (int i = 0; i < rows; i++) {
+//                for (int j = 0; j < cols; j++) {
+//                    sprite[i][j] = spriteSheet.getSubimage(j * width/cols, i * height/rows, width/cols, height/rows);
+//                }
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+    public void setScale(float scale) {
+        this.scale = scale;
+    }
+
+    public void update() {
+        position.add(currentVelocity);
     }
 
 
     public PositionVector getPosition() {
         return position;
+    }
+
+    public void setPosition(int x, int y) {
+        position.setX(x);
+        position.setY(y);
     }
 
     public Point2D getDrawPosition() {
@@ -55,16 +68,16 @@ public class Object {
     public Image getImage() {
 
         // TODO: Fix the sprite loading
-        //return sprite[0][0];
-        return image;
+        return sprite;
+
     }
 
     public double getWidth() {
-        return sprite[0][0].getWidth();
+        return sprite.getWidth();
     }
 
     public double getHeight() {
-        return sprite[0][0].getHeight();
+        return sprite.getHeight();
     }
 
     public Point2D getCenter() {
