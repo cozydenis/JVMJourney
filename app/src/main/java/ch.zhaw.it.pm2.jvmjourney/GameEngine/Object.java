@@ -12,12 +12,19 @@ public class Object {
     protected PositionVector position;
     protected PositionVector currentVelocity;
     private BufferedImage[][] sprite;
+    //sprites not working so using another image
+    private Image image;
     float scale = 1;
 
     public Object(int x, int y, String path, int rows, int cols) {
         this.position = new PositionVector(x, y);
         this.currentVelocity = Direction.NONE.vector;
-        loadSprite(path, rows, cols);
+        //loadSprite(path, rows, cols);
+        try {
+            image = new Image(new File(path).toURI().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void loadSprite(String path, int rows, int cols) {
@@ -47,7 +54,9 @@ public class Object {
 
     public Image getImage() {
 
-        return sprite[0][0];
+        // TODO: Fix the sprite loading
+        //return sprite[0][0];
+        return image;
     }
 
     public double getWidth() {
@@ -59,5 +68,6 @@ public class Object {
     }
 
     public Point2D getCenter() {
+        return new Point2D(position.getX() + getWidth() / 2, position.getY() + getHeight() / 2);
     }
 }

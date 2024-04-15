@@ -4,11 +4,12 @@ import ch.zhaw.it.pm2.jvmjourney.GameEngine.Direction;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.Object;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.MovingObject;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.GameConfig;
+import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
 
-public class GameController {
+public class GameController{
 
     public static final int MAX_X = 750;  // just an example needs to be adjusted to actual value
     public static final int MIN_X = 0;
@@ -19,7 +20,7 @@ public class GameController {
 
 
     public GameController() {
-        player = new Player(0,0, "src/main/resources/player.png", 1, 1, 1);
+        player = new Player(0,0, "app/src/main/resources/Basic_human_drawing.png", 1, 1, 1);
         setupKeyboardControls();
     }
 
