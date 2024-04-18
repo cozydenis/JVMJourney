@@ -26,12 +26,12 @@ public final class PositionVector {
     /**
      * horizontal value (position / velocity).
      */
-    private int x;
+    private double x;
 
     /**
      * vertical value (position / velocity).
      */
-    private int y;
+    private double y;
 
 
     /**
@@ -40,7 +40,7 @@ public final class PositionVector {
      * @param x horizontal value (position or velocity)
      * @param y vertical value (position or velocity)
      */
-    public PositionVector(final int x, final int y) {
+    public PositionVector(final double x, final double y) {
         this.y = y;
         this.x = x;
     }
@@ -58,14 +58,14 @@ public final class PositionVector {
     /**
      * @return the horizontal value (position or velocity)
      */
-    public int getX() {
+    public double getX() {
         return this.x;
     }
 
     /**
      * @return vertical value (position or velocity)
      */
-    public int getY() {
+    public double getY() {
         return this.y;
     }
 
@@ -120,11 +120,11 @@ public final class PositionVector {
         return Math.sqrt(Math.pow(a.getX() - this.getX(), 2) + Math.pow(a.getY() - this.getY(), 2));
     }
 
-    public void setX(int x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public void setY(int y) {
+    public void setY(double y) {
         this.y = y;
     }
 }

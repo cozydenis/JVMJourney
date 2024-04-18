@@ -32,24 +32,43 @@ public class GameController implements Initializable {
 
       @Override
    public void initialize(URL location, ResourceBundle resources) {
+
         initialiseCanvas();
+        Renderer renderer = new Renderer(this.gameCanvas);
+
+          // Initialization code that might not depend on the scene being fully set up
+          Game.sceneProperty().addListener((obs, oldScene, newScene) -> {
+              if (newScene != null) {
+                  newScene.widthProperty().addListener((observable, oldValue, newValue) -> {
+                      GameConfig.setMaxWidth(newValue.intValue());
+                      System.out.println("Updated MAX_X to: " + GameConfig.getMaxX());
+                      // This will trigger a canvas redraw through the Renderer
+                      renderer.prepare();
+                      renderer.render();
+                  });
+              }
+          });
 
         player.setPosition(50, 50);
         player.setScale(0.2f);
 
 
 //
-       Renderer renderer = new Renderer(this.gameCanvas);
+       //Renderer renderer = new Renderer(this.gameCanvas);
        renderer.addObject(player);
 //
         GameLoopTimer timer = new GameLoopTimer() {
             @Override
             public void tick(float secondsSinceLastFrame) {
                 renderer.prepare();
-//
+
                 updatePlayerMovement(secondsSinceLastFrame);
-                player.update();
+                player.update();  // This should internally handle both movement and landing logic
                 renderer.render();
+
+                if (player.getPosition().getY() >= GameConfig.GROUNDLEVEL) {
+                    player.land();
+                }
             }
         };
         timer.start();
@@ -61,6 +80,8 @@ public class GameController implements Initializable {
         gameCanvas.widthProperty().bind(Game.widthProperty());
         gameCanvas.heightProperty().bind(Game.heightProperty());
     }
+
+
 
 //    private void setupKeyboardControls() {
 //        sprite.getScene().setOnKeyPressed(this::handleKeyPressed);
@@ -80,7 +101,6 @@ public class GameController implements Initializable {
         } else if (keys.isDown(KeyCode.LEFT)) {
             player.accelerate(Direction.LEFT);
         }
-        player.update();
     }
 }
 

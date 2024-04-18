@@ -2,6 +2,7 @@ package ch.zhaw.it.pm2.jvmjourney.GameEngine;
 
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
+import javafx.scene.canvas.GraphicsContext;
 
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
@@ -27,6 +28,16 @@ public class Object {
         }
     }
 
+    public void draw(GraphicsContext gc) {
+        if (sprite != null) {
+            double width = sprite.getWidth() * scale;
+            double height = sprite.getHeight() * scale;
+            double drawX = position.getX() - width / 2;
+            double drawY = position.getY() - height / 2;
+
+            gc.drawImage(sprite, drawX, drawY, width, height);
+        }
+    }
     // TODO: Make for animation
 //    public void loadSprite(String path, int rows, int cols) {
 //        try {
@@ -57,7 +68,7 @@ public class Object {
         return position;
     }
 
-    public void setPosition(int x, int y) {
+    public void setPosition(double x, double y) {
         position.setX(x);
         position.setY(y);
     }

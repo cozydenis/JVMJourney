@@ -61,17 +61,26 @@ public class Renderer{
             );
         }
 
+
+
+
         context.restore();
     }
 
+
     public void prepare(){
+        context.clearRect(0,0, canvas.getWidth(),canvas.getHeight());
+
         context.setFill( new Color(0.68, 0.68, 0.68, 1.0) );
         context.fillRect(0,0, canvas.getWidth(),canvas.getHeight());
     }
 
     private void transformContext(Object Object){
+        context.save();
         Point2D centre = Object.getCenter();
         Rotate r = new Rotate(Object.getRotation(), centre.getX(), centre.getY());
         context.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
+
+        context.restore();
     }
 }
