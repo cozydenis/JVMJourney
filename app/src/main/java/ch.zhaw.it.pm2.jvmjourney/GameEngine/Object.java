@@ -7,42 +7,35 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.ImageView;
 
 public class Object {
     protected PositionVector position;
     protected PositionVector currentVelocity;
-    private Image sprite;
     float rotation = 0.1f;
+
+
+    private  Image imageView;
 
     float scale = 1;
 
-    public Object(int x, int y, String path, int rows, int cols) {
+    public Object(int x, int y, String path) {
+        loadSprite(path);
         this.position = new PositionVector(x, y);
         this.currentVelocity = Direction.NONE.vector;
-        //loadSprite(path, rows, cols);
-        try {
-            sprite = new Image(path);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+
+
     }
 
     // TODO: Make for animation
-//    public void loadSprite(String path, int rows, int cols) {
-//        try {
-//            BufferedImage spriteSheet = ImageIO.read(new File(path));
-//            final int width = spriteSheet.getWidth();
-//            final int height = spriteSheet.getHeight();
-//            sprite = new BufferedImage[rows][cols];
-//            for (int i = 0; i < rows; i++) {
-//                for (int j = 0; j < cols; j++) {
-//                    sprite[i][j] = spriteSheet.getSubimage(j * width/cols, i * height/rows, width/cols, height/rows);
-//                }
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+   public void loadSprite(String path) {
+
+       imageView = new Image(path);
+
+
+    }
 
     public void setScale(float scale) {
         this.scale = scale;
@@ -68,17 +61,16 @@ public class Object {
 
     public Image getImage() {
 
-        // TODO: Fix the sprite loading
-        return sprite;
+        return imageView;
 
     }
 
     public double getWidth() {
-        return sprite.getWidth() * scale;
+        return imageView.getWidth() * scale;
     }
 
     public double getHeight() {
-        return sprite.getHeight() * scale;
+        return imageView.getHeight() * scale;
     }
 
     public Point2D getCenter() {

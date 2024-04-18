@@ -1,14 +1,25 @@
 package ch.zhaw.it.pm2.jvmjourney.GameEngine;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 public class MovingObject extends Object {
+
 
 
     protected boolean inAir;
 
     private int speed;
 
-    public MovingObject(int x, int y, String path, int rows, int cols, int speed) {
-        super(x, y, path, rows, cols);
+    public MovingObject(int x, int y, String path) {
+        super(x, y, path);
+
+
+    }
+
+    public void loadSprite(String path) {
+        Image spriteSheet = new Image(path);
+
 
     }
 

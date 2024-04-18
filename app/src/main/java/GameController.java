@@ -26,7 +26,8 @@ public class GameController implements Initializable {
 
 
     public GameController() {
-        player = new Player(0, 0, "Basic_human_drawing.png", 1, 1, 1);
+        player = new Player(0, 0, "walking.png", 6, 6, 1);
+
 
     }
 
@@ -34,8 +35,9 @@ public class GameController implements Initializable {
    public void initialize(URL location, ResourceBundle resources) {
         initialiseCanvas();
 
+
         player.setPosition(50, 50);
-        player.setScale(0.2f);
+        player.setScale(1f);
 
 
 //
@@ -80,7 +82,6 @@ public class GameController implements Initializable {
         } else if (keys.isDown(KeyCode.LEFT)) {
             player.accelerate(Direction.LEFT);
         }
-        player.update();
     }
 }
 
