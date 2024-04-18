@@ -28,6 +28,8 @@ public class MovingObject extends Object {
         int newX = position.getX() + currentVelocity.getX();
         int newY = position.getY() + currentVelocity.getY();
 
+
+
         // Check boundaries for X
         if (newX < GameConfig.MIN_X) {
             newX = GameConfig.MIN_X;  // Prevent moving left beyond the left boundary
@@ -51,6 +53,14 @@ public class MovingObject extends Object {
             throw new IllegalArgumentException("Illegal acceleration: acceleration cannot be null");
         }
         super.currentVelocity = currentVelocity.add(acceleration.vector);
+    }
+
+    public void flip(){
+        if (this.rotation == 0){
+            this.rotation = 180;
+        } else {
+            this.rotation = 0;
+        }
     }
 
     public void update() {
