@@ -16,7 +16,7 @@ public class Object {
     float rotation = 0.1f;
 
 
-    private  Image imageView;
+    ImageView imageView;
 
     float scale = 1;
 
@@ -32,7 +32,7 @@ public class Object {
     // TODO: Make for animation
    public void loadSprite(String path) {
 
-       imageView = new Image(path);
+       imageView = new ImageView(path);
 
 
     }
@@ -59,18 +59,18 @@ public class Object {
         return new Point2D(position.getX(), position.getY());
     }
 
-    public Image getImage() {
+    public ImageView getImage() {
 
         return imageView;
 
     }
 
     public double getWidth() {
-        return imageView.getWidth() * scale;
+        return imageView.getImage().getWidth() * scale;
     }
 
     public double getHeight() {
-        return imageView.getHeight() * scale;
+        return imageView.getImage().getHeight() * scale;
     }
 
     public Point2D getCenter() {

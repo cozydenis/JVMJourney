@@ -1,9 +1,12 @@
 package ch.zhaw.it.pm2.jvmjourney.GameEngine;
 
 import javafx.geometry.Point2D;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 
@@ -53,7 +56,7 @@ public class Renderer{
 
             Point2D pos = Object.getDrawPosition();
             context.drawImage(
-                    Object.getImage(),
+                    Object.getImage().getImage(),
                     pos.getX(),
                     pos.getY(),
                     Object.getWidth(),
@@ -73,5 +76,8 @@ public class Renderer{
         Point2D centre = Object.getCenter();
         Rotate r = new Rotate(Object.getRotation(), centre.getX(), centre.getY());
         context.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
+
+
+
     }
 }

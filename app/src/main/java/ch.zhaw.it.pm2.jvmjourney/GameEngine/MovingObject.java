@@ -8,6 +8,7 @@ public class MovingObject extends Object {
 
 
     protected boolean inAir;
+    private boolean goingRight;
 
     private int speed;
 
@@ -18,7 +19,7 @@ public class MovingObject extends Object {
     }
 
     public void loadSprite(String path) {
-        Image spriteSheet = new Image(path);
+        super.loadSprite(path);
 
 
     }
@@ -27,6 +28,19 @@ public class MovingObject extends Object {
     public void move() {
         int newX = position.getX() + currentVelocity.getX();
         int newY = position.getY() + currentVelocity.getY();
+
+        if (currentVelocity.getX() > 0) {
+            if (!goingRight) {
+                goingRight = true;
+                flip();
+            }
+
+        } else if (currentVelocity.getX() < 0) {
+            if (goingRight) {
+               goingRight = false;
+                flip();
+            }
+        }
 
 
 
@@ -56,10 +70,11 @@ public class MovingObject extends Object {
     }
 
     public void flip(){
-        if (this.rotation == 0){
-            this.rotation = 180;
+        System.out.println("flip");
+        if (imageView.getScaleX() == 1) {
+            imageView.setScaleX(-1); // flip to left
         } else {
-            this.rotation = 0;
+            imageView.setScaleX(1); // flip to right
         }
     }
 
