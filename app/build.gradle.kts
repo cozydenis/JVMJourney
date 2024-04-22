@@ -28,9 +28,9 @@ dependencies {
     implementation(libs.guava)
 
 
-        implementation("org.openjfx:javafx-swing:16") // Add JavaFX Swing dependency
-        implementation("org.openjfx:javafx-controls:16") // Add JavaFX controls dependency
-        implementation("org.openjfx:javafx-fxml:16") // Add JavaFX FXML dependency
+    implementation("org.openjfx:javafx-swing:17") // Update JavaFX Swing dependency
+    implementation("org.openjfx:javafx-controls:17") // Update JavaFX controls dependency
+    implementation("org.openjfx:javafx-fxml:17") // Add JavaFX FXML dependency
         // Add other JavaFX dependencies if needed
 }
 

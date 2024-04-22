@@ -69,13 +69,8 @@ public class MovingObject extends Object {
         super.currentVelocity = currentVelocity.add(acceleration.vector);
     }
 
+    // to override in subclasses
     public void flip(){
-        System.out.println("flip");
-        if (imageView.getScaleX() == 1) {
-            imageView.setScaleX(-1); // flip to left
-        } else {
-            imageView.setScaleX(1); // flip to right
-        }
     }
 
     public void update() {
