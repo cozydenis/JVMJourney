@@ -92,13 +92,13 @@ public class MovingObject extends Object {
         // Apply the current velocity to the position (s = s + v * t)
         position.add(currentVelocity);
 
-        if (currentVelocity.getX() > 0) {
+        if (currentVelocity.getX() < 0) {
             if (!goingRight) {
                 goingRight = true;
                 flip();
             }
 
-        } else if (currentVelocity.getX() < 0) {
+        } else if (currentVelocity.getX() > 0) {
             if (goingRight) {
                 goingRight = false;
                 flip();
