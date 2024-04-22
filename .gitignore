@@ -1,6 +1,11 @@
 # Compiled class file
 *.class
 
+#wierd file
+*.lock
+*.bin
+*.probe
+
 # Log file
 *.log
 
