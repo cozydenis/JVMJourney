@@ -21,6 +21,7 @@ public class Player extends MovingObject {
     // private ImageView imageView = new ImageView();
     private ImageView walkingSprite;
     private ImageView jumpingSprite;
+    private boolean flipped;
 
 
     public Player(int x, int y, String path, int frameWidth, int frameHeight, int numFrames) {
@@ -49,6 +50,8 @@ public class Player extends MovingObject {
 
    @Override
 public void flip() {
+        flipped = !flipped;
+        System.out.println(flipped);
     // Convert Image to BufferedImage
     BufferedImage bufferedImage = new BufferedImage((int)imageView.getImage().getWidth(), (int)imageView.getImage().getHeight(), BufferedImage.TYPE_INT_ARGB);
     Graphics g = bufferedImage.getGraphics();
@@ -73,6 +76,9 @@ public void flip() {
         super.move();
 
         if (inAir) {
+            if (flipped) {
+                flip();
+            }
             imageView = jumpingSprite;
             // Apply gravity effect: v = v + a * t
             double gravityEffect = currentVelocity.getY() + GRAVITY * FRAME_RATE;
@@ -82,6 +88,9 @@ public void flip() {
 
             // Check if the player is below ground level and correct it.
             if (position.getY() > GameConfig.GROUNDLEVEL) {
+                if (flipped) {
+                    flip();
+                }
                 imageView = walkingSprite;
                 land();
             }
