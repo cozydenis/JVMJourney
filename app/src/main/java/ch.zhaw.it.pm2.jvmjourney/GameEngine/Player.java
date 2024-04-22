@@ -6,6 +6,10 @@ import javafx.scene.image.ImageView;
 
 public class Player extends MovingObject {
 
+    private static final double GRAVITY = 9.8; // Gravity constant
+    private static final double JUMP_STRENGTH = 20; // Initial jump strength
+    private static final double FRAME_RATE = 1.0 / 30.0; // Assuming 30 FPS for calculations
+
     private int frameWidth; // Width of each frame
     private int frameHeight; // Height of each frame
     private int numFrames;
@@ -41,21 +45,36 @@ public class Player extends MovingObject {
 
     @Override
     public void move() {
-        super.move();  // Apply current velocity
+        // Call move from the superclass.
+        super.move();
+
+        if (inAir) {
+            // Apply gravity effect: v = v + a * t
+            double gravityEffect = currentVelocity.getY() + GRAVITY * FRAME_RATE;
+            currentVelocity = new PositionVector(currentVelocity.getX(), gravityEffect);
+            // Apply the velocity to the position: s = s + v * t
+            position.setY(position.getY() + currentVelocity.getY() * FRAME_RATE);
+
+            // Check if the player is below ground level and correct it.
+            if (position.getY() > GameConfig.GROUNDLEVEL) {
+                land();
+            }
+        }
     }
 
     public void jump() {
         if (!inAir) {
-            accelerate(Direction.UP);  // Only jump if not already in the air
+            // Set the initial upward velocity for the jump.
+            currentVelocity = new PositionVector(currentVelocity.getX(), -JUMP_STRENGTH);
             inAir = true;
-            imageView = jumpingSprite;
         }
     }
 
     public void land() {
         this.inAir = false;
         imageView = walkingSprite;
-        this.currentVelocity = Direction.NONE.vector;  // Stop vertical movement when landing
+        position.setY(GameConfig.GROUNDLEVEL);
+        currentVelocity = new PositionVector(currentVelocity.getX(), 0);
     }
 
 
