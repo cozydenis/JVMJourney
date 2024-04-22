@@ -28,6 +28,7 @@ dependencies {
     implementation(libs.guava)
 
 
+
         implementation("org.openjfx:javafx-swing:17") // Add JavaFX Swing dependency
         implementation("org.openjfx:javafx-controls:17") // Add JavaFX controls dependency
         implementation("org.openjfx:javafx-fxml:17") // Add JavaFX FXML dependency
@@ -43,7 +44,7 @@ java {
 
 javafx {
     version = "21.0.2"
-    modules("javafx.controls", "javafx.fxml")
+    modules("javafx.controls", "javafx.fxml", "javafx.swing")
 }
 
 application {

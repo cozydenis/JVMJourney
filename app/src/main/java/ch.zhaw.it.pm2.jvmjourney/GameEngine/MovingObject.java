@@ -92,13 +92,13 @@ public class MovingObject extends Object {
         // Apply the current velocity to the position (s = s + v * t)
         position.add(currentVelocity);
 
-        if (currentVelocity.getX() > 0) {
+        if (currentVelocity.getX() < 0) {
             if (!goingRight) {
                 goingRight = true;
                 flip();
             }
 
-        } else if (currentVelocity.getX() < 0) {
+        } else if (currentVelocity.getX() > 0) {
             if (goingRight) {
                 goingRight = false;
                 flip();
@@ -155,13 +155,8 @@ public class MovingObject extends Object {
 
     }
 
+    // to override in subclasses
     public void flip(){
-        System.out.println("flip");
-        if (imageView.getScaleX() == 1) {
-            imageView.setScaleX(-1); // flip to left
-        } else {
-            imageView.setScaleX(1); // flip to right
-        }
     }
 
     public void update() {

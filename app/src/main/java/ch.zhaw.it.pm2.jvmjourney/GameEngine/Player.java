@@ -3,6 +3,11 @@ package ch.zhaw.it.pm2.jvmjourney.GameEngine;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.embed.swing.SwingFXUtils;
+import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
 
 public class Player extends MovingObject {
 
@@ -42,6 +47,25 @@ public class Player extends MovingObject {
 
     }
 
+   @Override
+public void flip() {
+    // Convert Image to BufferedImage
+    BufferedImage bufferedImage = new BufferedImage((int)imageView.getImage().getWidth(), (int)imageView.getImage().getHeight(), BufferedImage.TYPE_INT_ARGB);
+    Graphics g = bufferedImage.getGraphics();
+    g.drawImage(SwingFXUtils.fromFXImage(imageView.getImage(), null), 0, 0, null);
+    g.dispose();
+
+    // Perform flip operation
+    AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
+    tx.translate(-bufferedImage.getWidth(null), 0);
+    AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+    bufferedImage = op.filter(bufferedImage, null);
+
+    // Convert BufferedImage back to Image
+    Image flippedImage = SwingFXUtils.toFXImage(bufferedImage, null);
+    imageView.setImage(flippedImage);
+}
+
 
     @Override
     public void move() {
@@ -49,6 +73,7 @@ public class Player extends MovingObject {
         super.move();
 
         if (inAir) {
+            imageView = jumpingSprite;
             // Apply gravity effect: v = v + a * t
             double gravityEffect = currentVelocity.getY() + GRAVITY * FRAME_RATE;
             currentVelocity = new PositionVector(currentVelocity.getX(), gravityEffect);
@@ -57,6 +82,7 @@ public class Player extends MovingObject {
 
             // Check if the player is below ground level and correct it.
             if (position.getY() > GameConfig.GROUNDLEVEL) {
+                imageView = walkingSprite;
                 land();
             }
         }
