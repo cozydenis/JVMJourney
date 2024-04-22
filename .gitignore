@@ -31,3 +31,14 @@ build
 .idea/gradle.xml
 **/gradle
 ~/.gradle
+
+# Ignore Gradle and IDEA directories
+
+.idea/
+
+# Ignore all binary files
+*.bin
+
+# More specific ignore rules for commonly ignored patterns
+*~
+
