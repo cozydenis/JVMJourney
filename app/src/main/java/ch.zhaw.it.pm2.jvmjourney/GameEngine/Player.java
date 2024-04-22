@@ -73,6 +73,7 @@ public void flip() {
         super.move();
 
         if (inAir) {
+            imageView = jumpingSprite;
             // Apply gravity effect: v = v + a * t
             double gravityEffect = currentVelocity.getY() + GRAVITY * FRAME_RATE;
             currentVelocity = new PositionVector(currentVelocity.getX(), gravityEffect);
@@ -81,6 +82,7 @@ public void flip() {
 
             // Check if the player is below ground level and correct it.
             if (position.getY() > GameConfig.GROUNDLEVEL) {
+                imageView = walkingSprite;
                 land();
             }
         }
