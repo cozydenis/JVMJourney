@@ -1,7 +1,11 @@
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.*;
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.Object;
-import javafx.fxml.Initializable;
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.Direction;
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.GameConfig;
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.GameLoopTimer;
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.KeyPolling;
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.Player;
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.Renderer;
 import javafx.scene.canvas.Canvas;
+import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -14,8 +18,6 @@ import java.util.ResourceBundle;
 
 public class GameController implements Initializable {
 
-    public static final int MAX_X = 750;  // just an example needs to be adjusted to actual value
-    public static final int MIN_X = 0;
 
     public ImageView sprite;
     int level = 0;
@@ -31,45 +33,42 @@ public class GameController implements Initializable {
 
     }
 
-      @Override
-   public void initialize(URL location, ResourceBundle resources) {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         initialiseCanvas();
 
 
-          Renderer renderer = new Renderer(this.gameCanvas);
+        Renderer renderer = new Renderer(this.gameCanvas);
 
-          // Initialization code that might not depend on the scene being fully set up
-          Game.sceneProperty().addListener((obs, oldScene, newScene) -> {
-              if (newScene != null) {
-                  newScene.widthProperty().addListener((observable, oldValue, newValue) -> {
-                      GameConfig.setMaxWidth(newValue.intValue());
+        // Initialization code that might not depend on the scene being fully set up
+        Game.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) {
+                newScene.widthProperty().addListener((observable, oldValue, newValue) -> {
+                    GameConfig.setMaxWidth(newValue.intValue());
 
-                      // This will trigger a canvas redraw through the Renderer
-                      renderer.prepare();
-                      renderer.render();
-                  });
-                  newScene.heightProperty().addListener((observable, oldValue, newValue) -> {
+                    // This will trigger a canvas redraw through the Renderer
+                    renderer.prepare();
+                    renderer.render();
+                });
+                newScene.heightProperty().addListener((observable, oldValue, newValue) -> {
 
-                      // This will trigger a canvas redraw through the Renderer
-                      renderer.prepare();
-                      renderer.render();
-                  });
-              }
-          });
+                    // This will trigger a canvas redraw through the Renderer
+                    renderer.prepare();
+                    renderer.render();
+                });
+            }
+        });
 
         player.setPosition(50, GameConfig.GROUNDLEVEL);
         player.setScale(1f);
 
 
-//
-
-       renderer.addObject(player);
-//
+        renderer.addObject(player);
         GameLoopTimer timer = new GameLoopTimer() {
             @Override
             public void tick(float secondsSinceLastFrame) {
                 renderer.prepare();
-//
+
                 updatePlayerMovement(secondsSinceLastFrame);
                 player.update();
                 renderer.render();
@@ -77,18 +76,12 @@ public class GameController implements Initializable {
         };
         timer.start();
 
-        //setupKeyboardControls();
     }
 
     private void initialiseCanvas() {
         gameCanvas.widthProperty().bind(Game.widthProperty());
         gameCanvas.heightProperty().bind(Game.heightProperty());
     }
-
-//    private void setupKeyboardControls() {
-//        sprite.getScene().setOnKeyPressed(this::handleKeyPressed);
-//        sprite.getScene().setOnKeyReleased(this::handleKeyReleased);
-//    }
 
     private void updatePlayerMovement(float frameDuration) {
         if (keys.isDown(KeyCode.UP)) {
@@ -104,36 +97,6 @@ public class GameController implements Initializable {
     }
 }
 
-//    private void handleKeyPressed(KeyEvent event) {
-//        if (!player.isInAir() || event.getCode() == KeyCode.SPACE) { // Allow horizontal movement always, vertical only if not in air or jumping
-//            switch (event.getCode()) {
-//                case A:
-//                    if (player.getPosition().getX() > GameConfig.MIN_X) {
-//                        player.accelerate(Direction.LEFT);
-//                    }
-//                    break;
-//                case D:
-//                    if (player.getPosition().getX() < GameConfig.MAX_X) {
-//                        player.accelerate(Direction.RIGHT);
-//                    }
-//                    break;
-//                case SPACE:
-//                    player.jump();
-//                    break;
-//                case S:
-//                    player.accelerate(Direction.DOWN);
-//                    break;
-//                default:
-//                    break;
-//            }
-//        }
-//    }
-//
-//    private void handleKeyReleased(KeyEvent event) {
-//        if (event.getCode() == KeyCode.SPACE) {
-//            player.setInAir(true);  // Player remains in air after jumping until landing logic is triggered
-//        }
-//    }
 
 
 

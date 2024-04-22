@@ -28,33 +28,6 @@ public class MovingObject extends Object {
 
 
     public void move() {
-
-        /*
-        if (currentVelocity.getX() > 0) {
-            if (!goingRight) {
-                goingRight = true;
-                flip();
-            }
-
-        } else if (currentVelocity.getX() < 0) {
-            if (goingRight) {
-               goingRight = false;
-                flip();
-            }
-        }
-        */
-
-
-        /*
-        // Check boundaries for X
-        if (newX < GameConfig.MIN_X) {
-            newX = GameConfig.MIN_X;  // Prevent moving left beyond the left boundary
-        } else if (newX > GameConfig.MAX_X) {
-            newX = GameConfig.MAX_X;  // Prevent moving right beyond the right boundary
-        }
-        */
-
-
         // If on the ground, apply friction to horizontal movement
         if (!inAir) {
             double horizontalVelocity = currentVelocity.getX() * friction;
@@ -66,24 +39,6 @@ public class MovingObject extends Object {
 
             currentVelocity = new PositionVector(horizontalVelocity, currentVelocity.getY());
         }
-
-        // Apply the current velocity to the position (s = s + v * t)
-        //position.add(currentVelocity);
-
-        // Enforce maximum speeds
-        /*
-        if (Math.abs(currentVelocity.getX()) > maxSpeed) {
-            currentVelocity = new PositionVector(
-                    Math.signum(currentVelocity.getX()) * maxSpeed,
-                    currentVelocity.getY()
-            );
-        }
-        if (Math.abs(currentVelocity.getY()) > maxSpeed) {
-            currentVelocity = new PositionVector(
-                    currentVelocity.getX(),
-                    Math.signum(currentVelocity.getY()) * maxSpeed
-            );
-        }*/
 
         double newX = position.getX() + currentVelocity.getX();
         double newY = position.getY() + currentVelocity.getY();
@@ -113,7 +68,7 @@ public class MovingObject extends Object {
             finalNewX = maxX;
         }
 
-        position = new PositionVector(finalNewX, (int)newY);
+        position = new PositionVector(finalNewX, (int) newY);
         if (inAir) {
             accelerate(Direction.DOWN);  // Apply gravity if in the air
         }
@@ -156,16 +111,12 @@ public class MovingObject extends Object {
     }
 
     // to override in subclasses
-    public void flip(){
+    public void flip() {
     }
 
     public void update() {
         move();
     }
-
-
-
-
 
 
 }

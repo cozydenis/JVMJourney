@@ -4,6 +4,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.embed.swing.SwingFXUtils;
+
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
@@ -40,34 +41,29 @@ public class Player extends MovingObject {
         jumpingSprite = new ImageView("jumping.png");
         imageView = walkingSprite;
 
-        // due to time limitation the implementation of the sprite is chosen to be limited.
-//        Image spriteSheet = new Image(path);
-//        imageView.setViewport(new javafx.geometry.Rectangle2D(0, 0, frameWidth, frameHeight));
-//        imageView.setImage(spriteSheet);
-
 
     }
 
-   @Override
-public void flip() {
+    @Override
+    public void flip() {
         flipped = !flipped;
         System.out.println(flipped);
-    // Convert Image to BufferedImage
-    BufferedImage bufferedImage = new BufferedImage((int)imageView.getImage().getWidth(), (int)imageView.getImage().getHeight(), BufferedImage.TYPE_INT_ARGB);
-    Graphics g = bufferedImage.getGraphics();
-    g.drawImage(SwingFXUtils.fromFXImage(imageView.getImage(), null), 0, 0, null);
-    g.dispose();
+        // Convert Image to BufferedImage
+        BufferedImage bufferedImage = new BufferedImage((int) imageView.getImage().getWidth(), (int) imageView.getImage().getHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics g = bufferedImage.getGraphics();
+        g.drawImage(SwingFXUtils.fromFXImage(imageView.getImage(), null), 0, 0, null);
+        g.dispose();
 
-    // Perform flip operation
-    AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
-    tx.translate(-bufferedImage.getWidth(null), 0);
-    AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-    bufferedImage = op.filter(bufferedImage, null);
+        // Perform flip operation
+        AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
+        tx.translate(-bufferedImage.getWidth(null), 0);
+        AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+        bufferedImage = op.filter(bufferedImage, null);
 
-    // Convert BufferedImage back to Image
-    Image flippedImage = SwingFXUtils.toFXImage(bufferedImage, null);
-    imageView.setImage(flippedImage);
-}
+        // Convert BufferedImage back to Image
+        Image flippedImage = SwingFXUtils.toFXImage(bufferedImage, null);
+        imageView.setImage(flippedImage);
+    }
 
 
     @Override
