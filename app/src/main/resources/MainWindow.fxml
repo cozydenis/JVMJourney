@@ -5,8 +5,7 @@
 
 <VBox alignment="CENTER" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <!-- Other elements -->
-        <fx:include source="Statistic.fxml"/>
-        <fx:include source="Game.fxml"/>
+        <fx:include source="Statistic.fxml" />
+        <fx:include source="Game.fxml" />
     </children>
 </VBox>
