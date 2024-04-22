@@ -31,6 +31,7 @@
 hs_err_pid*
 replay_pid*
 
+
 # Ignore Gradle project-specific cache directory
 
 # Ignore Gradle build output directory
@@ -39,6 +40,9 @@ build
 .idea/gradle.xml
 **/gradle
 ~/.gradle
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
 
 # Ignore Gradle and IDEA directories
 
@@ -49,4 +53,5 @@ build
 
 # More specific ignore rules for commonly ignored patterns
 *~
+
 
