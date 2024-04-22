@@ -1,6 +1,11 @@
 # Compiled class file
 *.class
 
+#wierd file
+*.lock
+*.bin
+*.probe
+
 # Log file
 *.log
 
@@ -30,3 +35,18 @@ replay_pid*
 
 # Ignore Gradle build output directory
 build
+.gradle/
+.idea/gradle.xml
+**/gradle
+~/.gradle
+
+# Ignore Gradle and IDEA directories
+
+.idea/
+
+# Ignore all binary files
+*.bin
+
+# More specific ignore rules for commonly ignored patterns
+*~
+
