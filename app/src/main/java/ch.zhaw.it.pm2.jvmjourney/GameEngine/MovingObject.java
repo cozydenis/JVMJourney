@@ -5,7 +5,9 @@ import javafx.scene.image.ImageView;
 
 public class MovingObject extends Object {
 
-
+    private double friction = 0.95; // Represents frictional force, 5% reduction per frame
+    private double maxSpeed = 10; // Maximum speed in any direction
+    private double accelerationFactor = 0.5; // The rate of acceleration
 
     protected boolean inAir;
     private boolean goingRight;
@@ -26,9 +28,8 @@ public class MovingObject extends Object {
 
 
     public void move() {
-        int newX = position.getX() + currentVelocity.getX();
-        int newY = position.getY() + currentVelocity.getY();
 
+        /*
         if (currentVelocity.getX() > 0) {
             if (!goingRight) {
                 goingRight = true;
@@ -41,17 +42,78 @@ public class MovingObject extends Object {
                 flip();
             }
         }
+        */
 
 
-
+        /*
         // Check boundaries for X
         if (newX < GameConfig.MIN_X) {
             newX = GameConfig.MIN_X;  // Prevent moving left beyond the left boundary
         } else if (newX > GameConfig.MAX_X) {
             newX = GameConfig.MAX_X;  // Prevent moving right beyond the right boundary
         }
+        */
 
-        position = new PositionVector(newX, newY);
+
+        // If on the ground, apply friction to horizontal movement
+        if (!inAir) {
+            double horizontalVelocity = currentVelocity.getX() * friction;
+
+            // Set horizontal velocity to zero if it's less than the threshold
+            if (Math.abs(horizontalVelocity) < 0.4) {
+                horizontalVelocity = 0;
+            }
+
+            currentVelocity = new PositionVector(horizontalVelocity, currentVelocity.getY());
+        }
+
+        // Apply the current velocity to the position (s = s + v * t)
+        //position.add(currentVelocity);
+
+        // Enforce maximum speeds
+        /*
+        if (Math.abs(currentVelocity.getX()) > maxSpeed) {
+            currentVelocity = new PositionVector(
+                    Math.signum(currentVelocity.getX()) * maxSpeed,
+                    currentVelocity.getY()
+            );
+        }
+        if (Math.abs(currentVelocity.getY()) > maxSpeed) {
+            currentVelocity = new PositionVector(
+                    currentVelocity.getX(),
+                    Math.signum(currentVelocity.getY()) * maxSpeed
+            );
+        }*/
+
+        double newX = position.getX() + currentVelocity.getX();
+        double newY = position.getY() + currentVelocity.getY();
+
+
+        // Apply the current velocity to the position (s = s + v * t)
+        position.add(currentVelocity);
+
+        if (currentVelocity.getX() > 0) {
+            if (!goingRight) {
+                goingRight = true;
+                flip();
+            }
+
+        } else if (currentVelocity.getX() < 0) {
+            if (goingRight) {
+                goingRight = false;
+                flip();
+            }
+        }
+        int maxX = GameConfig.getMaxX();
+        // Check boundaries for X
+        int finalNewX = (int) newX;
+        if (finalNewX < GameConfig.MIN_X) {
+            finalNewX = GameConfig.MIN_X;
+        } else if (finalNewX > maxX) {
+            finalNewX = maxX;
+        }
+
+        position = new PositionVector(finalNewX, (int)newY);
         if (inAir) {
             accelerate(Direction.DOWN);  // Apply gravity if in the air
         }
@@ -66,7 +128,31 @@ public class MovingObject extends Object {
         if (acceleration == null) {
             throw new IllegalArgumentException("Illegal acceleration: acceleration cannot be null");
         }
-        super.currentVelocity = currentVelocity.add(acceleration.vector);
+        //super.currentVelocity = currentVelocity.add(acceleration.vector);
+
+        // Apply acceleration factor (a = F/m)
+        PositionVector accelerationVector = new PositionVector(
+                acceleration.vector.getX() * accelerationFactor,
+                acceleration.vector.getY() * accelerationFactor
+        );
+
+        // Update current velocity (v = u + a)
+        currentVelocity = currentVelocity.add(accelerationVector);
+
+        // Limit the velocity to the max speed after acceleration
+        if (Math.abs(currentVelocity.getX()) > maxSpeed) {
+            currentVelocity = new PositionVector(
+                    Math.signum(currentVelocity.getX()) * maxSpeed,
+                    currentVelocity.getY()
+            );
+        }
+        if (Math.abs(currentVelocity.getY()) > maxSpeed) {
+            currentVelocity = new PositionVector(
+                    currentVelocity.getX(),
+                    Math.signum(currentVelocity.getY()) * maxSpeed
+            );
+        }
+
     }
 
     // to override in subclasses

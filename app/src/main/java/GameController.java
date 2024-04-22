@@ -36,12 +36,33 @@ public class GameController implements Initializable {
         initialiseCanvas();
 
 
-        player.setPosition(50, 50);
+          Renderer renderer = new Renderer(this.gameCanvas);
+
+          // Initialization code that might not depend on the scene being fully set up
+          Game.sceneProperty().addListener((obs, oldScene, newScene) -> {
+              if (newScene != null) {
+                  newScene.widthProperty().addListener((observable, oldValue, newValue) -> {
+                      GameConfig.setMaxWidth(newValue.intValue());
+
+                      // This will trigger a canvas redraw through the Renderer
+                      renderer.prepare();
+                      renderer.render();
+                  });
+                  newScene.heightProperty().addListener((observable, oldValue, newValue) -> {
+
+                      // This will trigger a canvas redraw through the Renderer
+                      renderer.prepare();
+                      renderer.render();
+                  });
+              }
+          });
+
+        player.setPosition(50, GameConfig.GROUNDLEVEL);
         player.setScale(1f);
 
 
 //
-       Renderer renderer = new Renderer(this.gameCanvas);
+
        renderer.addObject(player);
 //
         GameLoopTimer timer = new GameLoopTimer() {
