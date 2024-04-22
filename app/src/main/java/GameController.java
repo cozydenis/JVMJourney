@@ -94,8 +94,6 @@ public class GameController implements Initializable {
         if (keys.isDown(KeyCode.UP)) {
             player.jump();
 
-        } else if (keys.isDown(KeyCode.DOWN)) {
-            player.accelerate(Direction.DOWN);
         }
         if (keys.isDown(KeyCode.RIGHT)) {
             player.accelerate(Direction.RIGHT);
