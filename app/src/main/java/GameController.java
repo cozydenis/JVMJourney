@@ -57,7 +57,7 @@ public class GameController implements Initializable {
               }
           });
 
-        player.setPosition(50, 50);
+        player.setPosition(50, GameConfig.GROUNDLEVEL);
         player.setScale(1f);
 
 
