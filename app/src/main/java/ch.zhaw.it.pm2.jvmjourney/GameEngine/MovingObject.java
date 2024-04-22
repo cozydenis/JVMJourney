@@ -58,6 +58,12 @@ public class MovingObject extends Object {
         // If on the ground, apply friction to horizontal movement
         if (!inAir) {
             double horizontalVelocity = currentVelocity.getX() * friction;
+
+            // Set horizontal velocity to zero if it's less than the threshold
+            if (Math.abs(horizontalVelocity) < 0.4) {
+                horizontalVelocity = 0;
+            }
+
             currentVelocity = new PositionVector(horizontalVelocity, currentVelocity.getY());
         }
 
@@ -65,6 +71,7 @@ public class MovingObject extends Object {
         //position.add(currentVelocity);
 
         // Enforce maximum speeds
+        /*
         if (Math.abs(currentVelocity.getX()) > maxSpeed) {
             currentVelocity = new PositionVector(
                     Math.signum(currentVelocity.getX()) * maxSpeed,
@@ -76,10 +83,12 @@ public class MovingObject extends Object {
                     currentVelocity.getX(),
                     Math.signum(currentVelocity.getY()) * maxSpeed
             );
-        }
+        }*/
 
         double newX = position.getX() + currentVelocity.getX();
         double newY = position.getY() + currentVelocity.getY();
+
+        System.out.println("newX: " +  (int) currentVelocity.getX() + " newY: " + (int)currentVelocity.getY());
 
         // Apply the current velocity to the position (s = s + v * t)
         position.add(currentVelocity);
