@@ -4,7 +4,7 @@ public class GameConfig {
     public static final int MIN_X = 0;
     public static int maxWidth = 750; // Default value
 
-    public static final int GROUNDLEVEL = 80;
+    public static final int GROUNDLEVEL = 135;
 
     public static int getMaxX() {
         return maxWidth;
