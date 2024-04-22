@@ -88,7 +88,6 @@ public class MovingObject extends Object {
         double newX = position.getX() + currentVelocity.getX();
         double newY = position.getY() + currentVelocity.getY();
 
-        System.out.println("newX: " +  (int) currentVelocity.getX() + " newY: " + (int)currentVelocity.getY());
 
         // Apply the current velocity to the position (s = s + v * t)
         position.add(currentVelocity);
