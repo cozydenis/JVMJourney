@@ -36,7 +36,6 @@ replay_pid*
 
 # Ignore Gradle build output directory
 build
-.gradle/
 .idea/gradle.xml
 **/gradle
 ~/.gradle
@@ -44,12 +43,7 @@ build
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-# Ignore Gradle and IDEA directories
 
-.idea/
-
-# Ignore all binary files
-*.bin
 
 # More specific ignore rules for commonly ignored patterns
 *~
