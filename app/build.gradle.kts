@@ -21,13 +21,17 @@ dependencies {
     // Use JUnit Jupiter for testing.
     testImplementation(libs.junit.jupiter)
 
+
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
     // This dependency is used by the application.
     implementation(libs.guava)
 
-        implementation("org.openjfx:javafx-controls:16") // Add JavaFX controls dependency
-        implementation("org.openjfx:javafx-fxml:16") // Add JavaFX FXML dependency
+
+
+        implementation("org.openjfx:javafx-swing:17") // Add JavaFX Swing dependency
+        implementation("org.openjfx:javafx-controls:17") // Add JavaFX controls dependency
+        implementation("org.openjfx:javafx-fxml:17") // Add JavaFX FXML dependency
         // Add other JavaFX dependencies if needed
 }
 
@@ -40,7 +44,7 @@ java {
 
 javafx {
     version = "21.0.2"
-    modules("javafx.controls", "javafx.fxml")
+    modules("javafx.controls", "javafx.fxml", "javafx.swing")
 }
 
 application {
