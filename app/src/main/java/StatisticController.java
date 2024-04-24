@@ -20,7 +20,7 @@ public class StatisticController {
     @FXML // Reference the axis from FXML, only if separately defined.
     private NumberAxis xAxis;
 
-    private List<XYChart.Series<Number, Number>> seriesList = new ArrayList<>();
+    private final List<XYChart.Series<Number, Number>> seriesList = new ArrayList<>();
     private int xSeriesData = 0;
     private final int maxDataPoints = 60;
 
@@ -60,7 +60,7 @@ public class StatisticController {
                     if (series.getName().equals(pool.getName())) {
                         javafx.application.Platform.runLater(() -> {
                             if (series.getData().size() >= maxDataPoints) {
-                                series.getData().remove(0);
+                                series.getData().removeFirst();
                             }
                             series.getData().add(new XYChart.Data<>(xSeriesData, usedMB));
                         });
@@ -73,7 +73,7 @@ public class StatisticController {
     }
 
     private void adjustXAxis() {
-        int lowerBound = xSeriesData - maxDataPoints + 1 > 0 ? xSeriesData - maxDataPoints + 1 : 0;
+        int lowerBound = Math.max(xSeriesData - maxDataPoints + 1, 0);
         xAxis.setLowerBound(lowerBound);
         xAxis.setUpperBound(lowerBound + maxDataPoints - 1);
     }
