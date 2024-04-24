@@ -1,3 +1,5 @@
+package statisticsController;
+
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -12,7 +14,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class StatisticController {
+public class MemoryController {
+    private final int UPDATE_PERIOD = 5;
 
     @FXML
     private LineChart<Number, Number> memoryUsageChart;
@@ -21,14 +24,14 @@ public class StatisticController {
     private NumberAxis xAxis;
 
     private final List<XYChart.Series<Number, Number>> seriesList = new ArrayList<>();
-    private int xSeriesData = 0;
+    private int xSeriesData = -5;
     private final int maxDataPoints = 60;
 
     @FXML
     public void initialize() {
         setupChart();
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-        executor.scheduleAtFixedRate(this::updateChart, 0, 2, TimeUnit.SECONDS);
+        executor.scheduleAtFixedRate(this::updateChart, 0, UPDATE_PERIOD, TimeUnit.SECONDS);
     }
 
     private void setupChart() {
@@ -40,7 +43,7 @@ public class StatisticController {
         }
 
         List<MemoryPoolMXBean> pools = ManagementFactory.getMemoryPoolMXBeans();
-        for (MemoryPoolMXBean pool : pools) {
+        for (MemoryPoolMXBean pool: pools) {
             if (pool.getType() == java.lang.management.MemoryType.HEAP) {
                 XYChart.Series<Number, Number> newSeries = new XYChart.Series<>();
                 newSeries.setName(pool.getName());
@@ -52,7 +55,8 @@ public class StatisticController {
 
     private void updateChart() {
         List<MemoryPoolMXBean> pools = ManagementFactory.getMemoryPoolMXBeans();
-        for (MemoryPoolMXBean pool : pools) {
+
+        for (MemoryPoolMXBean pool: pools) {
             if (pool.getType() == java.lang.management.MemoryType.HEAP) {
                 MemoryUsage usage = pool.getUsage();
                 double usedMB = usage.getUsed() / 1024.0 / 1024.0;
@@ -68,7 +72,9 @@ public class StatisticController {
                 });
             }
         }
-        xSeriesData++;
+
+        xSeriesData = xSeriesData + UPDATE_PERIOD;
+
         adjustXAxis();
     }
 
