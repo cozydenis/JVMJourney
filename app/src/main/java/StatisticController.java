@@ -28,7 +28,7 @@ public class StatisticController {
     public void initialize() {
         setupChart();
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-        executor.scheduleAtFixedRate(this::updateChart, 0, 1, TimeUnit.SECONDS);
+        executor.scheduleAtFixedRate(this::updateChart, 0, 2, TimeUnit.SECONDS);
     }
 
     private void setupChart() {

@@ -14,7 +14,7 @@
                     <NumberAxis autoRanging="false" forceZeroInRange="false" label="Seconds" side="BOTTOM" upperBound="59.0" />
                 </xAxis>
                 <yAxis>
-                    <NumberAxis autoRanging="false" label="Memory usage (%)" side="LEFT" upperBound="100" />
+                    <NumberAxis autoRanging="true" label="Memory usage (MB)" side="LEFT" />
                 </yAxis>
             </LineChart>
 
