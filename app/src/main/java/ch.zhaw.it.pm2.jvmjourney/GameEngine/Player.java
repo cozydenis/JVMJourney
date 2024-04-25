@@ -72,8 +72,6 @@ public class Player extends MovingObject {
         super.move();
 
         if (inAir) {
-            if (flipped) {
-                flip();
             }
             imageView = jumpingSprite;
             // Apply gravity effect: v = v + a * t
@@ -91,7 +89,7 @@ public class Player extends MovingObject {
                 land();
             }
         }
-    }
+
 
     public void jump() {
         if (!inAir) {
@@ -99,6 +97,7 @@ public class Player extends MovingObject {
             currentVelocity = new PositionVector(currentVelocity.getX(), -JUMP_STRENGTH);
             inAir = true;
         }
+
     }
 
     public void land() {
