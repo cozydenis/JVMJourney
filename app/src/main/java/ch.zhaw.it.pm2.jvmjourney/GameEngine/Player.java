@@ -25,8 +25,8 @@ public class Player extends MovingObject {
     private boolean flipped;
 
 
-    public Player(int x, int y, String path, int frameWidth, int frameHeight, int numFrames) {
-        super(x, y, path);
+    public Player(int x, int y, String path, int frameWidth, int frameHeight, int numFrames, float scale) {
+        super(x, y, path, scale);
         this.frameWidth = frameWidth;
         this.frameHeight = frameHeight;
         this.numFrames = numFrames;

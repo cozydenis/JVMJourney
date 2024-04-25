@@ -1,12 +1,44 @@
-package main.java.ch.zhaw.it.pm2.jvmjourney.GameEngine;
+package ch.zhaw.it.pm2.jvmjourney.GameEngine;
 
 public class WaterMelon extends ch.zhaw.it.pm2.jvmjourney.GameEngine.MovingObject {
-    public WaterMelon(int x, int y, String path) {
-        super(x, y, path);
+
+    float density = 0.5f;
+    Direction direction;
+
+    public WaterMelon(int x, int y, String path, float scale, Direction initialDirection, PositionVector initialVelocity) {
+        super(x, y, path, scale);
+        this.direction = initialDirection;
+        this.currentVelocity = initialVelocity;
+        this.inAir = true;
     }
 
     @Override
     public void move() {
+        super.move();
+        if (hitTheGround()) {
+            currentVelocity = this.currentVelocity.bounceOnTheGround();
+        }
+        if (hitTheWall()) {
+            currentVelocity = this.currentVelocity.bounceOntheWall();
+        }
+
+
+    }
+
+    public boolean hitTheGround() {
+        return position.getY() >= GameConfig.GROUNDLEVEL + 40;
+    }
+
+    public boolean hitTheWall() {
+        boolean hit = false;
+        if (position.getX() <= GameConfig.MIN_X) {
+
+            hit = true;
+        }
+        if (position.getX() >= GameConfig.getMaxX()) {
+            hit = true;
+        }
+        return hit;
 
     }
 }
