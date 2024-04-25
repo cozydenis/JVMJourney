@@ -40,6 +40,7 @@ build
 # Ignore Gradle and IDEA directories
 
 .idea/
+.idea/.name
 
 # Ignore all binary files
 *.bin
