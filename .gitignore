@@ -37,6 +37,9 @@ replay_pid*
 # Ignore Gradle build output directory
 build
 .idea/gradle.xml
+.idea/
+*.iml
+*.iws
 **/gradle
 ~/.gradle
 !gradle/wrapper/gradle-wrapper.jar
