@@ -22,6 +22,7 @@ public class Player extends MovingObject {
     // private ImageView imageView = new ImageView();
     private ImageView walkingSprite;
     private ImageView jumpingSprite;
+    private ImageView punchingSprite;
     private boolean flipped;
 
 
@@ -39,9 +40,29 @@ public class Player extends MovingObject {
 
         walkingSprite = new ImageView(path);
         jumpingSprite = new ImageView("jumping.png");
+        punchingSprite = new ImageView("punching.png");
+
+        /*
+        // Set initial positions to some default, assuming (x, y) is the bottom center of the sprite
+        double spriteBaseLine = y - walkingSprite.getImage().getHeight();
+        walkingSprite.setLayoutY(spriteBaseLine);
+        jumpingSprite.setLayoutY(spriteBaseLine);
+        punchingSprite.setLayoutY(spriteBaseLine); // Adjust this as necessary
+        */
+
         imageView = walkingSprite;
 
 
+    }
+
+    public void punch() {
+        imageView = punchingSprite;
+        //imageView.setY(imageView.getLayoutY() - 100); // Adjust this value as needed to align the sprite
+    }
+
+    public void stopPunch() {
+        imageView = walkingSprite;
+        //imageView.setY(originalY); // Reset to original y position
     }
 
     @Override

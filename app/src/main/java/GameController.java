@@ -94,6 +94,13 @@ public class GameController implements Initializable {
         } else if (keys.isDown(KeyCode.LEFT)) {
             player.accelerate(Direction.LEFT);
         }
+
+        // Handle punching action
+        if (keys.isDown(KeyCode.SPACE)) {
+            player.punch();
+        } else {
+            player.stopPunch(); // This resets the sprite to walking if the spacebar is not pressed
+        }
     }
 }
 
