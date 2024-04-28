@@ -62,7 +62,7 @@ public class Player extends MovingObject {
 
     public void punch() {
         if (punchCooldown <= 0) { // Check if cooldown has elapsed
-            System.out.println("Punching");
+            //System.out.println("Punching");
             isPunching = true;
             imageView = punchingSprite;
             punchCooldown = punchCooldownDuration; // Reset cooldown
@@ -115,9 +115,9 @@ public class Player extends MovingObject {
         super.move();
 
         if (inAir) {
-            //if (flipped) {
-            //    flip();
-            //}
+            if (flipped) {
+                flip();
+            }
             imageView = isPunching ? punchingSprite : jumpingSprite;
             double gravityEffect = currentVelocity.getY() + GRAVITY * FRAME_RATE;
             currentVelocity = new PositionVector(currentVelocity.getX(), gravityEffect);
