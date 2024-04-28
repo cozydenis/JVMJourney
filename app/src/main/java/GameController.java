@@ -71,6 +71,7 @@ public class GameController implements Initializable {
 
                 updatePlayerMovement(secondsSinceLastFrame);
                 player.update();
+                player.updatePunchCooldown(secondsSinceLastFrame); // Update the cooldown
                 renderer.render();
             }
         };
@@ -85,6 +86,7 @@ public class GameController implements Initializable {
 
     private void updatePlayerMovement(float frameDuration) {
         if (keys.isDown(KeyCode.UP)) {
+
             player.jump();
 
         }

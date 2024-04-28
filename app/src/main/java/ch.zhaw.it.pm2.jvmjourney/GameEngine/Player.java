@@ -24,6 +24,11 @@ public class Player extends MovingObject {
     private ImageView jumpingSprite;
     private ImageView punchingSprite;
     private boolean flipped;
+    private boolean isPunching = false;
+
+    private double punchCooldown = 0;
+    private double punchCooldownDuration = 0.5;
+
 
 
     public Player(int x, int y, String path, int frameWidth, int frameHeight, int numFrames) {
@@ -56,13 +61,30 @@ public class Player extends MovingObject {
     }
 
     public void punch() {
-        imageView = punchingSprite;
-        //imageView.setY(imageView.getLayoutY() - 100); // Adjust this value as needed to align the sprite
+        if (punchCooldown <= 0) { // Check if cooldown has elapsed
+            System.out.println("Punching");
+            isPunching = true;
+            imageView = punchingSprite;
+            punchCooldown = punchCooldownDuration; // Reset cooldown
+        }
+    }
+
+    public void updatePunchCooldown(double secondsSinceLastFrame) {
+        if (punchCooldown > 0) {
+            punchCooldown -= secondsSinceLastFrame;
+            if (punchCooldown <= 0) {
+                stopPunch(); // Stop punching if cooldown has expired
+            }
+        }
     }
 
     public void stopPunch() {
-        imageView = walkingSprite;
-        //imageView.setY(originalY); // Reset to original y position
+        isPunching = false;
+        if (!inAir) {
+            imageView = walkingSprite;
+        } else {
+            imageView = jumpingSprite; // Ensure we revert back to the jumping sprite if still in air
+        }
     }
 
     @Override
@@ -93,25 +115,23 @@ public class Player extends MovingObject {
         super.move();
 
         if (inAir) {
-            if (flipped) {
-                flip();
-            }
-            imageView = jumpingSprite;
-            // Apply gravity effect: v = v + a * t
+            //if (flipped) {
+            //    flip();
+            //}
+            imageView = isPunching ? punchingSprite : jumpingSprite;
             double gravityEffect = currentVelocity.getY() + GRAVITY * FRAME_RATE;
             currentVelocity = new PositionVector(currentVelocity.getX(), gravityEffect);
-            // Apply the velocity to the position: s = s + v * t
             position.setY(position.getY() + currentVelocity.getY() * FRAME_RATE);
-
-            // Check if the player is below ground level and correct it.
             if (position.getY() > GameConfig.GROUNDLEVEL) {
-                if (flipped) {
-                    flip();
-                }
-                imageView = walkingSprite;
                 land();
             }
+        } else {
+            if (!isPunching) {
+                imageView = walkingSprite;
+            }
         }
+
+
     }
 
     public void jump() {
@@ -119,14 +139,17 @@ public class Player extends MovingObject {
             // Set the initial upward velocity for the jump.
             currentVelocity = new PositionVector(currentVelocity.getX(), -JUMP_STRENGTH);
             inAir = true;
+            imageView = jumpingSprite; // Change to jumping sprite when starting to jump
         }
     }
 
     public void land() {
-        this.inAir = false;
-        imageView = walkingSprite;
+        inAir = false;
         position.setY(GameConfig.GROUNDLEVEL);
         currentVelocity = new PositionVector(currentVelocity.getX(), 0);
+        if (!isPunching) {
+            imageView = walkingSprite;
+        }
     }
 
 
