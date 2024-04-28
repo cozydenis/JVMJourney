@@ -9,6 +9,9 @@
 # Log file
 *.log
 
+
+.gradle/
+.idea/
 # BlueJ files
 *.ctxt
 
@@ -28,22 +31,22 @@
 hs_err_pid*
 replay_pid*
 
+
 # Ignore Gradle project-specific cache directory
 
 # Ignore Gradle build output directory
 build
-.gradle/
 .idea/gradle.xml
+.idea/
+*.iml
+*.iws
 **/gradle
 ~/.gradle
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
 
-# Ignore Gradle and IDEA directories
 
-.idea/
-.idea/.name
-
-# Ignore all binary files
-*.bin
 
 # More specific ignore rules for commonly ignored patterns
 *~

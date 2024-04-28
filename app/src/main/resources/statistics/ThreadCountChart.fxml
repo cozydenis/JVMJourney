@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.layout.HBox?>
+
+<LineChart title="Thread count over time" fx:id="threadCountChart" fx:controller="statisticsController.ThreadController"
+           xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" HBox.hgrow="ALWAYS">
+    <xAxis>
+        <NumberAxis forceZeroInRange="false" label="Seconds" side="BOTTOM" upperBound="60.0"/>
+    </xAxis>
+    <yAxis>
+        <NumberAxis autoRanging="false" upperBound="30" tickUnit="2" label="Thread Count" side="LEFT"/>
+    </yAxis>
+</LineChart>
