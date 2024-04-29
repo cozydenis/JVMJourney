@@ -86,3 +86,28 @@ The class diagram is carefully designed to clarify the relationships and depende
 ### Architectural Conclusion
 
 The chosen architecture for the JVMJourney game is based on the principles of object orientation and follows best practices in software development. It supports effective development methods through its clear structure and flexibility. This design allows the development team to efficiently maintain, expand, and optimize the game, while ensuring high code quality and game performance.Architecture Documentation for the JVMJourney Game Class Diagram
+
+### Feature List
+
+# Project Metrics
+
+## Graphs
+- **Memory Usage Over Time**
+    - Eden Space
+    - Old Gen
+    - Survivor Space
+- Thread Count
+- Moving Player
+- Punching
+- Bouncing Watermelon
+- Watermelon Squishing
+- Story Windows
+    - Tutorial
+    - Story
+
+# Future Feature List
+
+- Health Bar
+- Parkour Ability
+- Garbage Collection Example
+
