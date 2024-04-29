@@ -65,7 +65,7 @@ public class GameController implements Initializable {
             }
         });
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             waterMelon.add(new WaterMelon(200, getRandomIntInRange(0,100), "watermelon1_o.png", 0.15f, Direction.RIGHT, new PositionVector(getRandomIntInRange(0,5),getRandomIntInRange(0,5))));
         }
 
