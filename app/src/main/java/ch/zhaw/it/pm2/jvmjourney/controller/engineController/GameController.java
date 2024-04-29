@@ -1,3 +1,5 @@
+package ch.zhaw.it.pm2.jvmjourney.controller.engineController;
+
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.Direction;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.GameConfig;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.GameLoopTimer;
