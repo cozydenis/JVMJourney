@@ -21,34 +21,35 @@ In our JUnit testing framework, we systematically employ equivalence class parti
 ### Class Entity
 Equivalence tests for methods move() and rotate():
 
-| Equivalence Class | Test Case                  | Description                                                                                       |
-|-------------------|----------------------------|---------------------------------------------------------------------------------------------------|
-| move              | testMoveValidDirection     | Tests moving the stick figure to the right, ensuring that the position is updated correctly.      |
-| move              | testMoveWithNoMovement     | Verifies that the stick figure's position remains unchanged when no movement is commanded.        |
-| rotate            | testRotateValid            | Tests correct rotation of the stick figure by a set angle.                                        |
-| rotate            | testRotateWithZero         | Verifies that the stick figure's rotation remains unchanged when the rotation change is zero.     |
-| rotate            | testRotateAndMove          | Tests the combination of moving and rotating to check for correct updates in position and rotation.|
+### Class `Entity`
+| Number | Name                     | Method parameters | Initial object state            | Expected result                                              |
+|--------|--------------------------|-------------------|---------------------------------|--------------------------------------------------------------|
+| 1      | testMoveValidDirection   | Valid direction   | Position before move            | "Position is updated correctly to the right"                 |
+| 2      | testMoveWithNoMovement   | None              | Position unchanged              | "Stick figure's position remains unchanged with no movement" |
+| 3      | testRotateValid          | Set angle         | Angle before rotation           | "Correct rotation of the stick figure by a set angle"        |
+| 4      | testRotateWithZero       | Zero rotation     | Angle unchanged                 | "Stick figure's rotation remains unchanged with zero change" |
+| 5      | testRotateAndMove        | Combination       | Position and angle before test  | "Correct updates in position and rotation"                   |
 
 
 ### Class GameController
 Equivalence tests for controlling the stick figure using arrow keys:
 
-| Equivalence Class | Test Case         | Description                                                                                         |
-|-------------------|-------------------|-----------------------------------------------------------------------------------------------------|
-| key control       | testMoveLeft      | The stick figure should move left, updating its position and velocity accordingly.                  |
-| key control       | testMoveRight     | The stick figure should move right, updating its position and velocity accordingly.                 |
-| key control       | testJump          | The stick figure should jump (move upward), updating its position and velocity accordingly.         |
-| key control       | testCrouch        | The stick figure should crouch (move downward), updating its position accordingly.                  |
-| key control       | testNoMovement    | If no arrow key action is taken, the stick figure should not move, and its position should remain unchanged.|
+| Number | Name            | Method parameters | Initial object state           | Expected result                                                      |
+|--------|-----------------|-------------------|--------------------------------|----------------------------------------------------------------------|
+| 1      | testMoveLeft    | Left arrow key    | Position and velocity before   | "The stick figure moves left, updating its position and velocity"    |
+| 2      | testMoveRight   | Right arrow key   | Position and velocity before   | "The stick figure moves right, updating its position and velocity"   |
+| 3      | testJump        | Up arrow key      | Position and velocity before   | "The stick figure jumps, updating its position and velocity upward"  |
+| 4      | testCrouch      | Down arrow key    | Position and velocity before   | "The stick figure crouches, updating its position downward"          |
+| 5      | testNoMovement  | No key pressed    | Position unchanged             | "Stick figure does not move and position remains unchanged"          |
 
 ### Class Renderer
 Equivalence tests for the `render()` method:
 
-| Equivalence Class | Test Case            | Description                                                                                         |
-|-------------------|----------------------|-----------------------------------------------------------------------------------------------------|
-| render            | testRenderWithEntities | Tests rendering the game scene with multiple entities to ensure correct display and positioning.   |
-| render            | testRenderNoEntities | Verifies that the game scene is rendered correctly without entities and no visual artifacts occur. |
-| render            | testRenderDuringMove | Tests rendering while the stick figure is moving to confirm fluid animations and correct position updates.|
+| Number | Name                 | Method parameters | Initial object state       | Expected result                                            |
+|--------|----------------------|-------------------|----------------------------|------------------------------------------------------------|
+| 1      | testRenderWithEntities | Entities present | Before rendering          | "Game scene renders with multiple entities correctly"      |
+| 2      | testRenderNoEntities  | No entities        | Before rendering           | "Game scene renders correctly without entities, no artifacts" |
+| 3      | testRenderDuringMove | Stick figure moving | Position during movement  | "Rendering during movement shows fluid animations and correct positioning" |
 
 This test concept ensures that the game responds correctly to user inputs, the graphical display functions flawlessly, and the game remains stable under various conditions. Mock tests are particularly valuable for isolating and testing specific components without the need for actual dependencies.
 
