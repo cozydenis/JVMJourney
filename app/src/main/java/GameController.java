@@ -1,5 +1,9 @@
-
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.*;
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.Direction;
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.GameConfig;
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.GameLoopTimer;
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.KeyPolling;
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.Player;
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.Renderer;
 import javafx.scene.canvas.Canvas;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
@@ -88,6 +92,7 @@ public class GameController implements Initializable {
 
                 updatePlayerMovement(secondsSinceLastFrame);
                 player.update();
+                player.updatePunchCooldown(secondsSinceLastFrame); // Update the cooldown
                 for(WaterMelon waterMelon : waterMelon)
                 {waterMelon.update();}
                 renderer.render();
@@ -112,6 +117,13 @@ public class GameController implements Initializable {
 
         } else if (keys.isDown(KeyCode.LEFT)) {
             player.accelerate(Direction.LEFT);
+        }
+
+        // Handle punching action
+        if (keys.isDown(KeyCode.SPACE)) {
+            player.punch();
+        } else {
+            player.stopPunch(); // This resets the sprite to walking if the spacebar is not pressed
         }
     }
 }
