@@ -89,12 +89,14 @@ The chosen architecture for the JVMJourney game is based on the principles of ob
 
 ### Feature List
 
-Graphs
-- **Memory Usage Over Time**
+**Graphs**
+- Memory Usage Over Time
     - Eden Space
     - Old Gen
     - Survivor Space
 - Thread Count
+
+**Game**
 - Moving Player
 - Punching
 - Bouncing Watermelon
