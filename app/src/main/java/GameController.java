@@ -4,6 +4,7 @@ import ch.zhaw.it.pm2.jvmjourney.GameEngine.GameLoopTimer;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.KeyPolling;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.Player;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.Renderer;
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.WaterMelon;
 import javafx.scene.canvas.Canvas;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
