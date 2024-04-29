@@ -115,7 +115,7 @@ public class Player extends MovingObject {
         super.move();
 
         if (inAir) {
-            }
+
             imageView = isPunching ? punchingSprite : jumpingSprite;
             double gravityEffect = currentVelocity.getY() + GRAVITY * FRAME_RATE;
             currentVelocity = new PositionVector(currentVelocity.getX(), gravityEffect);
@@ -127,7 +127,7 @@ public class Player extends MovingObject {
                 imageView = walkingSprite;
                 land();
             }
-         else {
+        }else {
             if (!isPunching) {
                 imageView = walkingSprite;
             }

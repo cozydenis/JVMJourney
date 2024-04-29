@@ -21,30 +21,6 @@ public abstract class GameLoopTimer extends AnimationTimer {
     boolean playScheduled;
     boolean restartScheduled;
 
-    public boolean isPaused() {
-        return isPaused;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public DoubleProperty animationDurationProperty() {
-        return animationDuration;
-    }
-
-    public void pause() {
-        if (!isPaused) {
-            pauseScheduled = true;
-        }
-    }
-
-    public void play() {
-        if (isPaused) {
-            playScheduled = true;
-        }
-    }
-
     @Override
     public void start() {
         super.start();
