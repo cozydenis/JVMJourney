@@ -1,9 +1,4 @@
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.Direction;
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.GameConfig;
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.GameLoopTimer;
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.KeyPolling;
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.Player;
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.Renderer;
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.*;
 import javafx.scene.canvas.Canvas;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
