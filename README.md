@@ -27,8 +27,7 @@ Equivalence tests for methods move() and rotate():
 | 1      | testMoveValidDirection   | Valid direction   | Position before move            | "Position is updated correctly to the right"                 |
 | 2      | testMoveWithNoMovement   | None              | Position unchanged              | "Stick figure's position remains unchanged with no movement" |
 | 3      | testRotateValid          | Set angle         | Angle before rotation           | "Correct rotation of the stick figure by a set angle"        |
-| 4      | testRotateWithZero       | Zero rotation     | Angle unchanged                 | "Stick figure's rotation remains unchanged with zero change" |
-| 5      | testRotateAndMove        | Combination       | Position and angle before test  | "Correct updates in position and rotation"                   |
+| 4      | testRotateAndMove        | Combination       | Position and angle before test  | "Correct updates in position and rotation"                   |
 
 
 ### Class GameController
@@ -39,8 +38,7 @@ Equivalence tests for controlling the stick figure using arrow keys:
 | 1      | testMoveLeft    | Left arrow key    | Position and velocity before   | "The stick figure moves left, updating its position and velocity"    |
 | 2      | testMoveRight   | Right arrow key   | Position and velocity before   | "The stick figure moves right, updating its position and velocity"   |
 | 3      | testJump        | Up arrow key      | Position and velocity before   | "The stick figure jumps, updating its position and velocity upward"  |
-| 4      | testCrouch      | Down arrow key    | Position and velocity before   | "The stick figure crouches, updating its position downward"          |
-| 5      | testNoMovement  | No key pressed    | Position unchanged             | "Stick figure does not move and position remains unchanged"          |
+| 4      | testNoMovement  | No key pressed    | Position unchanged             | "Stick figure does not move and position remains unchanged"          |
 
 ### Class Renderer
 Equivalence tests for the `render()` method:
