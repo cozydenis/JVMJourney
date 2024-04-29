@@ -89,9 +89,7 @@ The chosen architecture for the JVMJourney game is based on the principles of ob
 
 ### Feature List
 
-# Project Metrics
-
-## Graphs
+# Graphs
 - **Memory Usage Over Time**
     - Eden Space
     - Old Gen
