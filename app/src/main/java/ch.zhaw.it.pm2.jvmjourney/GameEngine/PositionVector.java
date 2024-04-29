@@ -128,4 +128,12 @@ public final class PositionVector {
     public void setY(double y) {
         this.y = y;
     }
+
+    public PositionVector bounceOnTheGround () {
+        return new PositionVector(this.getX(), -this.getY());
+    }
+
+    public PositionVector bounceOntheWall () {
+        return new PositionVector(-this.getX(), this.getY());
+    }
 }

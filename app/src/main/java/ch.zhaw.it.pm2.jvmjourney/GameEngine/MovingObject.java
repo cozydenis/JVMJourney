@@ -5,17 +5,15 @@ import javafx.scene.image.ImageView;
 
 public class MovingObject extends Object {
 
-    private double friction = 0.95; // Represents frictional force, 5% reduction per frame
-    private double maxSpeed = 10; // Maximum speed in any direction
-    private double accelerationFactor = 0.5; // The rate of acceleration
-
     protected boolean inAir;
     private boolean goingRight;
 
-    private int speed;
+    protected PositionVector currentVelocity;
 
-    public MovingObject(int x, int y, String path) {
-        super(x, y, path);
+    public MovingObject(int x, int y, String path, float scale) {
+        super(x, y, path, scale);
+
+        this.currentVelocity = Direction.NONE.vector;
 
 
     }
@@ -30,6 +28,8 @@ public class MovingObject extends Object {
     public void move() {
         // If on the ground, apply friction to horizontal movement
         if (!inAir) {
+            // Represents frictional force, 5% reduction per frame
+            double friction = 0.95;
             double horizontalVelocity = currentVelocity.getX() * friction;
 
             // Set horizontal velocity to zero if it's less than the threshold
@@ -86,6 +86,8 @@ public class MovingObject extends Object {
         //super.currentVelocity = currentVelocity.add(acceleration.vector);
 
         // Apply acceleration factor (a = F/m)
+        // The rate of acceleration
+        double accelerationFactor = 0.5;
         PositionVector accelerationVector = new PositionVector(
                 acceleration.vector.getX() * accelerationFactor,
                 acceleration.vector.getY() * accelerationFactor
@@ -95,6 +97,8 @@ public class MovingObject extends Object {
         currentVelocity = currentVelocity.add(accelerationVector);
 
         // Limit the velocity to the max speed after acceleration
+        // Maximum speed in any direction
+        double maxSpeed = 10;
         if (Math.abs(currentVelocity.getX()) > maxSpeed) {
             currentVelocity = new PositionVector(
                     Math.signum(currentVelocity.getX()) * maxSpeed,
@@ -114,6 +118,7 @@ public class MovingObject extends Object {
     public void flip() {
     }
 
+    @Override
     public void update() {
         move();
     }

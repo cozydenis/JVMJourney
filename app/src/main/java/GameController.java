@@ -4,6 +4,8 @@ import ch.zhaw.it.pm2.jvmjourney.GameEngine.GameLoopTimer;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.KeyPolling;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.Player;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.Renderer;
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.WaterMelon;
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.PositionVector;
 import javafx.scene.canvas.Canvas;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
@@ -14,6 +16,8 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class GameController implements Initializable {
@@ -22,15 +26,24 @@ public class GameController implements Initializable {
     public ImageView sprite;
     int level = 0;
     Player player;
+    ArrayList <WaterMelon> waterMelon = new ArrayList<>();
     public Canvas gameCanvas;
     public AnchorPane Game;
     KeyPolling keys = KeyPolling.getInstance();
 
 
     public GameController() {
-        player = new Player(0, 0, "walking.png", 6, 6, 1);
+        player = new Player(0, 0, "walking.png", 6, 6, 1, 1f);
 
 
+    }
+    public int getRandomIntInRange(int min, int max) {
+        if (min >= max) {
+            throw new IllegalArgumentException("max must be greater than min");
+        }
+
+        Random r = new Random();
+        return r.nextInt((max - min) + 1) + min;
     }
 
     @Override
@@ -59,11 +72,21 @@ public class GameController implements Initializable {
             }
         });
 
+        for (int i = 0; i < 100; i++) {
+            waterMelon.add(new WaterMelon(200, getRandomIntInRange(0,100), "watermelon1_o.png", 0.15f, Direction.RIGHT, new PositionVector(getRandomIntInRange(0,5),getRandomIntInRange(0,5))));
+        }
+
+
+
+
         player.setPosition(50, GameConfig.GROUNDLEVEL);
         player.setScale(1f);
 
 
         renderer.addObject(player);
+        for(WaterMelon waterMelon : waterMelon) {
+            renderer.addObject(waterMelon);
+        }
         GameLoopTimer timer = new GameLoopTimer() {
             @Override
             public void tick(float secondsSinceLastFrame) {
@@ -71,6 +94,9 @@ public class GameController implements Initializable {
 
                 updatePlayerMovement(secondsSinceLastFrame);
                 player.update();
+                player.updatePunchCooldown(secondsSinceLastFrame); // Update the cooldown
+                for(WaterMelon waterMelon : waterMelon)
+                {waterMelon.update();}
                 renderer.render();
             }
         };
@@ -93,6 +119,13 @@ public class GameController implements Initializable {
 
         } else if (keys.isDown(KeyCode.LEFT)) {
             player.accelerate(Direction.LEFT);
+        }
+
+        // Handle punching action
+        if (keys.isDown(KeyCode.SPACE)) {
+            player.punch();
+        } else {
+            player.stopPunch(); // This resets the sprite to walking if the spacebar is not pressed
         }
     }
 }

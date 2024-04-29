@@ -12,18 +12,19 @@ import javafx.scene.image.ImageView;
 
 public class Object {
     protected PositionVector position;
-    protected PositionVector currentVelocity;
+
     float rotation = 0.1f;
+    float scale;
 
 
     ImageView imageView;
 
-    float scale = 1;
 
-    public Object(int x, int y, String path) {
+
+    public Object(int x, int y, String path, float scale) {
         loadSprite(path);
         this.position = new PositionVector(x, y);
-        this.currentVelocity = Direction.NONE.vector;
+        this.scale = scale;
 
 
 
@@ -42,7 +43,7 @@ public class Object {
     }
 
     public void update() {
-        position.add(currentVelocity);
+
     }
 
 
@@ -80,4 +81,7 @@ public class Object {
     public double getRotation() {
         return rotation;
     }
+
+
 }
+
