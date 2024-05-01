@@ -1,20 +1,11 @@
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.Direction;
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.GameConfig;
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.GameLoopTimer;
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.KeyPolling;
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.Player;
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.Renderer;
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.WaterMelon;
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.PositionVector;
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.*;
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.Particle;
 import javafx.scene.canvas.Canvas;
 import javafx.fxml.Initializable;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
@@ -72,8 +63,8 @@ public class GameController implements Initializable {
             }
         });
 
-        for (int i = 0; i < 100; i++) {
-            waterMelon.add(new WaterMelon(200, getRandomIntInRange(0,100), "watermelon1_o.png", 0.15f, Direction.RIGHT, new PositionVector(getRandomIntInRange(0,5),getRandomIntInRange(0,5))));
+        for (int i = 0; i < 10; i++) {
+            waterMelon.add(new WaterMelon(i,200, getRandomIntInRange(0,100), "watermelon1_o.png", 0.15f, Direction.RIGHT, new PositionVector(getRandomIntInRange(0,5),getRandomIntInRange(0,5))));
         }
 
 
@@ -84,6 +75,8 @@ public class GameController implements Initializable {
 
 
         renderer.addObject(player);
+
+
         for(WaterMelon waterMelon : waterMelon) {
             renderer.addObject(waterMelon);
         }
