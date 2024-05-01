@@ -137,7 +137,7 @@ public final class PositionVector {
     public PositionVector bounceOntheWall () {
         return new PositionVector(-this.getX(), this.getY());
     }
-    /
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
