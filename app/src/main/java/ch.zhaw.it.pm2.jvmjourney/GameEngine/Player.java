@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import java.util.BitSet;
 
 public class Player extends MovingObject {
 
@@ -159,8 +160,6 @@ public class Player extends MovingObject {
     public void setInAir(boolean inAir) {
         this.inAir = inAir;
     }
-
-
 }
 
 

@@ -2,27 +2,24 @@ import ch.zhaw.it.pm2.jvmjourney.GameEngine.Direction;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.GameConfig;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.GameLoopTimer;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.KeyPolling;
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.Object;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.Player;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.Renderer;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.WaterMelon;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.PositionVector;
 import javafx.scene.canvas.Canvas;
 import javafx.fxml.Initializable;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 
 public class GameController implements Initializable {
-
-
     public ImageView sprite;
     int level = 0;
     Player player;
@@ -30,13 +27,12 @@ public class GameController implements Initializable {
     public Canvas gameCanvas;
     public AnchorPane Game;
     KeyPolling keys = KeyPolling.getInstance();
-
+    Renderer renderer;
 
     public GameController() {
         player = new Player(0, 0, "walking.png", 6, 6, 1, 1f);
-
-
     }
+
     public int getRandomIntInRange(int min, int max) {
         if (min >= max) {
             throw new IllegalArgumentException("max must be greater than min");
@@ -51,7 +47,7 @@ public class GameController implements Initializable {
         initialiseCanvas();
 
 
-        Renderer renderer = new Renderer(this.gameCanvas);
+        renderer = new Renderer(this.gameCanvas);
 
         // Initialization code that might not depend on the scene being fully set up
         Game.sceneProperty().addListener((obs, oldScene, newScene) -> {
@@ -76,17 +72,14 @@ public class GameController implements Initializable {
             waterMelon.add(new WaterMelon(200, getRandomIntInRange(0,100), "watermelon1_o.png", 0.15f, Direction.RIGHT, new PositionVector(getRandomIntInRange(0,5),getRandomIntInRange(0,5))));
         }
 
-
-
-
         player.setPosition(50, GameConfig.GROUNDLEVEL);
         player.setScale(1f);
-
 
         renderer.addObject(player);
         for(WaterMelon waterMelon : waterMelon) {
             renderer.addObject(waterMelon);
         }
+
         GameLoopTimer timer = new GameLoopTimer() {
             @Override
             public void tick(float secondsSinceLastFrame) {
@@ -101,7 +94,6 @@ public class GameController implements Initializable {
             }
         };
         timer.start();
-
     }
 
     private void initialiseCanvas() {
@@ -109,7 +101,26 @@ public class GameController implements Initializable {
         gameCanvas.heightProperty().bind(Game.heightProperty());
     }
 
+    private void checkCollision() {
+        System.out.println(player.getPosition().getX());
+        System.out.println(player.getPosition().getY());
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+//        List<Object> entities = renderer.getEntities();
+//        for (Object entity : entities) {
+//            System.out.println(entity.getPosition());
+//            if (player.getBounds().intersects(entity.getBounds())) {
+//                player.setAlive(false);
+//            }
+//        }
+    }
+
     private void updatePlayerMovement(float frameDuration) {
+        checkCollision();
         if (keys.isDown(KeyCode.UP)) {
             player.jump();
 
@@ -129,7 +140,3 @@ public class GameController implements Initializable {
         }
     }
 }
-
-
-
-
