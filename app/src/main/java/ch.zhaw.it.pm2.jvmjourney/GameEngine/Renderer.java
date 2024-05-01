@@ -1,12 +1,9 @@
 package ch.zhaw.it.pm2.jvmjourney.GameEngine;
 
 import javafx.geometry.Point2D;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 
@@ -20,18 +17,18 @@ public class Renderer{
 
     Image background;
 
-    List<Object> entities = new ArrayList<>();
+    List<GameObject> entities = new ArrayList<>();
 
     public Renderer(Canvas canvas) {
         this.canvas = canvas;
         this.context = canvas.getGraphicsContext2D();
     }
 
-    public void addObject(Object Object) {
+    public void addObject(GameObject Object) {
         entities.add(Object);
     }
 
-    public void removeObject(Object Object) {
+    public void removeObject(GameObject Object) {
         entities.remove(Object);
     }
 
@@ -50,7 +47,7 @@ public class Renderer{
             context.drawImage(background, 0, 0);
         }
 
-        for (Object Object : entities) {
+        for (GameObject Object : entities) {
 
             transformContext(Object);
 
@@ -72,7 +69,7 @@ public class Renderer{
         context.fillRect(0,0, canvas.getWidth(),canvas.getHeight());
     }
 
-    private void transformContext(Object Object){
+    private void transformContext(GameObject Object){
         Point2D centre = Object.getCenter();
         Rotate r = new Rotate(Object.getRotation(), centre.getX(), centre.getY());
         context.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());

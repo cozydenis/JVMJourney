@@ -1,16 +1,10 @@
 package ch.zhaw.it.pm2.jvmjourney.GameEngine;
 
 import javafx.geometry.Point2D;
-import javafx.scene.image.Image;
 
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.ImageView;
 
-public class Object {
+public class GameObject {
     protected PositionVector position;
 
     float rotation = 0.1f;
@@ -21,7 +15,7 @@ public class Object {
 
 
 
-    public Object(int x, int y, String path, float scale) {
+    public GameObject(int x, int y, String path, float scale) {
         loadSprite(path);
         this.position = new PositionVector(x, y);
         this.scale = scale;
@@ -51,7 +45,7 @@ public class Object {
         return position;
     }
 
-    public void setPosition(int x, int y) {
+    public void setPosition(double x, double y) {
         position.setX(x);
         position.setY(y);
     }

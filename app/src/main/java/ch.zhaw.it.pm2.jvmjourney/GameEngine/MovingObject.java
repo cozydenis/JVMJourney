@@ -1,9 +1,6 @@
 package ch.zhaw.it.pm2.jvmjourney.GameEngine;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
-public class MovingObject extends Object {
+public class MovingObject extends GameObject {
 
     protected boolean inAir;
     private boolean goingRight;
