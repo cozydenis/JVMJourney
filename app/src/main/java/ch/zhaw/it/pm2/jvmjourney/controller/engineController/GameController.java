@@ -27,11 +27,11 @@ public class GameController implements Initializable {
 
     public ImageView sprite;
     int level = 0;
-    Player player;
+    public Player player;
     ArrayList <WaterMelon> waterMelon = new ArrayList<>();
     public Canvas gameCanvas;
     public AnchorPane Game;
-    KeyPolling keys = KeyPolling.getInstance();
+    public KeyPolling keys = KeyPolling.getInstance();
 
 
     public GameController() {
@@ -111,7 +111,7 @@ public class GameController implements Initializable {
         gameCanvas.heightProperty().bind(Game.heightProperty());
     }
 
-    private void updatePlayerMovement(float frameDuration) {
+    public void updatePlayerMovement(float frameDuration) {
         if (keys.isDown(KeyCode.UP)) {
             player.jump();
 

@@ -1,5 +1,6 @@
 package ch.zhaw.it.pm2.jvmjourney.GameEngine;
 
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -136,4 +137,19 @@ public final class PositionVector {
     public PositionVector bounceOntheWall () {
         return new PositionVector(-this.getX(), this.getY());
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PositionVector that = (PositionVector) o;
+        return Double.compare(x, that.x) == 0 && Double.compare(y, that.y) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
+
+
 }
