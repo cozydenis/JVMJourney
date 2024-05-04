@@ -11,6 +11,7 @@ import ch.zhaw.it.pm2.jvmjourney.GameEngine.Player;
 import ch.zhaw.it.pm2.jvmjourney.controller.engineController.GameController;
 import org.junit.jupiter.api.BeforeAll;
 import javafx.embed.swing.JFXPanel;
+import org.mockito.InOrder;
 
 public class GameControllerTest {
 
@@ -106,4 +107,89 @@ public class GameControllerTest {
         verify(mockPlayer, never()).jump();
         assertEquals(new PositionVector(50.0, 135.0), mockPlayer.getPosition()); // Verify position remains unchanged
     }
+
+    @Test
+    public void testMoveRightAndJump() {
+        // Setup
+        KeyPolling mockKeys = mock(KeyPolling.class);
+        when(mockKeys.isDown(KeyCode.RIGHT)).thenReturn(true);
+        when(mockKeys.isDown(KeyCode.UP)).thenReturn(true);
+
+        Player mockPlayer = mock(Player.class);
+        GameController controller = new GameController();
+        controller.keys = mockKeys;
+        controller.player = mockPlayer;
+
+        // Act
+        controller.updatePlayerMovement(1.0f);
+
+        // Assert
+        verify(mockPlayer).accelerate(Direction.RIGHT);
+        verify(mockPlayer).jump();
+    }
+
+    @Test
+    public void testMoveLeftAndJump() {
+        // Setup
+        KeyPolling mockKeys = mock(KeyPolling.class);
+        when(mockKeys.isDown(KeyCode.LEFT)).thenReturn(true);
+        when(mockKeys.isDown(KeyCode.UP)).thenReturn(true);
+
+        Player mockPlayer = mock(Player.class);
+        GameController controller = new GameController();
+        controller.keys = mockKeys;
+        controller.player = mockPlayer;
+
+        // Act
+        controller.updatePlayerMovement(1.0f);
+
+        // Assert
+        verify(mockPlayer).accelerate(Direction.LEFT);
+        verify(mockPlayer).jump();
+    }
+
+    @Test
+    public void testInvalidKeyPress() {
+        // Setup
+        KeyPolling mockKeys = mock(KeyPolling.class);
+        when(mockKeys.isDown(KeyCode.A)).thenReturn(true); // Assume 'A' is not a valid control key
+
+        Player mockPlayer = mock(Player.class);
+        GameController controller = new GameController();
+        controller.keys = mockKeys;
+        controller.player = mockPlayer;
+
+        // Act
+        controller.updatePlayerMovement(1.0f);
+
+        // Assert
+        verify(mockPlayer, never()).accelerate(any(Direction.class));
+        verify(mockPlayer, never()).jump();
+    }
+
+    @Test
+    public void testGameLoopInteraction() {
+        // Setup
+        KeyPolling mockKeys = mock(KeyPolling.class);
+        when(mockKeys.isDown(KeyCode.RIGHT)).thenReturn(true);
+
+        Player mockPlayer = mock(Player.class);
+        GameController controller = new GameController();
+        controller.keys = mockKeys;
+        controller.player = mockPlayer;
+
+        // Mimic what would happen during a game loop tick
+        // Assume updatePlayerMovement and render are called during each tick
+        controller.updatePlayerMovement(0.016f); // Approx 60 FPS
+        controller.player.update(); // Simulate the player's update logic as called by the game loop
+
+        // Assert
+        verify(mockPlayer).accelerate(Direction.RIGHT);
+        verify(mockPlayer, times(1)).update(); // Ensure the update method is called exactly once
+    }
+
+
+
+
+
 }
