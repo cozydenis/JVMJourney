@@ -18,7 +18,7 @@ public final class PositionVector {
     /**
      * Format to print the position vector.
      */
-    private static final String POSITION_VECTOR_FORMAT = "(X:%d, Y:%d)";
+    //private static final String POSITION_VECTOR_FORMAT = "(X:%f, Y:%f";
 
     /**
      * Pattern to parse a position vector from string format.
@@ -73,7 +73,8 @@ public final class PositionVector {
 
     @Override
     public String toString() {
-        return POSITION_VECTOR_FORMAT.formatted(this.x, this.y);
+        // Using %f for floating-point values, and optionally specify precision
+        return String.format("(X:%.2f, Y:%.2f)", this.x, this.y);
     }
 
     /**
