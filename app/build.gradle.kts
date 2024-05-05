@@ -46,7 +46,10 @@ javafx {
     version = "21.0.2"
     modules("javafx.controls", "javafx.fxml", "javafx.swing")
 }
-
+tasks.test {
+    // Set JVM arguments for the test task
+    jvmArgs("-Dnet.bytebuddy.experimental=true")
+}
 application {
     // Define the main class for the application.
     mainClass = "ch.zhaw.it.pm2.jvmjourney.JVMJourney"

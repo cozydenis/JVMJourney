@@ -41,32 +41,81 @@ public abstract class GameLoopTimer extends AnimationTimer {
 
     @Override
     public void handle(long now) {
-        if (pauseScheduled) {
-            pauseStart = now;
-            isPaused = true;
-            pauseScheduled = false;
-        }
-
-        if (playScheduled) {
-            animationStart += (now - pauseStart);
-            isPaused = false;
-            playScheduled = false;
-        }
-
-        if (restartScheduled) {
-            isPaused = false;
-            animationStart = now;
-            restartScheduled = false;
-        }
-
+        updateStateBasedOnFlags(now);
         if (!isPaused) {
-            long animDuration = now - animationStart;
-            animationDuration.set(animDuration / 1e9);
-
-            float secondsSinceLastFrame = (float) ((now - lastFrameTimeNanos) / 1e9);
-            lastFrameTimeNanos = now;
-            tick(secondsSinceLastFrame);
+            updateAnimation(now);
         }
+    }
+
+    private void updateStateBasedOnFlags(long now) {
+        if (pauseScheduled) {
+            handlePause(now);
+        } else if (playScheduled) {
+            handlePlay(now);
+        } else if (restartScheduled) {
+            handleRestart(now);
+        }
+    }
+
+    private void handlePause(long now) {
+        pauseStart = now;
+        isPaused = true;
+        pauseScheduled = false;
+        System.out.println("Game paused");
+    }
+
+    private void handlePlay(long now) {
+        if (isPaused) {  // Only adjust the start if we were paused
+            animationStart += (now - pauseStart);
+        }
+        isPaused = false;
+        playScheduled = false;
+        System.out.println("Game resumed");
+    }
+
+    private void handleRestart(long now) {
+        isPaused = false;
+        animationStart = now;
+        restartScheduled = false;
+        System.out.println("Game restarted");
+    }
+
+    private void updateAnimation(long now) {
+        long animDuration = now - animationStart;
+        animationDuration.set(animDuration / 1e9);
+        float secondsSinceLastFrame = (float) ((now - lastFrameTimeNanos) / 1e9);
+        lastFrameTimeNanos = now;
+        tick(secondsSinceLastFrame);
+        System.out.println("Animation updated: Duration = " + animationDuration.get());
+    }
+
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public boolean isPaused() {
+        return isPaused;
+    }
+
+    public DoubleProperty getAnimationDuration() {
+        return animationDuration;
+    }
+
+    public boolean isRestartScheduled() {
+        return restartScheduled;
+    }
+
+    public void setPauseScheduled(boolean pauseScheduled) {
+        this.pauseScheduled = pauseScheduled;
+    }
+
+    public void setPlayScheduled(boolean playScheduled) {
+        this.playScheduled = playScheduled;
+    }
+
+    public void setRestartScheduled(boolean restartScheduled) {
+        this.restartScheduled = restartScheduled;
     }
 
     public abstract void tick(float secondsSinceLastFrame);
