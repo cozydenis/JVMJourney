@@ -9,8 +9,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class JVMJourney extends Application {
     public static void main(String[] args) {
         launch(args);
@@ -19,12 +17,11 @@ public class JVMJourney extends Application {
     @Override
     public void start(Stage primaryStage) {
         mainWindow(primaryStage);
-        //resultWindow(primaryStage);
     }
 
     private void mainWindow(Stage primaryStage) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainWindow.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/MainWindow.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
 

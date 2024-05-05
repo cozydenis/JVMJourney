@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      alignment="CENTER"
+      prefHeight="400.0"
+      prefWidth="600.0"
+      spacing="20"
+      fx:controller="StartScreenController">
+
+    <!-- Play button -->
+    <Button text="Play"
+            onAction="#handlePlayButtonClick"/>
+
+    <!-- Help button -->
+    <Button text="Help"
+            onAction="#handleHelpButtonClick"/>
+
+    <!-- Exit button -->
+    <Button text="Exit"
+            onAction="#handleExitButtonClick"/>
+</VBox>
