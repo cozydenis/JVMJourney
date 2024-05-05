@@ -46,6 +46,7 @@ class MovingObjectTest {
 
     @Test
     void testMoveInAir() {
+
         // Setup initial velocity as zero for a clear test on the effect of gravity alone.
         movingObject.setCurrentVelocity(new PositionVector(0, 5));
         movingObject.setInAir(true); // Set the object to be in the air.
@@ -60,6 +61,7 @@ class MovingObjectTest {
         assertEquals(0.0, movingObject.getCurrentVelocity().getY(),
                 "Gravity should correctly alter Y velocity to 0.");
     }
+
 
 
     @Test
