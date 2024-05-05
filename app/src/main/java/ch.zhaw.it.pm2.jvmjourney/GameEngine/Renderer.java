@@ -19,8 +19,11 @@ public class Renderer{
     GraphicsContext context;
 
     Image background;
-
     List<Object> entities = new ArrayList<>();
+
+    public List<Object> getEntities() {
+        return entities;
+    }
 
     public Renderer(Canvas canvas) {
         this.canvas = canvas;
