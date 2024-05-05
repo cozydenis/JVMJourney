@@ -22,7 +22,7 @@ public class Renderer{
 
     List<GameObject> entities = new ArrayList<>();
 
-    public List<Object> getEntities() {
+    public List<GameObject> getEntities() {
         return entities;
     }
 
@@ -80,8 +80,5 @@ public class Renderer{
         Point2D centre = Object.getCenter();
         Rotate r = new Rotate(Object.getRotation(), centre.getX(), centre.getY());
         context.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
-
-
-
     }
 }

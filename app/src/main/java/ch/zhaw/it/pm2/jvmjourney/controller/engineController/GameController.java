@@ -1,14 +1,6 @@
 package ch.zhaw.it.pm2.jvmjourney.controller.engineController;
 
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.Direction;
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.GameConfig;
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.GameLoopTimer;
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.KeyPolling;
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.Object;
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.Player;
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.Renderer;
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.WaterMelon;
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.PositionVector;
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.*;
 import javafx.scene.canvas.Canvas;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
@@ -121,9 +113,9 @@ public class GameController implements Initializable {
         double playerTop = player.getPosition().getY() - offsetY - player.getHeight() / 2;
         double playerBottom = player.getPosition().getY() + player.getHeight() / 2 + offsetY;
 
-        Iterator<Object> iterator = renderer.getEntities().iterator();
+        Iterator<GameObject> iterator = renderer.getEntities().iterator();
         while (iterator.hasNext()) {
-            ch.zhaw.it.pm2.jvmjourney.GameEngine.Object entity = iterator.next();
+            GameObject entity = iterator.next();
             if (entity != player) {
                 if (playerLeft < entity.getPosition().getX() + entity.getWidth() &&
                         playerRight > entity.getPosition().getX() &&
@@ -141,8 +133,8 @@ public class GameController implements Initializable {
     private void updatePlayerMovement(float frameDuration) {
         if (keys.isDown(KeyCode.UP)) {
             player.jump();
-
         }
+
         if (keys.isDown(KeyCode.RIGHT)) {
             player.accelerate(Direction.RIGHT);
 
