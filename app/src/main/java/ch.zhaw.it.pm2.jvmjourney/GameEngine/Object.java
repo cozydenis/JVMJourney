@@ -15,27 +15,17 @@ public class Object {
 
     float rotation = 0.1f;
     float scale;
-
-
     ImageView imageView;
-
-
 
     public Object(int x, int y, String path, float scale) {
         loadSprite(path);
         this.position = new PositionVector(x, y);
         this.scale = scale;
-
-
-
     }
 
     // TODO: Make for animation
    public void loadSprite(String path) {
-
        imageView = new ImageView(path);
-
-
     }
 
     public void setScale(float scale) {
@@ -45,7 +35,6 @@ public class Object {
     public void update() {
 
     }
-
 
     public PositionVector getPosition() {
         return position;
@@ -81,10 +70,5 @@ public class Object {
     public double getRotation() {
         return rotation;
     }
-
-    public javafx.geometry.Bounds getBounds() {
-        return imageView.getBoundsInParent();
-    }
-
 }
 
