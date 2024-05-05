@@ -1,5 +1,6 @@
 package ch.zhaw.it.pm2.jvmjourney.GameEngine;
 
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,7 +18,7 @@ public final class PositionVector {
     /**
      * Format to print the position vector.
      */
-    private static final String POSITION_VECTOR_FORMAT = "(X:%d, Y:%d)";
+    //private static final String POSITION_VECTOR_FORMAT = "(X:%f, Y:%f";
 
     /**
      * Pattern to parse a position vector from string format.
@@ -72,7 +73,8 @@ public final class PositionVector {
 
     @Override
     public String toString() {
-        return POSITION_VECTOR_FORMAT.formatted(this.x, this.y);
+        // Using %f for floating-point values, and optionally specify precision
+        return String.format("(X:%.2f, Y:%.2f)", this.x, this.y);
     }
 
     /**
@@ -136,4 +138,19 @@ public final class PositionVector {
     public PositionVector bounceOntheWall () {
         return new PositionVector(-this.getX(), this.getY());
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PositionVector that = (PositionVector) o;
+        return Double.compare(x, that.x) == 0 && Double.compare(y, that.y) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
+
+
 }

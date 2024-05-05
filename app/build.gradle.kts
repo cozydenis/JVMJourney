@@ -32,7 +32,7 @@ dependencies {
         implementation("org.openjfx:javafx-swing:17") // Add JavaFX Swing dependency
         implementation("org.openjfx:javafx-controls:17") // Add JavaFX controls dependency
         implementation("org.openjfx:javafx-fxml:17") // Add JavaFX FXML dependency
-        // Add other JavaFX dependencies if needed
+        implementation("org.mockito:mockito-core:4.5.1")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.

@@ -1,3 +1,5 @@
+package ch.zhaw.it.pm2.jvmjourney.controller.engineController;
+
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.Direction;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.GameConfig;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.GameLoopTimer;
@@ -19,15 +21,23 @@ import java.util.*;
 public class GameController implements Initializable {
     public ImageView sprite;
     int level = 0;
-    Player player;
     ArrayList<WaterMelon> waterMelon = new ArrayList<>();
+    public Player player;
     public Canvas gameCanvas;
     public AnchorPane Game;
-    KeyPolling keys = KeyPolling.getInstance();
-    Renderer renderer;
+    public KeyPolling keys = KeyPolling.getInstance();
+    private Renderer renderer;
+
 
     public GameController() {
         player = new Player(0, 0, "walking.png", 6, 6, 1, 1f);
+    }
+
+    // Dependency Injection via Constructor
+    public GameController(Renderer renderer, Player player, Canvas gameCanvas) {
+        this.renderer = renderer;
+        this.player = player;
+        this.gameCanvas = gameCanvas;
     }
 
     public int getRandomIntInRange(int min, int max) {
@@ -92,6 +102,7 @@ public class GameController implements Initializable {
             }
         };
         timer.start();
+
     }
 
     private void initialiseCanvas() {
@@ -99,7 +110,7 @@ public class GameController implements Initializable {
         gameCanvas.heightProperty().bind(Game.heightProperty());
     }
 
-    private void detectAndHandleCollisions() {
+    public void detectAndHandleCollisions() {
         // Define the range around the player's position
         double offsetX = 4; // Example: 10 pixels to the left and right
         double offsetY = 2; // Example: 10 pixels above and below

@@ -1,4 +1,4 @@
-package statisticsController;
+package ch.zhaw.it.pm2.jvmjourney.controller.statisticsController;
 
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
