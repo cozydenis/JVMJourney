@@ -43,7 +43,7 @@ public class ThreadController {
         threadCountChart.getData().add(series);
     }
 
-    private void updateChart() {
+    public void updateChart() {
         ThreadMXBean threadBean = ManagementFactory.getThreadMXBean();
         int currentThreadCount = threadBean.getThreadCount();
 
