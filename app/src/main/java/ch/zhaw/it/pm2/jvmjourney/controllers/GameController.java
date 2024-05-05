@@ -1,3 +1,5 @@
+package ch.zhaw.it.pm2.jvmjourney.controllers;
+
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.Direction;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.GameConfig;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.GameLoopTimer;
@@ -9,7 +11,6 @@ import ch.zhaw.it.pm2.jvmjourney.GameEngine.WaterMelon;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.PositionVector;
 import javafx.scene.canvas.Canvas;
 import javafx.fxml.Initializable;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 
@@ -17,8 +18,6 @@ import java.net.URL;
 import java.util.*;
 
 public class GameController implements Initializable {
-    public ImageView sprite;
-    int level = 0;
     Player player;
     ArrayList<WaterMelon> waterMelon = new ArrayList<>();
     public Canvas gameCanvas;
@@ -127,7 +126,7 @@ public class GameController implements Initializable {
         }
     }
 
-    private void updatePlayerMovement(float frameDuration) {
+    private void updatePlayerMovement() {
         if (keys.isDown(KeyCode.UP)) {
             player.jump();
 

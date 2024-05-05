@@ -1,19 +1,14 @@
-package menuController;
+package ch.zhaw.it.pm2.jvmjourney.controllers.menuController;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MenuBarController implements Initializable {
-
-    @FXML
-    public MenuBar menuBar;
 
     @FXML
     public MenuItem featureListItem;
