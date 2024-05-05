@@ -17,11 +17,18 @@ import java.util.concurrent.TimeUnit;
 public class MemoryController {
     private final int UPDATE_PERIOD = 5;
 
+
+
+
     @FXML
     private LineChart<Number, Number> memoryUsageChart;
 
+
+
+
     @FXML // Reference the axis from FXML, only if separately defined.
     private NumberAxis xAxis;
+
 
     private final List<XYChart.Series<Number, Number>> seriesList = new ArrayList<>();
     private int xSeriesData = -5;
@@ -34,7 +41,7 @@ public class MemoryController {
         executor.scheduleAtFixedRate(this::updateChart, 0, UPDATE_PERIOD, TimeUnit.SECONDS);
     }
 
-    private void setupChart() {
+    public void setupChart() {
         if (xAxis == null) { // If xAxis is not separately defined in FXML, get it from the chart
             xAxis = (NumberAxis) memoryUsageChart.getXAxis();
             xAxis.setAutoRanging(false);
@@ -53,7 +60,7 @@ public class MemoryController {
         }
     }
 
-    private void updateChart() {
+    public void updateChart() {
         List<MemoryPoolMXBean> pools = ManagementFactory.getMemoryPoolMXBeans();
 
         for (MemoryPoolMXBean pool: pools) {
@@ -82,5 +89,26 @@ public class MemoryController {
         int lowerBound = Math.max(xSeriesData - maxDataPoints + 1, 0);
         xAxis.setLowerBound(lowerBound);
         xAxis.setUpperBound(lowerBound + maxDataPoints - 1);
+    }
+
+    public void setMemoryUsageChart(LineChart<Number, Number> memoryUsageChart) {
+        this.memoryUsageChart = memoryUsageChart;
+    }
+
+    public void setxAxis(NumberAxis xAxis) {
+        this.xAxis = xAxis;
+    }
+
+
+    public List<XYChart.Series<Number, Number>> getSeriesList() {
+        return seriesList;
+    }
+
+    public NumberAxis getxAxis() {
+        return xAxis;
+    }
+
+    public LineChart<Number, Number> getMemoryUsageChart() {
+        return memoryUsageChart;
     }
 }

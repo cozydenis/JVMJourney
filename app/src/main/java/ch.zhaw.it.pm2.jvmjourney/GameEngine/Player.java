@@ -130,9 +130,6 @@ public class Player extends MovingObject {
     }
 
 
-    public void setInAir(boolean inAir) {
-        this.inAir = inAir;
-    }
 
     public boolean isPunching() {
         return isPunching;

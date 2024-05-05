@@ -1,5 +1,7 @@
 package ch.zhaw.it.pm2.jvmjourney.GameEngine;
 
+import javafx.geometry.Pos;
+
 public class MovingObject extends GameObject {
 
     protected boolean inAir;
@@ -122,5 +124,23 @@ public class MovingObject extends GameObject {
         move();
     }
 
+    public void setCurrentVelocity(PositionVector velocity) {
+        this.currentVelocity = velocity;
+    }
 
+    public boolean inAir() {
+        return inAir;
+    }
+
+    public void setInAir(boolean inAir) {
+        this.inAir = inAir;
+    }
+
+    public void setGoingRight(boolean goingRight) {
+        this.goingRight = goingRight;
+    }
+
+    public boolean goingRight() {
+        return goingRight;
+    }
 }
