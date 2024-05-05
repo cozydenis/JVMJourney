@@ -76,6 +76,12 @@ public class GameObject {
         return rotation;
     }
 
+    public void setImageView(ImageView imageView) {
+        this.imageView = imageView;
+    }
+
+
+
 
 }
 

@@ -22,8 +22,14 @@ public class Player extends MovingObject {
     // private ImageView imageView = new ImageView();
     private ImageView walkingSprite;
     private ImageView jumpingSprite;
+
+
+
     private ImageView punchingSprite;
     private boolean flipped;
+
+
+
     private boolean isPunching = false;
 
     private double punchCooldown = 0;
@@ -160,7 +166,27 @@ public class Player extends MovingObject {
         this.inAir = inAir;
     }
 
+    public boolean isPunching() {
+        return isPunching;
+    }
 
+    public boolean isFlipped() {
+        return flipped;
+    }
+    public ImageView getPunchingSprite() {
+        return punchingSprite;
+    }
+
+    public void setPunchCooldown(double punchCooldown) {
+        this.punchCooldown = punchCooldown;
+    }
+    public double getPunchCooldown() {
+        return punchCooldown;
+    }
+
+    public void setPunchingSprite(ImageView view) {
+        this.punchingSprite = view;
+    }
 }
 
 

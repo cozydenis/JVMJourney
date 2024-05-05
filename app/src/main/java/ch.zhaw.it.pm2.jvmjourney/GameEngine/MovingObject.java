@@ -5,6 +5,8 @@ public class MovingObject extends GameObject {
     protected boolean inAir;
     private boolean goingRight;
 
+
+
     protected PositionVector currentVelocity;
 
     public MovingObject(int x, int y, String path, float scale) {
@@ -20,7 +22,9 @@ public class MovingObject extends GameObject {
 
 
     }
-
+    public PositionVector getCurrentVelocity() {
+        return currentVelocity;
+    }
 
     public void move() {
         // If on the ground, apply friction to horizontal movement
