@@ -32,6 +32,7 @@ public class GameController implements Initializable {
     public Canvas gameCanvas;
     public AnchorPane Game;
     public KeyPolling keys = KeyPolling.getInstance();
+    private Renderer renderer;
 
 
     public GameController() {
@@ -39,6 +40,14 @@ public class GameController implements Initializable {
 
 
     }
+
+    // Dependency Injection via Constructor
+    public GameController(Renderer renderer, Player player, Canvas gameCanvas) {
+        this.renderer = renderer;
+        this.player = player;
+        this.gameCanvas = gameCanvas;
+    }
+
     public int getRandomIntInRange(int min, int max) {
         if (min >= max) {
             throw new IllegalArgumentException("max must be greater than min");
