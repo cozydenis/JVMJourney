@@ -22,14 +22,8 @@ public class Player extends MovingObject {
     // private ImageView imageView = new ImageView();
     private ImageView walkingSprite;
     private ImageView jumpingSprite;
-
-
-
     private ImageView punchingSprite;
     private boolean flipped;
-
-
-
     private boolean isPunching = false;
 
     private double punchCooldown = 0;

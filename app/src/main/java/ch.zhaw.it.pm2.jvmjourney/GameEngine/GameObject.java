@@ -9,8 +9,6 @@ public class GameObject {
 
     float rotation = 0.1f;
     float scale;
-
-
     ImageView imageView;
 
 
@@ -19,17 +17,11 @@ public class GameObject {
         loadSprite(path);
         this.position = new PositionVector(x, y);
         this.scale = scale;
-
-
-
     }
 
     // TODO: Make for animation
    public void loadSprite(String path) {
-
        imageView = new ImageView(path);
-
-
     }
 
     public void setScale(float scale) {
@@ -39,7 +31,6 @@ public class GameObject {
     public void update() {
 
     }
-
 
     public PositionVector getPosition() {
         return position;
