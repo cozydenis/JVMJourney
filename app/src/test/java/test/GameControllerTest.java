@@ -1,8 +1,10 @@
 package test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.*;
+import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.AnchorPane;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,7 +13,15 @@ import javafx.scene.input.KeyCode;
 import ch.zhaw.it.pm2.jvmjourney.controller.engineController.GameController;
 import org.junit.jupiter.api.BeforeAll;
 import javafx.embed.swing.JFXPanel;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 
+import org.mockito.ArgumentCaptor;
+import org.mockito.InOrder;
+
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
 public class GameControllerTest {
@@ -21,7 +31,7 @@ public class GameControllerTest {
     private Renderer mockRenderer;
     private Canvas mockCanvas;
     private AnchorPane mockGame;
-
+    private KeyPolling mockKeys;
 
     @BeforeAll
     public static void initToolkit() {
@@ -33,15 +43,33 @@ public class GameControllerTest {
         mockPlayer = mock(Player.class);
         mockRenderer = mock(Renderer.class);
         mockCanvas = mock(Canvas.class);
-        mockGame = mock(AnchorPane.class);
 
-
-        // Initialize the controller with the mock objects
         controller = new GameController(mockRenderer, mockPlayer, mockCanvas);
-        controller.Game = mockGame;
     }
 
+    @Test
+    public void testInitialize() {
+        URL mockUrl = mock(URL.class);
+        ResourceBundle mockBundle = mock(ResourceBundle.class);
 
+        // Mocking the AnchorPane to observe scene property changes
+        mockGame = mock(AnchorPane.class);
+        controller.Game = mockGame;
+
+        controller.initialize(mockUrl, mockBundle);
+
+        // Capturing and simulating a scene property change
+        ArgumentCaptor<ChangeListener> captor = ArgumentCaptor.forClass(ChangeListener.class);
+        verify(mockGame.sceneProperty()).addListener(captor.capture());
+
+        // Create a dummy scene to simulate change
+        Scene oldScene = null; // no scene initially
+        Scene newScene = new Scene(new Group()); // new scene
+        captor.getValue().changed(null, oldScene, newScene);
+
+        verify(mockRenderer, atLeastOnce()).prepare();
+        verify(mockRenderer, atLeastOnce()).render();
+    }
 
     // Test method for moving left
     @Test
