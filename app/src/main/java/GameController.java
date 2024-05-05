@@ -14,16 +14,13 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class GameController implements Initializable {
     public ImageView sprite;
     int level = 0;
     Player player;
-    ArrayList <WaterMelon> waterMelon = new ArrayList<>();
+    ArrayList<WaterMelon> waterMelon = new ArrayList<>();
     public Canvas gameCanvas;
     public AnchorPane Game;
     KeyPolling keys = KeyPolling.getInstance();
@@ -68,15 +65,15 @@ public class GameController implements Initializable {
             }
         });
 
-        for (int i = 0; i < 100; i++) {
-            waterMelon.add(new WaterMelon(200, getRandomIntInRange(0,100), "watermelon1_o.png", 0.15f, Direction.RIGHT, new PositionVector(getRandomIntInRange(0,5),getRandomIntInRange(0,5))));
+        for (int i = 0; i < 5; i++) {
+            waterMelon.add(new WaterMelon(200, getRandomIntInRange(0, 100), "watermelon1_o.png", 0.15f, Direction.RIGHT, new PositionVector(getRandomIntInRange(0, 5), getRandomIntInRange(0, 5))));
         }
 
         player.setPosition(50, GameConfig.GROUNDLEVEL);
         player.setScale(1f);
 
         renderer.addObject(player);
-        for(WaterMelon waterMelon : waterMelon) {
+        for (WaterMelon waterMelon: waterMelon) {
             renderer.addObject(waterMelon);
         }
 
@@ -88,8 +85,9 @@ public class GameController implements Initializable {
                 updatePlayerMovement(secondsSinceLastFrame);
                 player.update();
                 player.updatePunchCooldown(secondsSinceLastFrame); // Update the cooldown
-                for(WaterMelon waterMelon : waterMelon)
-                {waterMelon.update();}
+                for (WaterMelon waterMelon: waterMelon) {
+                    waterMelon.update();
+                }
                 renderer.render();
             }
         };
@@ -101,26 +99,35 @@ public class GameController implements Initializable {
         gameCanvas.heightProperty().bind(Game.heightProperty());
     }
 
-    private void checkCollision() {
-        System.out.println(player.getPosition().getX());
-        System.out.println(player.getPosition().getY());
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+    private void detectAndHandleCollisions() {
+        // Define the range around the player's position
+        double offsetX = 4; // Example: 10 pixels to the left and right
+        double offsetY = 2; // Example: 10 pixels above and below
 
-//        List<Object> entities = renderer.getEntities();
-//        for (Object entity : entities) {
-//            System.out.println(entity.getPosition());
-//            if (player.getBounds().intersects(entity.getBounds())) {
-//                player.setAlive(false);
-//            }
-//        }
+        // Calculate the boundaries of the hitbox
+        double playerLeft = player.getPosition().getX() - offsetX - player.getWidth() / 2;
+        double playerRight = player.getPosition().getX() + player.getWidth() / 2 + offsetX;
+        double playerTop = player.getPosition().getY() - offsetY - player.getHeight() / 2;
+        double playerBottom = player.getPosition().getY() + player.getHeight() / 2 + offsetY;
+
+        Iterator<Object> iterator = renderer.getEntities().iterator();
+        while (iterator.hasNext()) {
+            ch.zhaw.it.pm2.jvmjourney.GameEngine.Object entity = iterator.next();
+            if (entity != player) {
+                if (playerLeft < entity.getPosition().getX() + entity.getWidth() &&
+                        playerRight > entity.getPosition().getX() &&
+                        playerTop < entity.getPosition().getY() + entity.getHeight() &&
+                        playerBottom > entity.getPosition().getY()) {
+                    System.out.println("Collision detected");
+                    //noinspection SuspiciousMethodCalls
+                    waterMelon.remove(entity);
+                    iterator.remove();
+                }
+            }
+        }
     }
 
     private void updatePlayerMovement(float frameDuration) {
-        checkCollision();
         if (keys.isDown(KeyCode.UP)) {
             player.jump();
 
@@ -135,6 +142,7 @@ public class GameController implements Initializable {
         // Handle punching action
         if (keys.isDown(KeyCode.SPACE)) {
             player.punch();
+            detectAndHandleCollisions();
         } else {
             player.stopPunch(); // This resets the sprite to walking if the spacebar is not pressed
         }

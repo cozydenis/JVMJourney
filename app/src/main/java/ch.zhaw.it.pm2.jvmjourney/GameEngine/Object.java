@@ -82,6 +82,9 @@ public class Object {
         return rotation;
     }
 
+    public javafx.geometry.Bounds getBounds() {
+        return imageView.getBoundsInParent();
+    }
 
 }
 
