@@ -28,7 +28,7 @@ public class GameObject {
         this.scale = scale;
     }
 
-    public boolean isGoingRight() {
+    public boolean isGoingLeft() {
         return goingRight;
     }
 
@@ -84,7 +84,7 @@ public class GameObject {
     }
 
     public Image getImage() {
-        if(isGoingRight())
+        if(isGoingLeft())
             return flipImage();
         else
             return imageView.getImage();
@@ -111,7 +111,10 @@ public class GameObject {
         this.imageView = imageView;
     }
 
+    public void setGoingRight(boolean goingRight) {
 
+        this.goingRight = goingRight;
+    }
 
 
 }

@@ -3,13 +3,10 @@ package ch.zhaw.it.pm2.jvmjourney.controller.engineController;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.*;
 import javafx.scene.canvas.Canvas;
 import javafx.fxml.Initializable;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 
-import java.io.File;
 import java.net.URL;
 import java.util.*;
 
@@ -119,7 +116,7 @@ public class GameController implements Initializable {
         while (iterator.hasNext()) {
             GameObject entity = iterator.next();
             if (entity != player) {
-                if(player.isGoingRight())
+                if(player.isGoingLeft())
                 {
                     if (playerLeft < entity.getPosition().getX() + entity.getWidth() && player.getPosition().getX() > entity.getPosition().getX() ) {
                     //System.out.println("Collision detected");
@@ -141,7 +138,7 @@ public class GameController implements Initializable {
         }
     }
 
-    private void updatePlayerMovement(float frameDuration) {
+    public void updatePlayerMovement(float frameDuration) {
         if (keys.isDown(KeyCode.UP)) {
             player.jump();
         }
