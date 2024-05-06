@@ -10,6 +10,6 @@
         <NumberAxis forceZeroInRange="false" label="Seconds" side="BOTTOM" upperBound="60.0"/>
     </xAxis>
     <yAxis>
-        <NumberAxis autoRanging="false" upperBound="30" tickUnit="2" label="Thread Count" side="LEFT"/>
+        <NumberAxis upperBound="30" tickUnit="2" label="Thread Count" side="LEFT"/>
     </yAxis>
 </LineChart>
