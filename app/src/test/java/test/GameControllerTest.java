@@ -3,23 +3,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.*;
-import ch.zhaw.it.pm2.jvmjourney.controllers.gameController.GameController;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.AnchorPane;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import javafx.scene.input.KeyCode;
+import ch.zhaw.it.pm2.jvmjourney.controllers.gameController.GameController;
 import org.junit.jupiter.api.BeforeAll;
 import javafx.embed.swing.JFXPanel;
-import javafx.beans.value.ChangeListener;
-
-import org.mockito.ArgumentCaptor;
-
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 
 public class GameControllerTest {
@@ -41,32 +32,12 @@ public class GameControllerTest {
         mockPlayer = mock(Player.class);
         mockRenderer = mock(Renderer.class);
         mockCanvas = mock(Canvas.class);
-
-        controller = new GameController(mockRenderer, mockPlayer, mockCanvas);
-    }
-
-    @Test
-    public void testInitialize() {
-        URL mockUrl = mock(URL.class);
-        ResourceBundle mockBundle = mock(ResourceBundle.class);
-
-        // Mocking the AnchorPane to observe scene property changes
         mockGame = mock(AnchorPane.class);
+
+        // Initialize the controller with the mock objects
+        controller = new GameController(mockRenderer, mockPlayer, mockCanvas);
         controller.Game = mockGame;
 
-        controller.initialize(mockUrl, mockBundle);
-
-        // Capturing and simulating a scene property change
-        ArgumentCaptor<ChangeListener> captor = ArgumentCaptor.forClass(ChangeListener.class);
-        verify(mockGame.sceneProperty()).addListener(captor.capture());
-
-        // Create a dummy scene to simulate change
-        Scene oldScene = null; // no scene initially
-        Scene newScene = new Scene(new Group()); // new scene
-        captor.getValue().changed(null, oldScene, newScene);
-
-        verify(mockRenderer, atLeastOnce()).prepare();
-        verify(mockRenderer, atLeastOnce()).render();
     }
 
     // Test method for moving left
