@@ -108,7 +108,15 @@ The chosen architecture for the JVMJourney game is based on the principles of ob
 
 # Future Feature List
 
-- Health Bar
-- Parkour Ability
-- Garbage Collection Example
+|     ID    |     Feature Name             |     Description                                |     Issue                               |
+|-----------|------------------------------|------------------------------------------------|------------------------------------------|
+| 1         | Level 2 (Garbage Collector)  | Introduce a level which explains jvm garbage collector   | Improve efficiency and reduce pauses     |
+| 2         | Level 3 (Thread Management)  | Level with advanced Thread Management explaination            | Optimize thread usage and concurrency    |
+| 3         | CPU Implementation           | Show how JVM Dynamics cause CPU reactions      | Enhance performance and resource usage   |
+| 4         | Points-System for the Player | Implement a scoring system for players        | Gamification and player engagement       |
+| 5         | Memory Management Metrics    | Display detailed memory usage statistics      | Aid in optimization and troubleshooting |
+| 6         | Health Bar for the Player    | Visual representation of player's health for advanced levels     | Enhance player experience                |
+| 7         | Parkour Ability              | Player ability to perform parkour maneuvers   | Add dynamic movement mechanics           |
+
+
 
