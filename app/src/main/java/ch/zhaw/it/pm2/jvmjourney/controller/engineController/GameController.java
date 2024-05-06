@@ -1,3 +1,5 @@
+package ch.zhaw.it.pm2.jvmjourney.controller.engineController;
+
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.*;
 import javafx.scene.canvas.Canvas;
 import javafx.fxml.Initializable;
@@ -143,7 +145,7 @@ public class GameController implements Initializable {
     }
 
 
-    private void updatePlayerMovement(float frameDuration) {
+    public void updatePlayerMovement(float frameDuration) {
         if (keys.isDown(KeyCode.UP)) {
             player.jump();
 
