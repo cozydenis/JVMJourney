@@ -38,16 +38,10 @@ public class PlayerTest {
         player.loadSprite("walking.png");
     }
 
-
     @AfterEach
     public void tearDown() {
         Mockito.reset(mockImageView);
     }
-
-
-
-
-
 
     @Test
     public void testJump() {
@@ -75,7 +69,6 @@ public class PlayerTest {
 
     }
 
-
     @Test
     public void testLand() {
         player.jump(); // Make the player jump
@@ -84,9 +77,6 @@ public class PlayerTest {
         assertFalse(player.isInAir());
         assertEquals(GameConfig.GROUNDLEVEL, player.getPosition().getY());
     }
-
-
-
 
     @Test
     public void testStopPunch() {
