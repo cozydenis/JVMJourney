@@ -1,9 +1,17 @@
-package ch.zhaw.it.pm2.jvmjourney.controller.engineController;
+package ch.zhaw.it.pm2.jvmjourney.controllers;
+
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.Direction;
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.GameConfig;
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.GameLoopTimer;
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.KeyPolling;
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.Player;
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.Renderer;
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.WaterMelon;
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.PositionVector;
 
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.*;
 import javafx.scene.canvas.Canvas;
 import javafx.fxml.Initializable;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 
@@ -11,15 +19,13 @@ import java.net.URL;
 import java.util.*;
 
 public class GameController implements Initializable {
-    public ImageView sprite;
-    int level = 0;
-    ArrayList<WaterMelon> waterMelon = new ArrayList<>();
+    private final ArrayList<WaterMelon> waterMelon = new ArrayList<>();
+    private Renderer renderer;
+    public static GameLoopTimer timer;
     public Player player;
     public Canvas gameCanvas;
     public AnchorPane Game;
     public KeyPolling keys = KeyPolling.getInstance();
-    private Renderer renderer;
-
 
     public GameController() {
         player = new Player(0, 0, "walking.png", 6, 6, 1, 1f);
@@ -79,7 +85,7 @@ public class GameController implements Initializable {
             renderer.addObject(waterMelon);
         }
 
-        GameLoopTimer timer = new GameLoopTimer() {
+        timer = new GameLoopTimer() {
             @Override
             public void tick(float secondsSinceLastFrame) {
                 renderer.prepare();
@@ -121,7 +127,6 @@ public class GameController implements Initializable {
                         playerRight > entity.getPosition().getX() &&
                         playerTop < entity.getPosition().getY() + entity.getHeight() &&
                         playerBottom > entity.getPosition().getY()) {
-                    System.out.println("Collision detected");
                     //noinspection SuspiciousMethodCalls
                     waterMelon.remove(entity);
                     iterator.remove();
@@ -130,7 +135,7 @@ public class GameController implements Initializable {
         }
     }
 
-    private void updatePlayerMovement(float frameDuration) {
+    public void updatePlayerMovement(float frameDuration) {
         if (keys.isDown(KeyCode.UP)) {
             player.jump();
         }

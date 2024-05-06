@@ -8,7 +8,6 @@ import ch.zhaw.it.pm2.jvmjourney.GameEngine.PositionVector;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.Direction;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.GameConfig;
 import javafx.embed.swing.JFXPanel;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -35,16 +34,10 @@ public class PlayerTest {
         player.loadSprite("walking.png");
     }
 
-
     @AfterEach
     public void tearDown() {
         Mockito.reset(mockImageView);
     }
-
-
-
-
-
 
     @Test
     public void testJump() {
@@ -72,7 +65,6 @@ public class PlayerTest {
 
     }
 
-
     @Test
     public void testLand() {
         player.jump(); // Make the player jump
@@ -81,9 +73,6 @@ public class PlayerTest {
         assertFalse(player.isInAir());
         assertEquals(GameConfig.GROUNDLEVEL, player.getPosition().getY());
     }
-
-
-
 
     @Test
     public void testStopPunch() {
@@ -110,9 +99,4 @@ public class PlayerTest {
         player.move();
         assertEquals(GameConfig.GROUNDLEVEL, player.getPosition().getY());
     }
-
-
-
-
-
 }
