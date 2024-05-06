@@ -19,9 +19,10 @@ public class Renderer{
     GraphicsContext context;
 
     Image background;
-    List<Object> entities = new ArrayList<>();
 
-    public List<Object> getEntities() {
+    List<GameObject> entities = new ArrayList<>();
+
+    public List<GameObject> getEntities() {
         return entities;
     }
 
@@ -30,11 +31,11 @@ public class Renderer{
         this.context = canvas.getGraphicsContext2D();
     }
 
-    public void addObject(Object Object) {
+    public void addObject(GameObject Object) {
         entities.add(Object);
     }
 
-    public void removeObject(Object Object) {
+    public void removeObject(GameObject Object) {
         entities.remove(Object);
     }
 
@@ -53,7 +54,7 @@ public class Renderer{
             context.drawImage(background, 0, 0);
         }
 
-        for (Object Object : entities) {
+        for (GameObject Object : entities) {
 
             transformContext(Object);
 
@@ -75,12 +76,9 @@ public class Renderer{
         context.fillRect(0,0, canvas.getWidth(),canvas.getHeight());
     }
 
-    private void transformContext(Object Object){
+    private void transformContext(GameObject Object){
         Point2D centre = Object.getCenter();
         Rotate r = new Rotate(Object.getRotation(), centre.getX(), centre.getY());
         context.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
-
-
-
     }
 }

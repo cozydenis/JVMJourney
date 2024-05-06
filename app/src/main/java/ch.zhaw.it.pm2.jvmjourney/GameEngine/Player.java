@@ -9,7 +9,6 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.util.BitSet;
 
 public class Player extends MovingObject {
 
@@ -159,6 +158,28 @@ public class Player extends MovingObject {
 
     public void setInAir(boolean inAir) {
         this.inAir = inAir;
+    }
+
+    public boolean isPunching() {
+        return isPunching;
+    }
+
+    public boolean isFlipped() {
+        return flipped;
+    }
+    public ImageView getPunchingSprite() {
+        return punchingSprite;
+    }
+
+    public void setPunchCooldown(double punchCooldown) {
+        this.punchCooldown = punchCooldown;
+    }
+    public double getPunchCooldown() {
+        return punchCooldown;
+    }
+
+    public void setPunchingSprite(ImageView view) {
+        this.punchingSprite = view;
     }
 }
 

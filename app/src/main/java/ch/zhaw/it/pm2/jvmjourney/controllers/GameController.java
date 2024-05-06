@@ -4,11 +4,12 @@ import ch.zhaw.it.pm2.jvmjourney.GameEngine.Direction;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.GameConfig;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.GameLoopTimer;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.KeyPolling;
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.Object;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.Player;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.Renderer;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.WaterMelon;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.PositionVector;
+
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.*;
 import javafx.scene.canvas.Canvas;
 import javafx.fxml.Initializable;
 import javafx.scene.input.KeyCode;
@@ -18,16 +19,23 @@ import java.net.URL;
 import java.util.*;
 
 public class GameController implements Initializable {
-    public static GameLoopTimer timer;
-    private final Player player;
     private final ArrayList<WaterMelon> waterMelon = new ArrayList<>();
+    private Renderer renderer;
+    public static GameLoopTimer timer;
+    public Player player;
     public Canvas gameCanvas;
     public AnchorPane Game;
-    private final KeyPolling keys = KeyPolling.getInstance();
-    private Renderer renderer;
+    public KeyPolling keys = KeyPolling.getInstance();
 
     public GameController() {
         player = new Player(0, 0, "walking.png", 6, 6, 1, 1f);
+    }
+
+    // Dependency Injection via Constructor
+    public GameController(Renderer renderer, Player player, Canvas gameCanvas) {
+        this.renderer = renderer;
+        this.player = player;
+        this.gameCanvas = gameCanvas;
     }
 
     public int getRandomIntInRange(int min, int max) {
@@ -92,6 +100,7 @@ public class GameController implements Initializable {
             }
         };
         timer.start();
+
     }
 
     private void initialiseCanvas() {
@@ -99,7 +108,7 @@ public class GameController implements Initializable {
         gameCanvas.heightProperty().bind(Game.heightProperty());
     }
 
-    private void detectAndHandleCollisions() {
+    public void detectAndHandleCollisions() {
         // Define the range around the player's position
         double offsetX = 4; // Example: 10 pixels to the left and right
         double offsetY = 2; // Example: 10 pixels above and below
@@ -110,9 +119,9 @@ public class GameController implements Initializable {
         double playerTop = player.getPosition().getY() - offsetY - player.getHeight() / 2;
         double playerBottom = player.getPosition().getY() + player.getHeight() / 2 + offsetY;
 
-        Iterator<Object> iterator = renderer.getEntities().iterator();
+        Iterator<GameObject> iterator = renderer.getEntities().iterator();
         while (iterator.hasNext()) {
-            ch.zhaw.it.pm2.jvmjourney.GameEngine.Object entity = iterator.next();
+            GameObject entity = iterator.next();
             if (entity != player) {
                 if (playerLeft < entity.getPosition().getX() + entity.getWidth() &&
                         playerRight > entity.getPosition().getX() &&
@@ -126,7 +135,7 @@ public class GameController implements Initializable {
         }
     }
 
-    private void updatePlayerMovement(float frameDuration) {
+    public void updatePlayerMovement(float frameDuration) {
         if (keys.isDown(KeyCode.UP)) {
             player.jump();
         }
