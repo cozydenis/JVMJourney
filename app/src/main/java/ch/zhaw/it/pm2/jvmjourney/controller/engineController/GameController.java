@@ -1,6 +1,6 @@
 package ch.zhaw.it.pm2.jvmjourney.controller.engineController;
-
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.*;
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.Particle;
 import javafx.scene.canvas.Canvas;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
@@ -11,6 +11,8 @@ import java.net.URL;
 import java.util.*;
 
 public class GameController implements Initializable {
+
+
     public ImageView sprite;
     int level = 0;
     ArrayList<WaterMelon> waterMelon = new ArrayList<>();
@@ -72,8 +74,12 @@ public class GameController implements Initializable {
             waterMelon.add(new WaterMelon(200, getRandomIntInRange(0, 100), "watermelon1_o.png", 0.15f, Direction.RIGHT, new PositionVector(getRandomIntInRange(0, 5), getRandomIntInRange(0, 5))));
         }
 
+
+
+
         player.setPosition(50, GameConfig.GROUNDLEVEL);
         player.setScale(1f);
+
 
         renderer.addObject(player);
         for (WaterMelon waterMelon: waterMelon) {
@@ -110,8 +116,6 @@ public class GameController implements Initializable {
         // Calculate the boundaries of the hitbox
         double playerLeft = player.getPosition().getX() - offsetX - player.getWidth() / 2;
         double playerRight = player.getPosition().getX() + player.getWidth() / 2 + offsetX;
-        double playerTop = player.getPosition().getY() - offsetY - player.getHeight() / 2;
-        double playerBottom = player.getPosition().getY() + player.getHeight() / 2 + offsetY;
 
         Iterator<GameObject> iterator = renderer.getEntities().iterator();
         while (iterator.hasNext()) {
@@ -121,7 +125,7 @@ public class GameController implements Initializable {
                 {
                     if (playerLeft < entity.getPosition().getX() + entity.getWidth() && player.getPosition().getX() > entity.getPosition().getX() ) {
                     //System.out.println("Collision detected");
-                    //noinspection SuspiciousMethodCalls
+
                     //waterMelon
                     waterMelon.remove(entity);
                     iterator.remove();
@@ -143,8 +147,8 @@ public class GameController implements Initializable {
     private void updatePlayerMovement(float frameDuration) {
         if (keys.isDown(KeyCode.UP)) {
             player.jump();
-        }
 
+        }
         if (keys.isDown(KeyCode.RIGHT)) {
             player.accelerate(Direction.RIGHT);
 
@@ -161,3 +165,7 @@ public class GameController implements Initializable {
         }
     }
 }
+
+
+
+
