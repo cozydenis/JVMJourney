@@ -36,6 +36,7 @@ public class GameController implements Initializable {
         this.player = player;
         this.gameCanvas = gameCanvas;
     }
+
     public int getRandomIntInRange(int min, int max) {
         if (min >= max) {
             throw new IllegalArgumentException("max must be greater than min");
@@ -75,12 +76,8 @@ public class GameController implements Initializable {
             waterMelon.add(new WaterMelon(200, getRandomIntInRange(0, 100), "watermelon1_o.png", 0.15f, Direction.RIGHT, new PositionVector(getRandomIntInRange(0, 5), getRandomIntInRange(0, 5))));
         }
 
-
-
-
         player.setPosition(50, GameConfig.GROUNDLEVEL);
         player.setScale(1f);
-
 
         renderer.addObject(player);
         for (WaterMelon waterMelon: waterMelon) {
@@ -144,12 +141,11 @@ public class GameController implements Initializable {
         }
     }
 
-
-    public void updatePlayerMovement(float frameDuration) {
+    private void updatePlayerMovement(float frameDuration) {
         if (keys.isDown(KeyCode.UP)) {
             player.jump();
-
         }
+
         if (keys.isDown(KeyCode.RIGHT)) {
             player.accelerate(Direction.RIGHT);
 
@@ -166,7 +162,3 @@ public class GameController implements Initializable {
         }
     }
 }
-
-
-
-
