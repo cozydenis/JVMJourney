@@ -15,6 +15,28 @@ This collaborative review process not only safeguarded our project from errors a
 
 Once a pull request was thoroughly reviewed and deemed satisfactory, it was then merged into the main branch. This methodical approach to integration helped us maintain a clean, stable, and well-documented codebase, which was crucial for the successful completion of our game project.
 
+
+## Example Pull Requests for Reviews and Merging
+
+Below are examples of pull requests where reviews were discussed and feedback was incorporated, demonstrating our team's use of GitHub's collaborative features:
+
+### [Game Engine Menubar Enhancement #63](https://github.zhaw.ch/PM2-IT23tbZH-ruiz-urak/Team3-DownForAnything-projekt2-JVMexplorer/pull/63)
+
+#### Description
+In this pull request, multiple menu items were removed from the game engine's menubar, specifically mainMenuItem, resetGameItem, goBackItem, and goNextItem. These changes aimed to declutter the user interface, assuming these options were either infrequently used or accessible through other means. Additionally, the pull request included an update to the alert dialog information to better inform users about future features, enhancing user communication.
+
+#### Discussion and Feedback
+- **Öztürk Umut (oeztuumu)** initiated the pull request with commits to remove unused menu options, explaining the potential benefits for UI decluttering.
+- **Durresi2**, another team member, reviewed the changes and recommended including details about testing to verify that the removal of these menu items does not affect other functionalities. They also suggested updating user documentation to reflect these changes, and posed questions about the rationale behind the specific items removed.
+- The author responded to the review by adding testing details and further clarifying the rationale behind the removal decisions, emphasizing that the removed items were either infrequently used or accessible through alternative means.
+
+#### Outcomes
+The pull request was merged, contributing to better code maintenance and readability, and the branch `gameEngine_menubar_enhancement` was subsequently deleted. This pull request was also added to the Milestone 3: Documentation, Testing, and Bug Fixes.
+
+This example showcases effective use of GitHub's review features, ensuring that changes are well-documented and justified before integration into the main project.
+
+
+
 ## Test concept
 In our JUnit testing framework, we systematically employ equivalence class partitioning to validate the functionality of the classes Entity, ch.zhaw.it.pm2.jvmjourney.controller.engineController.GameController, and Renderer. We focus on the methods move, rotate, and render, as well as strategies for controlling the stick figure using arrow keys. This method groups input conditions into sets that the program treats equivalently, ensuring comprehensive test coverage with an optimized set of test cases. Additionally, mock tests are utilized to simulate interaction with dependencies, ensuring that our tests can run in isolation and behave as expected under controlled conditions. Each test case is meticulously documented to indicate the equivalence class it represents. Detailed information about these classes and their corresponding tests can be found in the accompanying table.
 
@@ -110,13 +132,13 @@ The chosen architecture for the JVMJourney game is based on the principles of ob
 
 |     ID    |     Feature Name             |     Description                                |     Issue                               |
 |-----------|------------------------------|------------------------------------------------|------------------------------------------|
-| 1         | Level 2 (Garbage Collector)  | Introduce a level which explains jvm garbage collector   | Improve efficiency and reduce pauses     |
-| 2         | Level 3 (Thread Management)  | Level with advanced Thread Management explaination            | Optimize thread usage and concurrency    |
-| 3         | CPU Implementation           | Show how JVM Dynamics cause CPU reactions      | Enhance performance and resource usage   |
-| 4         | Points-System for the Player | Implement a scoring system for players        | Gamification and player engagement       |
-| 5         | Memory Management Metrics    | Display detailed memory usage statistics      | Aid in optimization and troubleshooting |
-| 6         | Health Bar for the Player    | Visual representation of player's health for advanced levels     | Enhance player experience                |
-| 7         | Parkour Ability              | Player ability to perform parkour maneuvers   | Add dynamic movement mechanics           |
+| 1         | Level 2 (Garbage Collector)  | Introduce a level which explains jvm garbage collector   | [Future Feature: Create Level 2 to Explain JVM Garbage Collector](https://github.zhaw.ch/PM2-IT23tbZH-ruiz-urak/Team3-DownForAnything-projekt2-JVMexplorer/issues/56)     |
+| 2         | Level 3 (Thread Management)  | Level with advanced Thread Management explanation            | [Future Feature: Create Level 3 for Advanced Thread Management](https://github.zhaw.ch/PM2-IT23tbZH-ruiz-urak/Team3-DownForAnything-projekt2-JVMexplorer/issues/57)    |
+| 3         | CPU Implementation           | Show how JVM Dynamics cause CPU reactions      | [Future feature: Implement CPU Usage Graph with Thread Functions](https://github.zhaw.ch/PM2-IT23tbZH-ruiz-urak/Team3-DownForAnything-projekt2-JVMexplorer/issues/58)   |
+| 4         | Points-System for the Player | Implement a scoring system for players        | [Future feature: Implement Scoring System for Players Across All Levels](https://github.zhaw.ch/PM2-IT23tbZH-ruiz-urak/Team3-DownForAnything-projekt2-JVMexplorer/issues/59)       |
+| 5         | Health Bar for the Player    | Visual representation of player's health for advanced levels     | [Future feature: Display Health Bar for Player](https://github.zhaw.ch/PM2-IT23tbZH-ruiz-urak/Team3-DownForAnything-projekt2-JVMexplorer/issues/60)                |
+| 6         | Parkour Ability              | Player ability to perform parkour maneuvers   | [Future feature: Parkour Ability](https://github.zhaw.ch/PM2-IT23tbZH-ruiz-urak/Team3-DownForAnything-projekt2-JVMexplorer/issues/61)           |
+
 
 
 

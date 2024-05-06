@@ -22,6 +22,7 @@ public class WaterMelon extends MovingObject {
         this.currentVelocity = initialVelocity;
         this.inAir = true;
         this.thread = new Thread(() -> {
+
             try {
                 Thread.sleep(Long.MAX_VALUE);
             } catch (InterruptedException e) {
