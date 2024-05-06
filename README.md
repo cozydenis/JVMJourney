@@ -111,11 +111,12 @@ The chosen architecture for the JVMJourney game is based on the principles of ob
 |     ID    |     Feature Name             |     Description                                |     Issue                               |
 |-----------|------------------------------|------------------------------------------------|------------------------------------------|
 | 1         | Level 2 (Garbage Collector)  | Introduce a level which explains jvm garbage collector   | [Future Feature: Create Level 2 to Explain JVM Garbage Collector](https://github.zhaw.ch/PM2-IT23tbZH-ruiz-urak/Team3-DownForAnything-projekt2-JVMexplorer/issues/56)     |
-| 2         | Level 3 (Thread Management)  | Level with advanced Thread Management explaination            | [Future Feature: Create Level 3 for Advanced Thread Management](https://github.zhaw.ch/PM2-IT23tbZH-ruiz-urak/Team3-DownForAnything-projekt2-JVMexplorer/issues/57)    |
-| 3         | CPU Implementation           | Show how JVM Dynamics cause CPU reactions      | [Future feature: Implement CPU Usage Graph with Thread Functions] https://github.zhaw.ch/PM2-IT23tbZH-ruiz-urak/Team3-DownForAnything-projekt2-JVMexplorer/issues/58   |
-| 4         | Points-System for the Player | Implement a scoring system for players        | [Future feature: Implement Scoring System for Players Across All Levels] https://github.zhaw.ch/PM2-IT23tbZH-ruiz-urak/Team3-DownForAnything-projekt2-JVMexplorer/issues/59       |
+| 2         | Level 3 (Thread Management)  | Level with advanced Thread Management explanation            | [Future Feature: Create Level 3 for Advanced Thread Management](https://github.zhaw.ch/PM2-IT23tbZH-ruiz-urak/Team3-DownForAnything-projekt2-JVMexplorer/issues/57)    |
+| 3         | CPU Implementation           | Show how JVM Dynamics cause CPU reactions      | [Future feature: Implement CPU Usage Graph with Thread Functions](https://github.zhaw.ch/PM2-IT23tbZH-ruiz-urak/Team3-DownForAnything-projekt2-JVMexplorer/issues/58)   |
+| 4         | Points-System for the Player | Implement a scoring system for players        | [Future feature: Implement Scoring System for Players Across All Levels](https://github.zhaw.ch/PM2-IT23tbZH-ruiz-urak/Team3-DownForAnything-projekt2-JVMexplorer/issues/59)       |
 | 5         | Health Bar for the Player    | Visual representation of player's health for advanced levels     | [Future feature: Display Health Bar for Player](https://github.zhaw.ch/PM2-IT23tbZH-ruiz-urak/Team3-DownForAnything-projekt2-JVMexplorer/issues/60)                |
 | 6         | Parkour Ability              | Player ability to perform parkour maneuvers   | [Future feature: Parkour Ability](https://github.zhaw.ch/PM2-IT23tbZH-ruiz-urak/Team3-DownForAnything-projekt2-JVMexplorer/issues/61)           |
+
 
 
 
