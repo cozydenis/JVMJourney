@@ -77,8 +77,8 @@ public class GameObject {
      * @param renderer The renderer associated with the game object.
      */
     public void getHit(Renderer renderer) {
-        thread.interrupt();
-        System.out.println(thread.getName());
+        if(thread != null)
+            thread.interrupt();
         renderer.removeObject(this);
         ParticlesController.explosion((int) position.getX(), (int) position.getY(), 10, renderer);
     }

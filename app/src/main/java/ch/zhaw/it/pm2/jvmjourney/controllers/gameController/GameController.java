@@ -183,28 +183,32 @@ public class GameController implements Initializable {
         double playerLeft = player.getPosition().getX() - offsetX - player.getWidth() / 2;
         double playerRight = player.getPosition().getX() + player.getWidth() / 2 + offsetX;
 
-        Iterator<GameObject> iterator = renderer.getEntities().iterator();
-        while (iterator.hasNext()) {
-            GameObject entity = iterator.next();
+        for (GameObject entity : renderer.getEntities()) {
             if (entity != player) {
                 if (player.isGoingRight()) {
                     if (playerLeft < entity.getPosition().getX() + entity.getWidth() && player.getPosition().getX() > entity.getPosition().getX()) {
-                        //System.out.println("Collision detected");
-
                         entity.getHit(renderer);
                         waterMelon.remove(entity);
-                        iterator.remove();
-                    }
-                } else {
-                    if (playerRight > entity.getPosition().getX() && player.getPosition().getX() < entity.getPosition().getX()) {
-                        entity.getHit(renderer);
-                        waterMelon.remove(entity);
-                        iterator.remove();
+                        renderer.removeObject(entity);
                     }
                 }
+            } else {
+                if (playerRight > entity.getPosition().getX() && player.getPosition().getX() < entity.getPosition().getX()) {
+                    entity.getHit(renderer);
+                    waterMelon.remove(entity);
+                    renderer.removeObject(entity);
+                }
+            }
+            if(entity instanceof Particle)
+            {
+                if(entity.getPosition().getY() < GameConfig.GROUNDLEVEL)
+                    waterMelon.remove(entity);
+                    renderer.removeObject(entity);
+
             }
         }
-    }
+        }
+
 
     public void updatePlayerMovement(float frameDuration) {
         if (!tutorialTriggered && pressedKeys.containsAll(EnumSet.of(KeyCode.UP, KeyCode.LEFT, KeyCode.RIGHT, KeyCode.SPACE))) {
