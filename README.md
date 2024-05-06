@@ -36,6 +36,19 @@ The pull request was merged, contributing to better code maintenance and readabi
 This example showcases effective use of GitHub's review features, ensuring that changes are well-documented and justified before integration into the main project.
 
 
+### [Game Engine Enhancements #64](https://github.zhaw.ch/PM2-IT23tbZH-ruiz-urak/Team3-DownForAnything-projekt2-JVMexplorer/pull/64)
+
+#### Description
+Significant updates were made to the GameController class to handle game mechanics and tutorial progression more effectively, along with UI enhancements and testing improvements.
+
+#### Discussion and Feedback
+- **Öztürk Umut (oeztuumu)** detailed the enhancements in game mechanics and UI, addressing the expansion of the GameController class and updates to FXML files.
+- **durresi2** queried about the integration of game mechanics with UI interactions and the challenges faced during implementation.
+- The dialogue covered the advantages of refactoring, implementation challenges, and the impact on the game's architecture. The discussion emphasized on maintaining a cohesive flow between game logic and UI updates, which led to a more manageable system.
+
+#### Outcomes
+The pull request successfully merged 17 commits from the branch `gameEngine` into `dev`, showcasing an excellent example of collaborative problem-solving and code integration.
+
 
 ## Test concept
 In our JUnit testing framework, we systematically employ equivalence class partitioning to validate the functionality of the classes Entity, ch.zhaw.it.pm2.jvmjourney.controller.engineController.GameController, and Renderer. We focus on the methods move, rotate, and render, as well as strategies for controlling the stick figure using arrow keys. This method groups input conditions into sets that the program treats equivalently, ensuring comprehensive test coverage with an optimized set of test cases. Additionally, mock tests are utilized to simulate interaction with dependencies, ensuring that our tests can run in isolation and behave as expected under controlled conditions. Each test case is meticulously documented to indicate the equivalence class it represents. Detailed information about these classes and their corresponding tests can be found in the accompanying table.
