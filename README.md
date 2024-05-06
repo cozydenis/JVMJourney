@@ -36,6 +36,19 @@ The pull request was merged, contributing to better code maintenance and readabi
 This example showcases effective use of GitHub's review features, ensuring that changes are well-documented and justified before integration into the main project.
 
 
+### [Game Engine Enhancements #64](https://github.zhaw.ch/PM2-IT23tbZH-ruiz-urak/Team3-DownForAnything-projekt2-JVMexplorer/pull/64)
+
+#### Description
+Significant updates were made to the GameController class to handle game mechanics and tutorial progression more effectively, along with UI enhancements and testing improvements.
+
+#### Discussion and Feedback
+- **Öztürk Umut (oeztuumu)** detailed the enhancements in game mechanics and UI, addressing the expansion of the GameController class and updates to FXML files.
+- **durresi2** queried about the integration of game mechanics with UI interactions and the challenges faced during implementation.
+- The dialogue covered the advantages of refactoring, implementation challenges, and the impact on the game's architecture. The discussion emphasized on maintaining a cohesive flow between game logic and UI updates, which led to a more manageable system.
+
+#### Outcomes
+The pull request successfully merged 17 commits from the branch `gameEngine` into `dev`, showcasing an excellent example of collaborative problem-solving and code integration.
+
 
 ## Test concept
 In our JUnit testing framework, we systematically employ equivalence class partitioning to validate the functionality of the classes Entity, ch.zhaw.it.pm2.jvmjourney.controllers.gameController.GameController, and Renderer. We focus on the methods move, rotate, and render, as well as strategies for controlling the stick figure using arrow keys. This method groups input conditions into sets that the program treats equivalently, ensuring comprehensive test coverage with an optimized set of test cases. Additionally, mock tests are utilized to simulate interaction with dependencies, ensuring that our tests can run in isolation and behave as expected under controlled conditions. Each test case is meticulously documented to indicate the equivalence class it represents. Detailed information about these classes and their corresponding tests can be found in the accompanying table.
@@ -74,9 +87,8 @@ Equivalence tests for the `render()` method:
 This test concept ensures that the game responds correctly to user inputs, the graphical display functions flawlessly, and the game remains stable under various conditions. Mock tests are particularly valuable for isolating and testing specific components without the need for actual dependencies.
 
 ## Class diagram
-Under root directory: java.png
+![Class Diagramm with MVC Pattern](https://github.zhaw.ch/PM2-IT23tbZH-ruiz-urak/Team3-DownForAnything-projekt2-JVMexplorer/blob/6a36362f1c075354680667ecf1ae36e07e5ba6d1/JVMexplorerMVC.png)
 
-//[Class diagram link](https://mermaid.ink/svg/pako:eNqNVttu2zgQ_RVC-6K0tuFLnDhGEaC1g-12G9RI2iywVR9oaWyzkUiDpOy4QfpD-wl965d1KOpG2fXmxaZmhjNnDmeGfPRCEYE39sKYKjVldClpEvCISQg1E5y8-RjwTEempewx4K9eAU8TkNQILi8DTshLsqFxCso_qUw_f6lpPiz8Wy0ZX9YMAv5U-P-TJjARfMGWDYmWIo5BmrCEtEm6jqiGWUx3IK_FBhLg2l_EguoTshEsshEZZ5rRmH0D_9PN-xa5ASVSGcKblEcxVJbt0lLBhPINNfit0kH2Xoj1R5YUML6TuRAxUE6Yeo2ZbKApndFUQQ5Gs_B-H6LSYu3XBZSzJCN0mlpiZ1KsQeqdoVSk8xgKQeGASu14WFGTnR8LQ3IlXiNZjt3agKtJDmZzIJmSknd31--QTw47y8dLklDG8_P9_KXOr1H8w3gktqimS3ApMBk44jLE37Cb4cGjv-Lkb0PgQJT5tQIJCRbAJJUSawDt32bpS-Xmik6ynX72W4cWYnoS97kbmJqKLfdRPsHeOCloyI9S2Bxxh11kTNWwMo5J8dAy6CAuM8OqRcsP86_YAza3Pyqu-WsmbahFzNz6MMm6BROGEJsmBL_sqLoeKy66XUuG-qLzKqXto4NFYDGUeOtIv5OsjokUmtoGNuhnQjHzdYd2QiLl9rO-QYU0hmfAUqALbz7juoVo9HHYfyVYPncMtoSZVSaLsnZxUB4DiToM058SPCkNGf9N2IXLFbDlStclWxbpleMlknQ7K92XPNqZVTTMURa-pol79jGW9rFi-O3hNbJ-LIaeJg_VMh8oNIp81_6ksb8YH1KBqyhzOGSv0rmWNNTPch4x20B7xnYEHmvDMqsiqZKFG-ARyGp6ZzVD5jS8X0qBV4L1aueJLXff_tXHBebA1ULIxFxK8LBvgsxIQHIaXRpFv3FpIhpcjnk2lK64xtxB7dW5g7lM79aUucJrprou91Tqii8ZTqO8_JagrzFdiYNLxJ8Uui6P0FwfWUSzIFzwt0DX1jgzLBnWKwk0miAYXdmvmsaIMuDV6yHweoFHXrTbl7jc2Ko0kkah1reQTudyr3_H5Od_IcbX8PNHwBtvBSfIPU74LERtTB_fsbadmsGyyz37HJPVHsViLcsKdG2du4CY6MW4ber-n4Nio5NJvuEwxc_3nSdqETrAAl6m5kSGvITJC5SVtgcqNQ-_V6gugEMbnXiqud_o9pwG3Gt5-IzDV0mEz96sGQJPr_AZGXhjXEZU3gceVi3a0RTnzI6H3ljLFFqevXvyV7IrvIoYkuaNFzRWKFxT_q8QpQ1-euNH78Eb94bnndFw2B-dnp_2h73BqN_ydt64Pej0zk67o7PRWXfUPR0MB4Onlvctc9HrdHvd7qh_fja4uLg4H1w8_QKD_A9T)
 
 Architecture Documentation for the JVMJourney Game Class Diagram
 ----------------------------------------------------------------
