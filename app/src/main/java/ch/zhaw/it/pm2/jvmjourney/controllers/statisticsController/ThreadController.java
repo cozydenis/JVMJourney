@@ -67,8 +67,7 @@ public class ThreadController {
      */
     public int getThreadCount() {
         ThreadMXBean threadBean = ManagementFactory.getThreadMXBean();
-        int currentThreadCount = threadBean.getThreadCount();
-        return currentThreadCount;
+        return threadBean.getThreadCount();
     }
 
     private void adjustXAxis() {
