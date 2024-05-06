@@ -146,8 +146,8 @@ public class GameController implements Initializable {
         Alert alert = getAlert("Tutorial 2/2", """
                 Congratulations! You have completed the tutorial.\s
                 You can now play the game.\s
-                Watermelons will come at you. Once they hit you the thread count will go up!\s
-                Try to avoid them by dodging or punching them.\s
+                Watermelons will come at you. Each watermelon represents a thread.\s
+                Try to destroy them by punching and keep the thread count low!\s
                 Have fun!""");
         alert.show();
     }
@@ -157,8 +157,9 @@ public class GameController implements Initializable {
                 In this tutorial you will learn how to move and jump and punch.\s
                 Use the arrow keys to move and jump.\s
                 Use the space bar to punch.\s
-                                
-                Punching will be used to destroy the watermelons!\s""");
+                               \s
+                Punching will be used to destroy the watermelons!\s
+                Press all arrow keys and space bar to continue to the next tutorial.\s""");
         alert.show();
     }
 
@@ -168,7 +169,7 @@ public class GameController implements Initializable {
 
                 In the top bar you can see diagnostics about the JVM.\s
                 The metrics will change according to actions happening in the game.\s
-                                
+                               \s
                 The bottom bar contains the game panel.\s
                 Interactions happening in the game will directly influence the metrics in the top bar.\s
                 Try to monitor the metrics while playing the game!\s
