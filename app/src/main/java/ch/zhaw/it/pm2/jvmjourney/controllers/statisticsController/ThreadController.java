@@ -43,20 +43,32 @@ public class ThreadController {
         threadCountChart.getData().add(series);
     }
 
+    /**
+     * Update the chart with the current thread count.
+     * Calculating -15 to exclude the JavaFX and java native threads.
+     */
     private void updateChart() {
-        ThreadMXBean threadBean = ManagementFactory.getThreadMXBean();
-        int currentThreadCount = threadBean.getThreadCount();
-
         javafx.application.Platform.runLater(() -> {
             if (series.getData().size() >= maxDataPoints) {
                 series.getData().removeFirst();
             }
-            series.getData().add(new XYChart.Data<>(xSeriesData, currentThreadCount -15));
+            series.getData().add(new XYChart.Data<>(xSeriesData, getThreadCount() - 15));
 
             xSeriesData = xSeriesData + UPDATE_PERIOD;
 
             adjustXAxis();
         });
+    }
+
+    /**
+     * Get the current thread count.
+     *
+     * @return The current thread count.
+     */
+    public int getThreadCount() {
+        ThreadMXBean threadBean = ManagementFactory.getThreadMXBean();
+        int currentThreadCount = threadBean.getThreadCount();
+        return currentThreadCount;
     }
 
     private void adjustXAxis() {
