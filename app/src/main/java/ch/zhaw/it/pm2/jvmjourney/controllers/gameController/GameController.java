@@ -15,7 +15,6 @@ import static ch.zhaw.it.pm2.jvmjourney.controllers.gameController.LEVEL.*;
 public class GameController implements Initializable {
     private LEVEL level = INTRO;
     private final ArrayList<WaterMelon> waterMelon = new ArrayList<>();
-    private final Map<WaterMelon, Thread> melonThreads = new HashMap<>();
     private Renderer renderer;
     public static GameLoopTimer timer;
     public Player player;
@@ -113,19 +112,6 @@ public class GameController implements Initializable {
         WaterMelon newMelon = new WaterMelon(getRandomIntInRange(100, 300), GameConfig.GROUNDLEVEL, "watermelon1_o.png", 0.15f, Direction.RIGHT, new PositionVector(getRandomIntInRange(0, 5), getRandomIntInRange(0, 5)));
         waterMelon.add(newMelon);
         renderer.addObject(newMelon);
-
-        // Start a dummy thread that waits indefinitely
-        Thread dummyThread = new Thread(() -> {
-            try {
-                // Thread waits indefinitely until interrupted
-                Thread.sleep(Long.MAX_VALUE);
-            } catch (InterruptedException e) {
-                // Thread interrupted
-                System.out.println("Thread for " + newMelon + " was interrupted and is now terminating.");
-            }
-        });
-        dummyThread.start();
-        melonThreads.put(newMelon, dummyThread);
     }
 
     private void triggerTutorial() {
@@ -219,11 +205,6 @@ public class GameController implements Initializable {
                     //noinspection SuspiciousMethodCalls
                     waterMelon.remove(entity);
                     iterator.remove();
-                    Thread threadToInterrupt = melonThreads.get(entity);
-                    if (threadToInterrupt != null) {
-                        threadToInterrupt.interrupt();
-                        melonThreads.remove(entity);
-                    }
                 }
             }
         }
