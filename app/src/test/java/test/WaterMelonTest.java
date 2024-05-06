@@ -59,6 +59,10 @@ class WaterMelonTest {
 
         // Verify normal movement without bouncing
         assertEquals(5, waterMelon.getCurrentVelocity().getX(), "X velocity should remain constant");
+<<<<<<< HEAD
         assertEquals(-0.5,waterMelon.getCurrentVelocity().getY(), "Y velocity should decrease to 0 due to gravity");
+=======
+        assertTrue(waterMelon.getCurrentVelocity().getY() < -1, "Y velocity should decrease due to gravity");
+>>>>>>> origin/dev_Player_Test
     }
 }

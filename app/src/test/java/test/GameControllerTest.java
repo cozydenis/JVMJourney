@@ -1,5 +1,5 @@
 package test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.*;
@@ -36,7 +36,6 @@ public class GameControllerTest {
     private AnchorPane mockGame;
     private KeyPolling mockKeys;
 
-
     @BeforeAll
     public static void initToolkit() {
         new JFXPanel(); // Initializes the JavaFX environment
@@ -67,11 +66,6 @@ public class GameControllerTest {
         when(mockCanvas.getGraphicsContext2D()).thenReturn(mockGraphicsContext);
     }
 
-
-
-
-
-
     @Test
     public void testInitializePartially() {
 
@@ -94,16 +88,6 @@ public class GameControllerTest {
         // (e.g., verifying if certain methods were called on mockRenderer)
         verify(mockRenderer, atLeastOnce()).prepare();
     }
-
-
-
-
-
-
-
-
-
-
 
     // Test method for moving left
     @Test
