@@ -12,10 +12,11 @@ public class WaterMelon extends ch.zhaw.it.pm2.jvmjourney.GameEngine.MovingObjec
         this.currentVelocity = initialVelocity;
         this.inAir = true;
         thread = new Thread(() -> {
-            while (true) {
-                // System.out.println("Thread started " + threadNumber);
+            try {
+                Thread.sleep(Long.MAX_VALUE);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
-
         });
         thread.start();
     }
