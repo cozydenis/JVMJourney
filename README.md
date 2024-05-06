@@ -20,20 +20,6 @@ In our JUnit testing framework, we systematically employ equivalence class parti
 
 ### Equivalence Test Class
 Equivalence tests for methods move() and rotate():
-| Class           | Equivalence Class              | Inputs                                              | Expected Result                                                                                    |
-|-----------------|--------------------------------|-----------------------------------------------------|----------------------------------------------------------------------------------------------------|
-| **Player**      | Movement in Air                | `inAir = true`, varying `currentVelocity`           | Position and velocity are updated according to gravity and existing velocity.                      |
-|                 | Movement on Ground             | `inAir = false`, varying `currentVelocity`          | Position updates based on velocity with friction applied, velocity reduces unless at friction limit.|
-|                 | Jumping                        | `inAir = false`, command to jump                    | `inAir` becomes true, vertical velocity reflects jump strength, simulating an upward movement.      |
-|                 | Landing                        | `inAir = true`, reaching ground level               | `inAir` becomes false, position set to ground level, vertical velocity resets.                     |
-|                 | Punching and Cooldown          | Various states of `punchCooldown`                   | When cooldown is zero, player can punch. Cooldown resets and counts down until punching stops.     |
-| **WaterMelon**  | Bouncing Off Ground            | `currentVelocity` having a downward component       | Upon collision with ground, y component of velocity becomes positive (bounces up).                 |
-|                 | Bouncing Off Wall              | `currentVelocity` directed towards a wall           | Upon collision, x component of velocity reverses, simulating a bounce off the wall.                |
-|                 | Free Movement                  | No obstacles, various `currentVelocity`             | Position updates smoothly in trajectory without bouncing.                                          |
-| **GameController** | Arrow Key Movement          | Key inputs for left, right, and jump                | Player's position and velocity update based on the direction indicated by the key press.           |
-|                 | No Key Pressed                 | No movement keys pressed                            | Player remains stationary, with no changes in position or velocity.                                |
-|                 | Simultaneous Movement and Jump | Right or left key along with jump key pressed       | Player moves horizontally while also initiating a jump.                                            |
-|                 | Invalid Key Press              | Non-directional keys pressed                        | No movement or action taken, demonstrating that only specific keys influence gameplay.             |
 
 
 
