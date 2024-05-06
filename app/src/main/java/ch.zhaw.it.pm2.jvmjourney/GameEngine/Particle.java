@@ -1,48 +1,46 @@
 package ch.zhaw.it.pm2.jvmjourney.GameEngine;
 
 
-
+/**
+ * The Particle class represents a particle in the game.
+ * It extends the MovingObject class and has properties for its life thread and original velocity.
+ */
 public class Particle extends MovingObject {
 
-    private boolean alive = true;
+    /**
+     * The thread that controls the life of the particle.
+     */
     private Thread lifeThread;
+
+    /**
+     * The original velocity of the particle.
+     */
     private PositionVector originalVelocity;
-    private PositionVector currentVelocity;
 
-
+    /**
+     * Constructs a new Particle object with the specified position and velocity.
+     *
+     * @param x The x-coordinate of the particle's position.
+     * @param y The y-coordinate of the particle's position.
+     * @param velocity The velocity of the particle.
+     */
     public Particle(int x, int y, PositionVector velocity) {
         super(x, y, "WaterMelonParticule.png", 1);
-        startLifeThread(2);
         originalVelocity = velocity;
     }
 
+    /**
+     * Moves the particle by adding the original velocity to the current position.
+     */
     public void move() {
-        if(isAlive())
-        {
-
-            position = position.add(originalVelocity= originalVelocity.add(new PositionVector(-1, -0.1f)));
-
-        }
-
+        position = position.add(originalVelocity = originalVelocity.add(new PositionVector(0, 0.1f)));
     }
 
-    private void startLifeThread(int seconds) {
-        lifeThread = new Thread(() -> {
-            System.out.println("Thread started");
-            try {
-                Thread.sleep(seconds * 1000L);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println("Thread ended");
-            alive = false; // set alive to false after 2 seconds
-        });
-        lifeThread.start();
+    /**
+     * Updates the state of the particle by moving it.
+     */
+    @Override
+    public void update() {
+        move();
     }
-
-    public boolean isAlive() {
-        return alive;
-    }
-
-
 }

@@ -10,7 +10,10 @@ import javafx.scene.transform.Rotate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Renderer{
+/**
+ * Responsible for rendering game objects onto a canvas.
+ */
+public class Renderer {
 
     Canvas canvas;
     GraphicsContext context;
@@ -19,65 +22,101 @@ public class Renderer{
 
     List<GameObject> entities = new ArrayList<>();
 
-    public List<GameObject> getEntities() {
-        return entities;
-    }
-
+    /**
+     * Constructs a Renderer with the specified canvas.
+     *
+     * @param canvas The canvas to render on.
+     */
     public Renderer(Canvas canvas) {
         this.canvas = canvas;
         this.context = canvas.getGraphicsContext2D();
     }
 
-    public void addObject(GameObject Object) {
-        entities.add(Object);
+    /**
+     * Retrieves the list of entities currently managed by the renderer.
+     *
+     * @return The list of entities.
+     */
+    public List<GameObject> getEntities() {
+        return entities;
     }
 
-    public void removeObject(GameObject Object) {
-        entities.remove(Object);
+    /**
+     * Adds a game object to the list of entities to be rendered.
+     *
+     * @param object The game object to add.
+     */
+    public void addObject(GameObject object) {
+        entities.add(object);
     }
 
+    /**
+     * Removes a game object from the list of entities to be rendered.
+     *
+     * @param object The game object to remove.
+     */
+    public void removeObject(GameObject object) {
+        entities.remove(object);
+    }
+
+    /**
+     * Clears all entities from the renderer.
+     */
     public void clearEntities() {
         entities.clear();
     }
 
+    /**
+     * Sets the background image for the renderer.
+     *
+     * @param background The background image to set.
+     */
     public void setBackground(Image background) {
         this.background = background;
     }
 
+    /**
+     * Renders all entities onto the canvas.
+     */
     public void render() {
         context.save();
 
-        if(background!=null){
+        if (background != null) {
             context.drawImage(background, 0, 0);
         }
 
-        for (GameObject Object : entities) {
+        for (GameObject object : entities) {
+            transformContext(object);
 
-            transformContext(Object);
-
-            Point2D pos = Object.getDrawPosition();
+            Point2D pos = object.getDrawPosition();
             context.drawImage(
-                    Object.getImage(),
+                    object.getImage(),
                     pos.getX(),
                     pos.getY(),
-                    Object.getWidth(),
-                    Object.getHeight()
+                    object.getWidth(),
+                    object.getHeight()
             );
         }
 
         context.restore();
     }
 
-
-
-    public void prepare(){
-        context.setFill( new Color(0.68, 0.68, 0.68, 1.0) );
-        context.fillRect(0,0, canvas.getWidth(),canvas.getHeight());
+    /**
+     * Prepares the canvas by filling it with a background color.
+     */
+    public void prepare() {
+        context.setFill(new Color(0.68, 0.68, 0.68, 1.0));
+        context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
 
-    private void transformContext(GameObject Object){
-        Point2D centre = Object.getCenter();
-        Rotate r = new Rotate(Object.getRotation(), centre.getX(), centre.getY());
+    /**
+     * Transforms the rendering context based on the properties of the given game object.
+     *
+     * @param object The game object to transform the context for.
+     */
+    private void transformContext(GameObject object) {
+        Point2D centre = object.getCenter();
+        Rotate r = new Rotate(object.getRotation(), centre.getX(), centre.getY());
         context.setTransform(r.getMxx(), r.getMyx(), r.getMxy(), r.getMyy(), r.getTx(), r.getTy());
     }
 }
