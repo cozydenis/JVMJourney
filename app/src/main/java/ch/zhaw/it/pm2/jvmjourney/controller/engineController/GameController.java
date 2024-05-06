@@ -93,10 +93,11 @@ public class GameController implements Initializable {
                 renderer.prepare();
 
                 updatePlayerMovement(secondsSinceLastFrame);
-                player.update();
+                for (GameObject object: renderer.getEntities())
+                {
+                    object.update();
+                }
                 player.updatePunchCooldown(secondsSinceLastFrame); // Update the cooldown
-                for(WaterMelon waterMelon : waterMelon)
-                {waterMelon.update();}
                 renderer.render();
             }
         };
@@ -127,7 +128,7 @@ public class GameController implements Initializable {
                     if (playerLeft < entity.getPosition().getX() + entity.getWidth() && player.getPosition().getX() > entity.getPosition().getX() ) {
                     //System.out.println("Collision detected");
 
-                    //waterMelon
+                    entity.getHit(renderer);
                     waterMelon.remove(entity);
                     iterator.remove();
                 }
@@ -136,6 +137,7 @@ public class GameController implements Initializable {
                 {
                     if(playerRight > entity.getPosition().getX() && player.getPosition().getX() < entity.getPosition().getX())
                     {
+                        entity.getHit(renderer);
                         waterMelon.remove(entity);
                         iterator.remove();
                     }
