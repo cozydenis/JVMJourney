@@ -1,6 +1,5 @@
 package test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.*;
@@ -37,6 +36,7 @@ public class GameControllerTest {
     private AnchorPane mockGame;
     private KeyPolling mockKeys;
 
+
     @BeforeAll
     public static void initToolkit() {
         new JFXPanel(); // Initializes the JavaFX environment
@@ -58,6 +58,9 @@ public class GameControllerTest {
         // Initialize the controller with the mock objects
         controller = new GameController(mockRenderer, mockPlayer, mockCanvas);
         controller.Game = mockGame;
+        mockCanvas.setWidth(800);
+
+
 
         // Ensure GraphicsContext is mocked if used in renderer or canvas initialization
         GraphicsContext mockGraphicsContext = mock(GraphicsContext.class);
@@ -68,9 +71,10 @@ public class GameControllerTest {
 
 
 
-/*
+
     @Test
     public void testInitializePartially() {
+
         URL mockUrl = mock(URL.class);
         ResourceBundle mockBundle = mock(ResourceBundle.class);
 
@@ -92,7 +96,7 @@ public class GameControllerTest {
     }
 
 
- */
+
 
 
 

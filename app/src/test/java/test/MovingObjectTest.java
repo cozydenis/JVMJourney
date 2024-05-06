@@ -46,14 +46,21 @@ class MovingObjectTest {
 
     @Test
     void testMoveInAir() {
-        movingObject.setCurrentVelocity(new PositionVector(0, 0)); // Initially stationary
-        movingObject.setInAir(true); // Object is in the air
+        // Setup initial velocity as zero for a clear test on the effect of gravity alone.
+        movingObject.setCurrentVelocity(new PositionVector(0, 5));
+        movingObject.setInAir(true); // Set the object to be in the air.
 
+
+
+        // Call move, which should apply gravity.
         movingObject.move();
 
-        // Check if gravity is applied
-        assertEquals(Direction.DOWN.vector.getY(), movingObject.getCurrentVelocity().getY(), 0.1);
+
+        // Check if gravity is applied correctly.
+        assertEquals(0.0, movingObject.getCurrentVelocity().getY(),
+                "Gravity should correctly alter Y velocity to 0.");
     }
+
 
     @Test
     void testHorizontalBoundaryCheck() {

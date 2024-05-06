@@ -130,7 +130,7 @@ public class GameController implements Initializable {
         }
     }
 
-    private void updatePlayerMovement(float frameDuration) {
+    public void updatePlayerMovement(float frameDuration) {
         if (keys.isDown(KeyCode.UP)) {
             player.jump();
         }
