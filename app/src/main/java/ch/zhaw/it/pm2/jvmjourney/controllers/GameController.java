@@ -18,12 +18,13 @@ import java.net.URL;
 import java.util.*;
 
 public class GameController implements Initializable {
-    Player player;
-    ArrayList<WaterMelon> waterMelon = new ArrayList<>();
+    public static GameLoopTimer timer;
+    private final Player player;
+    private final ArrayList<WaterMelon> waterMelon = new ArrayList<>();
     public Canvas gameCanvas;
     public AnchorPane Game;
-    KeyPolling keys = KeyPolling.getInstance();
-    Renderer renderer;
+    private final KeyPolling keys = KeyPolling.getInstance();
+    private Renderer renderer;
 
     public GameController() {
         player = new Player(0, 0, "walking.png", 6, 6, 1, 1f);
@@ -76,7 +77,7 @@ public class GameController implements Initializable {
             renderer.addObject(waterMelon);
         }
 
-        GameLoopTimer timer = new GameLoopTimer() {
+        timer = new GameLoopTimer() {
             @Override
             public void tick(float secondsSinceLastFrame) {
                 renderer.prepare();
@@ -117,7 +118,6 @@ public class GameController implements Initializable {
                         playerRight > entity.getPosition().getX() &&
                         playerTop < entity.getPosition().getY() + entity.getHeight() &&
                         playerBottom > entity.getPosition().getY()) {
-                    System.out.println("Collision detected");
                     //noinspection SuspiciousMethodCalls
                     waterMelon.remove(entity);
                     iterator.remove();
@@ -129,8 +129,8 @@ public class GameController implements Initializable {
     private void updatePlayerMovement(float frameDuration) {
         if (keys.isDown(KeyCode.UP)) {
             player.jump();
-
         }
+
         if (keys.isDown(KeyCode.RIGHT)) {
             player.accelerate(Direction.RIGHT);
 
