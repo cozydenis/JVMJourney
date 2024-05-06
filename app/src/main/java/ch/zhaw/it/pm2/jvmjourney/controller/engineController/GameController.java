@@ -1,12 +1,13 @@
-package ch.zhaw.it.pm2.jvmjourney.controller.engineController;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.*;
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.Particle;
 import javafx.scene.canvas.Canvas;
 import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 
+import java.io.File;
 import java.net.URL;
 import java.util.*;
 
@@ -33,8 +34,6 @@ public class GameController implements Initializable {
         this.player = player;
         this.gameCanvas = gameCanvas;
     }
-
-
     public int getRandomIntInRange(int min, int max) {
         if (min >= max) {
             throw new IllegalArgumentException("max must be greater than min");
