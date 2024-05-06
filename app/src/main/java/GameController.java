@@ -1,5 +1,4 @@
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.*;
-import ch.zhaw.it.pm2.jvmjourney.GameEngine.Particle;
+import ch.zhaw.it.pm2.jvmjourney.GameEngine.*;qsimport ch.zhaw.it.pm2.jvmjourney.GameEngine.Particle;
 import javafx.scene.canvas.Canvas;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
