@@ -1,14 +1,6 @@
 package ch.zhaw.it.pm2.jvmjourney.GameEngine;
 
-import javafx.geometry.Point2D;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.embed.swing.SwingFXUtils;
-
-import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
-import java.awt.image.BufferedImage;
 
 public class Player extends MovingObject {
 
@@ -18,12 +10,10 @@ public class Player extends MovingObject {
 
     private int frameWidth; // Width of each frame
     private int frameHeight; // Height of each frame
-    private int numFrames;
     // private ImageView imageView = new ImageView();
     private ImageView walkingSprite;
     private ImageView jumpingSprite;
     private ImageView punchingSprite;
-    private boolean flipped;
     private boolean isPunching = false;
 
     private double punchCooldown = 0;
@@ -35,7 +25,6 @@ public class Player extends MovingObject {
         super(x, y, path, scale);
         this.frameWidth = frameWidth;
         this.frameHeight = frameHeight;
-        this.numFrames = numFrames;
 
     }
 
@@ -82,35 +71,19 @@ public class Player extends MovingObject {
         isPunching = false;
         if (!inAir) {
             imageView = walkingSprite;
+
         } else {
             imageView = jumpingSprite; // Ensure we revert back to the jumping sprite if still in air
+
         }
     }
 
-    @Override
-    public void flip() {
-        flipped = !flipped;
-        System.out.println(flipped);
-        // Convert Image to BufferedImage
-        BufferedImage bufferedImage = new BufferedImage((int) imageView.getImage().getWidth(), (int) imageView.getImage().getHeight(), BufferedImage.TYPE_INT_ARGB);
-        Graphics g = bufferedImage.getGraphics();
-        g.drawImage(SwingFXUtils.fromFXImage(imageView.getImage(), null), 0, 0, null);
-        g.dispose();
 
-        // Perform flip operation
-        AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
-        tx.translate(-bufferedImage.getWidth(null), 0);
-        AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-        bufferedImage = op.filter(bufferedImage, null);
-
-        // Convert BufferedImage back to Image
-        Image flippedImage = SwingFXUtils.toFXImage(bufferedImage, null);
-        imageView.setImage(flippedImage);
-    }
 
 
     @Override
     public void move() {
+
         // Call move from the superclass.
         super.move();
 
@@ -121,15 +94,14 @@ public class Player extends MovingObject {
             currentVelocity = new PositionVector(currentVelocity.getX(), gravityEffect);
             position.setY(position.getY() + currentVelocity.getY() * FRAME_RATE);
             if (position.getY() > GameConfig.GROUNDLEVEL) {
-                if (flipped) {
-                    flip();
-                }
                 imageView = walkingSprite;
+
                 land();
             }
         }else {
             if (!isPunching) {
                 imageView = walkingSprite;
+
             }
         }
 
@@ -142,6 +114,7 @@ public class Player extends MovingObject {
             currentVelocity = new PositionVector(currentVelocity.getX(), -JUMP_STRENGTH);
             inAir = true;
             imageView = jumpingSprite; // Change to jumping sprite when starting to jump
+
         }
     }
 
@@ -152,6 +125,7 @@ public class Player extends MovingObject {
         currentVelocity = new PositionVector(currentVelocity.getX(), 0);
         if (!isPunching) {
             imageView = walkingSprite;
+
         }
     }
 
@@ -164,9 +138,7 @@ public class Player extends MovingObject {
         return isPunching;
     }
 
-    public boolean isFlipped() {
-        return flipped;
-    }
+
     public ImageView getPunchingSprite() {
         return punchingSprite;
     }

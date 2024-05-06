@@ -3,7 +3,6 @@ package ch.zhaw.it.pm2.jvmjourney.GameEngine;
 public class MovingObject extends GameObject {
 
     protected boolean inAir;
-    private boolean goingRight;
 
 
 
@@ -50,13 +49,11 @@ public class MovingObject extends GameObject {
 
         if (currentVelocity.getX() < 0) {
             if (!goingRight) {
-                goingRight = true;
                 flip();
             }
 
         } else if (currentVelocity.getX() > 0) {
             if (goingRight) {
-                goingRight = false;
                 flip();
             }
         }
@@ -117,6 +114,7 @@ public class MovingObject extends GameObject {
 
     // to override in subclasses
     public void flip() {
+        goingRight = !goingRight;
     }
 
     @Override

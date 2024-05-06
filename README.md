@@ -16,45 +16,45 @@ This collaborative review process not only safeguarded our project from errors a
 Once a pull request was thoroughly reviewed and deemed satisfactory, it was then merged into the main branch. This methodical approach to integration helped us maintain a clean, stable, and well-documented codebase, which was crucial for the successful completion of our game project.
 
 ## Test concept
-In our JUnit testing framework, we systematically employ equivalence class partitioning to validate the functionality of the classes Entity, ch.zhaw.it.pm2.jvmjourney.controllers.gameController.GameController, and Renderer. We focus on the methods move, rotate, and render, as well as strategies for controlling the stick figure using arrow keys. This method groups input conditions into sets that the program treats equivalently, ensuring comprehensive test coverage with an optimized set of test cases. Additionally, mock tests are utilized to simulate interaction with dependencies, ensuring that our tests can run in isolation and behave as expected under controlled conditions. Each test case is meticulously documented to indicate the equivalence class it represents. Detailed information about these classes and their corresponding tests can be found in the accompanying table.
+In our JUnit testing framework, we systematically employ equivalence class partitioning to validate the functionality of the classes Entity, ch.zhaw.it.pm2.jvmjourney.controller.engineController.GameController, and Renderer. We focus on the methods move, rotate, and render, as well as strategies for controlling the stick figure using arrow keys. This method groups input conditions into sets that the program treats equivalently, ensuring comprehensive test coverage with an optimized set of test cases. Additionally, mock tests are utilized to simulate interaction with dependencies, ensuring that our tests can run in isolation and behave as expected under controlled conditions. Each test case is meticulously documented to indicate the equivalence class it represents. Detailed information about these classes and their corresponding tests can be found in the accompanying table.
 
 ### Class Entity
 Equivalence tests for methods move() and rotate():
 
-| Equivalence Class | Test Case                  | Description                                                                                       |
-|-------------------|----------------------------|---------------------------------------------------------------------------------------------------|
-| move              | testMoveValidDirection     | Tests moving the stick figure to the right, ensuring that the position is updated correctly.      |
-| move              | testMoveWithNoMovement     | Verifies that the stick figure's position remains unchanged when no movement is commanded.        |
-| rotate            | testRotateValid            | Tests correct rotation of the stick figure by a set angle.                                        |
-| rotate            | testRotateWithZero         | Verifies that the stick figure's rotation remains unchanged when the rotation change is zero.     |
-| rotate            | testRotateAndMove          | Tests the combination of moving and rotating to check for correct updates in position and rotation.|
+### Class `Entity`
+| Number | Name                     | Method parameters | Initial object state            | Expected result                                              |
+|--------|--------------------------|-------------------|---------------------------------|--------------------------------------------------------------|
+| 1      | testMoveValidDirection   | Valid direction   | Position before move            | "Position is updated correctly to the right"                 |
+| 2      | testMoveWithNoMovement   | None              | Position unchanged              | "Stick figure's position remains unchanged with no movement" |
+| 3      | testRotateValid          | Set angle         | Angle before rotation           | "Correct rotation of the stick figure by a set angle"        |
+| 4      | testRotateAndMove        | Combination       | Position and angle before test  | "Correct updates in position and rotation"                   |
 
 
-### Class ch.zhaw.it.pm2.jvmjourney.controllers.gameController.GameController
+### Class ch.zhaw.it.pm2.jvmjourney.controller.engineController.GameController
 Equivalence tests for controlling the stick figure using arrow keys:
 
-| Equivalence Class | Test Case         | Description                                                                                         |
-|-------------------|-------------------|-----------------------------------------------------------------------------------------------------|
-| key control       | testMoveLeft      | The stick figure should move left, updating its position and velocity accordingly.                  |
-| key control       | testMoveRight     | The stick figure should move right, updating its position and velocity accordingly.                 |
-| key control       | testJump          | The stick figure should jump (move upward), updating its position and velocity accordingly.         |
-| key control       | testCrouch        | The stick figure should crouch (move downward), updating its position accordingly.                  |
-| key control       | testNoMovement    | If no arrow key action is taken, the stick figure should not move, and its position should remain unchanged.|
+| Number | Name            | Method parameters | Initial object state           | Expected result                                                      |
+|--------|-----------------|-------------------|--------------------------------|----------------------------------------------------------------------|
+| 1      | testMoveLeft    | Left arrow key    | Position and velocity before   | "The stick figure moves left, updating its position and velocity"    |
+| 2      | testMoveRight   | Right arrow key   | Position and velocity before   | "The stick figure moves right, updating its position and velocity"   |
+| 3      | testJump        | Up arrow key      | Position and velocity before   | "The stick figure jumps, updating its position and velocity upward"  |
+| 4      | testNoMovement  | No key pressed    | Position unchanged             | "Stick figure does not move and position remains unchanged"          |
 
 ### Class Renderer
 Equivalence tests for the `render()` method:
 
-| Equivalence Class | Test Case            | Description                                                                                         |
-|-------------------|----------------------|-----------------------------------------------------------------------------------------------------|
-| render            | testRenderWithEntities | Tests rendering the game scene with multiple entities to ensure correct display and positioning.   |
-| render            | testRenderNoEntities | Verifies that the game scene is rendered correctly without entities and no visual artifacts occur. |
-| render            | testRenderDuringMove | Tests rendering while the stick figure is moving to confirm fluid animations and correct position updates.|
+| Number | Name                 | Method parameters | Initial object state       | Expected result                                            |
+|--------|----------------------|-------------------|----------------------------|------------------------------------------------------------|
+| 1      | testRenderWithEntities | Entities present | Before rendering          | "Game scene renders with multiple entities correctly"      |
+| 2      | testRenderNoEntities  | No entities        | Before rendering           | "Game scene renders correctly without entities, no artifacts" |
+| 3      | testRenderDuringMove | Stick figure moving | Position during movement  | "Rendering during movement shows fluid animations and correct positioning" |
 
 This test concept ensures that the game responds correctly to user inputs, the graphical display functions flawlessly, and the game remains stable under various conditions. Mock tests are particularly valuable for isolating and testing specific components without the need for actual dependencies.
 
 ## Class diagram
+Under root directory: java.png
 
-[Class diagram link](https://mermaid.ink/svg/pako:eNqNVttu2zgQ_RVC-6K0tuFLnDhGEaC1g-12G9RI2iywVR9oaWyzkUiDpOy4QfpD-wl965d1KOpG2fXmxaZmhjNnDmeGfPRCEYE39sKYKjVldClpEvCISQg1E5y8-RjwTEempewx4K9eAU8TkNQILi8DTshLsqFxCso_qUw_f6lpPiz8Wy0ZX9YMAv5U-P-TJjARfMGWDYmWIo5BmrCEtEm6jqiGWUx3IK_FBhLg2l_EguoTshEsshEZZ5rRmH0D_9PN-xa5ASVSGcKblEcxVJbt0lLBhPINNfit0kH2Xoj1R5YUML6TuRAxUE6Yeo2ZbKApndFUQQ5Gs_B-H6LSYu3XBZSzJCN0mlpiZ1KsQeqdoVSk8xgKQeGASu14WFGTnR8LQ3IlXiNZjt3agKtJDmZzIJmSknd31--QTw47y8dLklDG8_P9_KXOr1H8w3gktqimS3ApMBk44jLE37Cb4cGjv-Lkb0PgQJT5tQIJCRbAJJUSawDt32bpS-Xmik6ynX72W4cWYnoS97kbmJqKLfdRPsHeOCloyI9S2Bxxh11kTNWwMo5J8dAy6CAuM8OqRcsP86_YAza3Pyqu-WsmbahFzNz6MMm6BROGEJsmBL_sqLoeKy66XUuG-qLzKqXto4NFYDGUeOtIv5OsjokUmtoGNuhnQjHzdYd2QiLl9rO-QYU0hmfAUqALbz7juoVo9HHYfyVYPncMtoSZVSaLsnZxUB4DiToM058SPCkNGf9N2IXLFbDlStclWxbpleMlknQ7K92XPNqZVTTMURa-pol79jGW9rFi-O3hNbJ-LIaeJg_VMh8oNIp81_6ksb8YH1KBqyhzOGSv0rmWNNTPch4x20B7xnYEHmvDMqsiqZKFG-ARyGp6ZzVD5jS8X0qBV4L1aueJLXff_tXHBebA1ULIxFxK8LBvgsxIQHIaXRpFv3FpIhpcjnk2lK64xtxB7dW5g7lM79aUucJrprou91Tqii8ZTqO8_JagrzFdiYNLxJ8Uui6P0FwfWUSzIFzwt0DX1jgzLBnWKwk0miAYXdmvmsaIMuDV6yHweoFHXrTbl7jc2Ko0kkah1reQTudyr3_H5Od_IcbX8PNHwBtvBSfIPU74LERtTB_fsbadmsGyyz37HJPVHsViLcsKdG2du4CY6MW4ber-n4Nio5NJvuEwxc_3nSdqETrAAl6m5kSGvITJC5SVtgcqNQ-_V6gugEMbnXiqud_o9pwG3Gt5-IzDV0mEz96sGQJPr_AZGXhjXEZU3gceVi3a0RTnzI6H3ljLFFqevXvyV7IrvIoYkuaNFzRWKFxT_q8QpQ1-euNH78Eb94bnndFw2B-dnp_2h73BqN_ydt64Pej0zk67o7PRWXfUPR0MB4Onlvctc9HrdHvd7qh_fja4uLg4H1w8_QKD_A9T)
+//[Class diagram link](https://mermaid.ink/svg/pako:eNqNVttu2zgQ_RVC-6K0tuFLnDhGEaC1g-12G9RI2iywVR9oaWyzkUiDpOy4QfpD-wl965d1KOpG2fXmxaZmhjNnDmeGfPRCEYE39sKYKjVldClpEvCISQg1E5y8-RjwTEempewx4K9eAU8TkNQILi8DTshLsqFxCso_qUw_f6lpPiz8Wy0ZX9YMAv5U-P-TJjARfMGWDYmWIo5BmrCEtEm6jqiGWUx3IK_FBhLg2l_EguoTshEsshEZZ5rRmH0D_9PN-xa5ASVSGcKblEcxVJbt0lLBhPINNfit0kH2Xoj1R5YUML6TuRAxUE6Yeo2ZbKApndFUQQ5Gs_B-H6LSYu3XBZSzJCN0mlpiZ1KsQeqdoVSk8xgKQeGASu14WFGTnR8LQ3IlXiNZjt3agKtJDmZzIJmSknd31--QTw47y8dLklDG8_P9_KXOr1H8w3gktqimS3ApMBk44jLE37Cb4cGjv-Lkb0PgQJT5tQIJCRbAJJUSawDt32bpS-Xmik6ynX72W4cWYnoS97kbmJqKLfdRPsHeOCloyI9S2Bxxh11kTNWwMo5J8dAy6CAuM8OqRcsP86_YAza3Pyqu-WsmbahFzNz6MMm6BROGEJsmBL_sqLoeKy66XUuG-qLzKqXto4NFYDGUeOtIv5OsjokUmtoGNuhnQjHzdYd2QiLl9rO-QYU0hmfAUqALbz7juoVo9HHYfyVYPncMtoSZVSaLsnZxUB4DiToM058SPCkNGf9N2IXLFbDlStclWxbpleMlknQ7K92XPNqZVTTMURa-pol79jGW9rFi-O3hNbJ-LIaeJg_VMh8oNIp81_6ksb8YH1KBqyhzOGSv0rmWNNTPch4x20B7xnYEHmvDMqsiqZKFG-ARyGp6ZzVD5jS8X0qBV4L1aueJLXff_tXHBebA1ULIxFxK8LBvgsxIQHIaXRpFv3FpIhpcjnk2lK64xtxB7dW5g7lM79aUucJrprou91Tqii8ZTqO8_JagrzFdiYNLxJ8Uui6P0FwfWUSzIFzwt0DX1jgzLBnWKwk0miAYXdmvmsaIMuDV6yHweoFHXrTbl7jc2Ko0kkah1reQTudyr3_H5Od_IcbX8PNHwBtvBSfIPU74LERtTB_fsbadmsGyyz37HJPVHsViLcsKdG2du4CY6MW4ber-n4Nio5NJvuEwxc_3nSdqETrAAl6m5kSGvITJC5SVtgcqNQ-_V6gugEMbnXiqud_o9pwG3Gt5-IzDV0mEz96sGQJPr_AZGXhjXEZU3gceVi3a0RTnzI6H3ljLFFqevXvyV7IrvIoYkuaNFzRWKFxT_q8QpQ1-euNH78Eb94bnndFw2B-dnp_2h73BqN_ydt64Pej0zk67o7PRWXfUPR0MB4Onlvctc9HrdHvd7qh_fja4uLg4H1w8_QKD_A9T)
 
 Architecture Documentation for the JVMJourney Game Class Diagram
 ----------------------------------------------------------------
@@ -63,7 +63,7 @@ Architecture Documentation for the JVMJourney Game Class Diagram
 
 The architecture of the JVMJourney game is designed to support flexibility, extensibility, and maintainability. The individual classes and their relationships were crafted with a focus on modularity and loose coupling. Here are the main reasons for the chosen architecture:
 
-1.  Modularity: By dividing functionalities into specific classes (such as `ch.zhaw.it.pm2.jvmjourney.controllers.gameController.GameController`, `Player`, `Object`, `Renderer`), a clear separation of responsibilities is achieved. This facilitates maintenance and testing of individual components.
+1.  Modularity: By dividing functionalities into specific classes (such as `ch.zhaw.it.pm2.jvmjourney.controller.engineController.GameController`, `Player`, `Object`, `Renderer`), a clear separation of responsibilities is achieved. This facilitates maintenance and testing of individual components.
 
 2.  Extensibility: The use of general classes like `MovingObject` and `Object`, which serve as bases for more specific entities like `Player`, allows the game to be easily expanded with new movable or interactive elements. This structure supports the creation of new classes with minimal changes to existing code.
 
@@ -79,7 +79,7 @@ The architecture of the JVMJourney game is designed to support flexibility, exte
 
 The class diagram is carefully designed to clarify the relationships and dependencies between the classes:
 
--   ch.zhaw.it.pm2.jvmjourney.controllers.gameController.GameController: Acts as the central hub that orchestrates the interaction between game objects (`Player`, `Object`), inputs (`KeyPolling`), and rendering (`Renderer`).
+-   ch.zhaw.it.pm2.jvmjourney.controller.engineController.GameController: Acts as the central hub that orchestrates the interaction between game objects (`Player`, `Object`), inputs (`KeyPolling`), and rendering (`Renderer`).
 -   Player and MovingObject: `Player` inherits from `MovingObject`, which simplifies the implementation of movements and other player-specific actions like jumping and landing.
 -   Renderer: Responsible for drawing all objects in the game, where the "composed of" relationship (`1` to `*`) with `Object` supports the dynamics and diversity of the game world.
 -   StatisticsEngine and GameConfig: These classes are used for configuring and monitoring the game to facilitate adjustments and provide performance statistics.
@@ -87,3 +87,36 @@ The class diagram is carefully designed to clarify the relationships and depende
 ### Architectural Conclusion
 
 The chosen architecture for the JVMJourney game is based on the principles of object orientation and follows best practices in software development. It supports effective development methods through its clear structure and flexibility. This design allows the development team to efficiently maintain, expand, and optimize the game, while ensuring high code quality and game performance.Architecture Documentation for the JVMJourney Game Class Diagram
+
+### Feature List
+
+**Graphs**
+- Memory Usage Over Time
+    - Eden Space
+    - Old Gen
+    - Survivor Space
+- Thread Count
+
+**Game**
+- Moving Player
+- Punching
+- Bouncing Watermelon
+- Watermelon Squishing
+- Story Windows
+    - Tutorial
+    - Story
+
+# Future Feature List
+
+|     ID    |     Feature Name             |     Description                                |     Issue                               |
+|-----------|------------------------------|------------------------------------------------|------------------------------------------|
+| 1         | Level 2 (Garbage Collector)  | Introduce a level which explains jvm garbage collector   | [Future Feature: Create Level 2 to Explain JVM Garbage Collector](https://github.zhaw.ch/PM2-IT23tbZH-ruiz-urak/Team3-DownForAnything-projekt2-JVMexplorer/issues/56)     |
+| 2         | Level 3 (Thread Management)  | Level with advanced Thread Management explanation            | [Future Feature: Create Level 3 for Advanced Thread Management](https://github.zhaw.ch/PM2-IT23tbZH-ruiz-urak/Team3-DownForAnything-projekt2-JVMexplorer/issues/57)    |
+| 3         | CPU Implementation           | Show how JVM Dynamics cause CPU reactions      | [Future feature: Implement CPU Usage Graph with Thread Functions](https://github.zhaw.ch/PM2-IT23tbZH-ruiz-urak/Team3-DownForAnything-projekt2-JVMexplorer/issues/58)   |
+| 4         | Points-System for the Player | Implement a scoring system for players        | [Future feature: Implement Scoring System for Players Across All Levels](https://github.zhaw.ch/PM2-IT23tbZH-ruiz-urak/Team3-DownForAnything-projekt2-JVMexplorer/issues/59)       |
+| 5         | Health Bar for the Player    | Visual representation of player's health for advanced levels     | [Future feature: Display Health Bar for Player](https://github.zhaw.ch/PM2-IT23tbZH-ruiz-urak/Team3-DownForAnything-projekt2-JVMexplorer/issues/60)                |
+| 6         | Parkour Ability              | Player ability to perform parkour maneuvers   | [Future feature: Parkour Ability](https://github.zhaw.ch/PM2-IT23tbZH-ruiz-urak/Team3-DownForAnything-projekt2-JVMexplorer/issues/61)           |
+
+
+
+

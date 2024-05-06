@@ -1,8 +1,15 @@
 package ch.zhaw.it.pm2.jvmjourney.GameEngine;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Point2D;
 
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
 
 public class GameObject {
     protected PositionVector position;
@@ -11,12 +18,43 @@ public class GameObject {
     float scale;
     ImageView imageView;
 
+    boolean goingRight = false;
+
 
 
     public GameObject(int x, int y, String path, float scale) {
         loadSprite(path);
         this.position = new PositionVector(x, y);
         this.scale = scale;
+    }
+
+    public boolean isGoingRight() {
+        return goingRight;
+    }
+
+    public Image flipImage() {
+
+            // Convert Image to BufferedImage
+            BufferedImage bufferedImage = new BufferedImage((int) imageView.getImage().getWidth(), (int) imageView.getImage().getHeight(), BufferedImage.TYPE_INT_ARGB);
+            Graphics g = bufferedImage.getGraphics();
+            g.drawImage(SwingFXUtils.fromFXImage(imageView.getImage(), null), 0, 0, null);
+            g.dispose();
+
+            // Perform flip operation
+            AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
+            tx.translate(-bufferedImage.getWidth(null), 0);
+            AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+            bufferedImage = op.filter(bufferedImage, null);
+
+            // Convert BufferedImage back to Image
+            Image flippedImage = SwingFXUtils.toFXImage(bufferedImage, null);
+
+            return flippedImage;
+
+
+
+
+
     }
 
     // TODO: Make for animation
@@ -45,9 +83,11 @@ public class GameObject {
         return new Point2D(position.getX(), position.getY());
     }
 
-    public ImageView getImage() {
-
-        return imageView;
+    public Image getImage() {
+        if(isGoingRight())
+            return flipImage();
+        else
+            return imageView.getImage();
 
     }
 
