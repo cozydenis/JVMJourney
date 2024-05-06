@@ -7,8 +7,6 @@
 <MenuBar xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
          fx:controller="ch.zhaw.it.pm2.jvmjourney.controllers.menuController.MenuBarController">
     <Menu text="Game">
-        <MenuItem text="Main menu" fx:id="mainMenuItem"/>
-        <MenuItem text="Reset game" fx:id="resetGameItem"/>
         <MenuItem text="Exit" fx:id="exitMenuItem"/>
     </Menu>
     <Menu text="Help">

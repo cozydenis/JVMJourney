@@ -15,12 +15,6 @@ public class MenuBarController implements Initializable {
     public MenuItem featureListItem;
 
     @FXML
-    public MenuItem mainMenuItem;
-
-    @FXML
-    public MenuItem resetGameItem;
-
-    @FXML
     public MenuItem activateLegendItem;
 
     @FXML
@@ -48,7 +42,7 @@ public class MenuBarController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Info");
             alert.setHeaderText("Future feature list");
-            alert.setContentText("In the future following features will be made available:\n-\n-\n-");
+            alert.setContentText("In the future following features will be made available:\n- Back to main menu\n- Reset game\n- Further levels");
             alert.setOnCloseRequest(event1 -> GameController.timer.start());
             alert.show();
         });
