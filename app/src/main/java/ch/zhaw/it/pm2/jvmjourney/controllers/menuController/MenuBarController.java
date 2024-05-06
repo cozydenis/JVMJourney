@@ -1,6 +1,6 @@
 package ch.zhaw.it.pm2.jvmjourney.controllers.menuController;
 
-import ch.zhaw.it.pm2.jvmjourney.controllers.GameController;
+import ch.zhaw.it.pm2.jvmjourney.controllers.gameController.GameController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -37,9 +37,7 @@ public class MenuBarController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        exitMenuItem.setOnAction(event -> {
-            System.exit(0);
-        });
+        exitMenuItem.setOnAction(event -> System.exit(0));
 
         aboutItem.setOnAction(event -> {
             GameController.timer.stop();
