@@ -35,7 +35,9 @@ class WaterMelonTest {
         waterMelon.move();
 
         // Verify that the watermelon bounces off the ground, expecting negation of Y-velocity
+
         assertEquals(1.0, waterMelon.getCurrentVelocity().getY(), "Should bounce on Y-axis");
+
     }
 
     @Test
@@ -59,6 +61,8 @@ class WaterMelonTest {
 
         // Verify normal movement without bouncing
         assertEquals(5, waterMelon.getCurrentVelocity().getX(), "X velocity should remain constant");
+
         assertEquals(-0.5,waterMelon.getCurrentVelocity().getY(), "Y velocity should decrease to 0 due to gravity");
+
     }
 }
