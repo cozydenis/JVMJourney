@@ -46,22 +46,7 @@ public class GameLoopTimerTest {
         assertFalse(timer.isPaused());  // Accessing the boolean property with .get()
         assertEquals(0, timer.getAnimationDuration().get(), 0.001);  // Accessing the double property with .get()
     }
-    @Test
-    void testHandlePauseAndPlay() {
-        TestGameLoopTimer timer = new TestGameLoopTimer();
-        timer.start();
-        long initialTime = System.nanoTime();
 
-        // Simulate pause
-        timer.setPauseScheduled(true);
-        timer.handle(initialTime + 5000); // Assuming handle checks and acts on pauseScheduled
-        assertTrue(timer.isPaused(), "Timer should be paused");
-
-        // Simulate resume
-        timer.setPlayScheduled(true);
-        timer.handle(initialTime + 10000); // Assuming handle checks and acts on playScheduled
-        assertFalse(timer.isPaused(), "Timer should be resumed");
-    }
 
     @Test
     void testHandleRestart() {

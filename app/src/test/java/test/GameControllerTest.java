@@ -8,7 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import javafx.scene.input.KeyCode;
-import ch.zhaw.it.pm2.jvmjourney.controller.engineController.GameController;
+import ch.zhaw.it.pm2.jvmjourney.controllers.gameController.GameController;
 import org.junit.jupiter.api.BeforeAll;
 import javafx.embed.swing.JFXPanel;
 

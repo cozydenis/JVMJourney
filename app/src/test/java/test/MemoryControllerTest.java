@@ -1,6 +1,6 @@
 package test;
 
-import ch.zhaw.it.pm2.jvmjourney.controller.statisticsController.MemoryController;
+import ch.zhaw.it.pm2.jvmjourney.controllers.statisticsController.MemoryController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
