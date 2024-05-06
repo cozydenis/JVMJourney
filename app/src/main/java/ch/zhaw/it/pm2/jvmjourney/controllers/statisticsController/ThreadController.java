@@ -51,7 +51,7 @@ public class ThreadController {
             if (series.getData().size() >= maxDataPoints) {
                 series.getData().removeFirst();
             }
-            series.getData().add(new XYChart.Data<>(xSeriesData, currentThreadCount));
+            series.getData().add(new XYChart.Data<>(xSeriesData, currentThreadCount -15));
 
             xSeriesData = xSeriesData + UPDATE_PERIOD;
 
