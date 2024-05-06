@@ -1,14 +1,9 @@
 package test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.*;
-import javafx.beans.property.*;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.AnchorPane;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,16 +11,6 @@ import javafx.scene.input.KeyCode;
 import ch.zhaw.it.pm2.jvmjourney.controller.engineController.GameController;
 import org.junit.jupiter.api.BeforeAll;
 import javafx.embed.swing.JFXPanel;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-
-
-import org.mockito.ArgumentCaptor;
-import org.mockito.InOrder;
-
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 
 public class GameControllerTest {
@@ -49,55 +34,11 @@ public class GameControllerTest {
         mockCanvas = mock(Canvas.class);
         mockGame = mock(AnchorPane.class);
 
-        // Setup the width and height properties on the mockGame
-        DoubleProperty widthProperty = new SimpleDoubleProperty(800); // default width
-        DoubleProperty heightProperty = new SimpleDoubleProperty(600); // default height
-        when(mockGame.widthProperty()).thenReturn(widthProperty);
-        when(mockGame.heightProperty()).thenReturn(heightProperty);
-
         // Initialize the controller with the mock objects
         controller = new GameController(mockRenderer, mockPlayer, mockCanvas);
         controller.Game = mockGame;
 
-        // Ensure GraphicsContext is mocked if used in renderer or canvas initialization
-        GraphicsContext mockGraphicsContext = mock(GraphicsContext.class);
-        when(mockCanvas.getGraphicsContext2D()).thenReturn(mockGraphicsContext);
     }
-
-
-
-
-
-/*
-    @Test
-    public void testInitializePartially() {
-        URL mockUrl = mock(URL.class);
-        ResourceBundle mockBundle = mock(ResourceBundle.class);
-
-        // Assuming GameController.initialize() involves setting these bindings
-        Scene mockScene = mock(Scene.class);
-        ReadOnlyDoubleProperty mockWidthProperty = new SimpleDoubleProperty();
-        ReadOnlyDoubleProperty mockHeightProperty = new SimpleDoubleProperty();
-
-        when(mockScene.widthProperty()).thenReturn(mockWidthProperty);
-        when(mockScene.heightProperty()).thenReturn(mockHeightProperty);
-        when(mockGame.getScene()).thenReturn(mockScene);
-
-        // Call the initialization method
-        controller.initialize(mockUrl, mockBundle);
-
-        // Assuming you need to verify some behavior or other initializations
-        // (e.g., verifying if certain methods were called on mockRenderer)
-        verify(mockRenderer, atLeastOnce()).prepare();
-    }
-
-
-
- */
-
-
-
-
 
     // Test method for moving left
     @Test
