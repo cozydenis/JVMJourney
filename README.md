@@ -7,7 +7,7 @@
 
 Welcome to *JVM Journey*, an exciting game that challenges you to navigate through levels, avoid obstacles, and interact with objects to understand system behaviors. Below is a detailed guide on how to get started, play the game, and utilize its features.
 
-## Cloning and Starting the Game
+### Cloning and Starting the Game
 
 1. **Clone the Game from GitHub**
    - Navigate to the GitHub repository.
@@ -18,7 +18,7 @@ Welcome to *JVM Journey*, an exciting game that challenges you to navigate throu
    - Navigate to the cloned repository directory.
    - Run the game using `java -jar JVMJourney.java`.
 
-## Tutorial and Controls
+### Tutorial and Controls
 
 - **Tutorial Windows**: When you first start the game, tutorial windows will guide you through the gameplay mechanics. These windows explain key elements like:
   - **Watermelons**: Represent threads in the game. Each watermelon you encounter has a thread associated with it.
@@ -27,7 +27,7 @@ Welcome to *JVM Journey*, an exciting game that challenges you to navigate throu
 
 - **Completing the Tutorial**: You must successfully perform all actions explained in the tutorial before proceeding. Once completed, Level 1 will begin.
 
-## Gameplay
+### Gameplay
 
 - **Level 1**:
   - Ten watermelons are generated, each linked to a separate thread.
@@ -35,11 +35,11 @@ Welcome to *JVM Journey*, an exciting game that challenges you to navigate throu
   - The effect of this can be monitored in the statistics view, which displays changes in memory usage and thread count.
   - Watermelons continuously spawn to allow for ongoing observation of memory and thread metrics in the game's line charts.
 
-## Exiting the Game
+### Exiting the Game
 
 - To exit the game, navigate to the navbar, select "Game", and then choose "Quit".
 
-## Tips
+### Tips
 
 - Keep an eye on your statistics view to understand how your actions affect system resources.
 - Experiment with different strategies to manage the spawning watermelons and associated threads.
