@@ -18,54 +18,26 @@ Once a pull request was thoroughly reviewed and deemed satisfactory, it was then
 ## Test concept
 In our JUnit testing framework, we systematically employ equivalence class partitioning to validate the functionality of the classes Entity, ch.zhaw.it.pm2.jvmjourney.controller.engineController.GameController, and Renderer. We focus on the methods move, rotate, and render, as well as strategies for controlling the stick figure using arrow keys. This method groups input conditions into sets that the program treats equivalently, ensuring comprehensive test coverage with an optimized set of test cases. Additionally, mock tests are utilized to simulate interaction with dependencies, ensuring that our tests can run in isolation and behave as expected under controlled conditions. Each test case is meticulously documented to indicate the equivalence class it represents. Detailed information about these classes and their corresponding tests can be found in the accompanying table.
 
-### Equivalence Test Class
-Equivalence tests for methods move() and rotate():
+### Defined equivalence testclasses
+| Class              | Equivalence Class              | Inputs                                                | Expected Result                                                                                     |
+|--------------------|--------------------------------|-------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| **Player**         | Movement in Air                | `inAir = true`, varying `currentVelocity`             | Position and velocity are updated according to gravity and existing velocity.                       |
+|                    | Movement on Ground             | `inAir = false`, varying `currentVelocity`            | Position updates based on velocity with friction applied, velocity reduces unless at friction limit. |
+|                    | Jumping                        | `inAir = false`, command to jump                      | `inAir` becomes true, vertical velocity reflects jump strength, simulating an upward movement.       |
+|                    | Landing                        | `inAir = true`, reaching ground level                 | `inAir` becomes false, position set to ground level, vertical velocity resets.                      |
+|                    | Punching and Cooldown          | Various states of `punchCooldown`                     | When cooldown is zero, player can punch. Cooldown resets and counts down until punching stops.      |
+| **WaterMelon**     | Bouncing Off Ground            | `currentVelocity` having a downward component         | Upon collision with ground, y component of velocity becomes positive (bounces up).                  |
+|                    | Bouncing Off Wall              | `currentVelocity` directed towards a wall             | Upon collision, x component of velocity reverses, simulating a bounce off the wall.                 |
+|                    | Free Movement                  | No obstacles, various `currentVelocity`               | Position updates smoothly in trajectory without bouncing.                                           |
+| **GameController** | Arrow Key Movement             | Key inputs for left, right, and jump                  | Player's position and velocity update based on the direction indicated by the key press.            |
+|                    | No Key Pressed                 | No movement keys pressed                              | Player remains stationary, with no changes in position or velocity.                                 |
+|                    | Simultaneous Movement and Jump | Right or left key along with jump key pressed         | Player moves horizontally while also initiating a jump.                                             |
+|                    | Invalid Key Press              | Non-directional keys pressed                          | No movement or action taken, demonstrating that only specific keys influence gameplay.              |
+| **RenderTest**     | Render Object                  | `GraphicsContext`, `MovingObject` with image and size | Context draws the image at specified position and size.                                             |
+|                    | Render Nothing                 | `GraphicsContext`, `MovingObject` without objects     | No image is drawn despite rendering attempt, verifying absence of object rendering.                 |
+|                    | Render Movement                | `GraphicsContext`, `MovingObject` with updated position| Context redraws the image at new position, verifying the object's movement rendering.              |
 
 
-
-| Class           | Equivalence Class              | Inputs                                              | Expected Result                                                                                    |
-|-----------------|--------------------------------|-----------------------------------------------------|----------------------------------------------------------------------------------------------------|
-| **Player**      | Movement in Air                | `inAir = true`, varying `currentVelocity`           | Position and velocity are updated according to gravity and existing velocity.                      |
-|                 | Movement on Ground             | `inAir = false`, varying `currentVelocity`          | Position updates based on velocity with friction applied, velocity reduces unless at friction limit.|
-|                 | Jumping                        | `inAir = false`, command to jump                    | `inAir` becomes true, vertical velocity reflects jump strength, simulating an upward movement.      |
-|                 | Landing                        | `inAir = true`, reaching ground level               | `inAir` becomes false, position set to ground level, vertical velocity resets.                     |
-|                 | Punching and Cooldown          | Various states of `punchCooldown`                   | When cooldown is zero, player can punch. Cooldown resets and counts down until punching stops.     |
-| **WaterMelon**  | Bouncing Off Ground            | `currentVelocity` having a downward component       | Upon collision with ground, y component of velocity becomes positive (bounces up).                 |
-|                 | Bouncing Off Wall              | `currentVelocity` directed towards a wall           | Upon collision, x component of velocity reverses, simulating a bounce off the wall.                |
-|                 | Free Movement                  | No obstacles, various `currentVelocity`             | Position updates smoothly in trajectory without bouncing.                                          |
-| **GameController** | Arrow Key Movement          | Key inputs for left, right, and jump                | Player's position and velocity update based on the direction indicated by the key press.           |
-|                 | No Key Pressed                 | No movement keys pressed                            | Player remains stationary, with no changes in position or velocity.                                |
-|                 | Simultaneous Movement and Jump | Right or left key along with jump key pressed       | Player moves horizontally while also initiating a jump.                                            |
-|                 | Invalid Key Press              | Non-directional keys pressed                        | No movement or action taken, demonstrating that only specific keys influence gameplay.             |
-
-
-### Class `Entity`
-| Number | Name                     | Method parameters | Initial object state            | Expected result                                              |
-|--------|--------------------------|-------------------|---------------------------------|--------------------------------------------------------------|
-| 1      | testMoveValidDirection   | Valid direction   | Position before move            | "Position is updated correctly to the right"                 |
-| 2      | testMoveWithNoMovement   | None              | Position unchanged              | "Stick figure's position remains unchanged with no movement" |
-| 3      | testRotateValid          | Set angle         | Angle before rotation           | "Correct rotation of the stick figure by a set angle"        |
-| 4      | testRotateAndMove        | Combination       | Position and angle before test  | "Correct updates in position and rotation"                   |
-
-
-### Class ch.zhaw.it.pm2.jvmjourney.controller.engineController.GameController
-Equivalence tests for controlling the stick figure using arrow keys:
-
-| Number | Name            | Method parameters | Initial object state           | Expected result                                                      |
-|--------|-----------------|-------------------|--------------------------------|----------------------------------------------------------------------|
-| 1      | testMoveLeft    | Left arrow key    | Position and velocity before   | "The stick figure moves left, updating its position and velocity"    |
-| 2      | testMoveRight   | Right arrow key   | Position and velocity before   | "The stick figure moves right, updating its position and velocity"   |
-| 3      | testJump        | Up arrow key      | Position and velocity before   | "The stick figure jumps, updating its position and velocity upward"  |
-| 4      | testNoMovement  | No key pressed    | Position unchanged             | "Stick figure does not move and position remains unchanged"          |
-
-### Class Renderer
-Equivalence tests for the `render()` method:
-
-| Number | Name                 | Method parameters | Initial object state       | Expected result                                            |
-|--------|----------------------|-------------------|----------------------------|------------------------------------------------------------|
-| 1      | testRenderWithEntities | Entities present | Before rendering          | "Game scene renders with multiple entities correctly"      |
-| 2      | testRenderNoEntities  | No entities        | Before rendering           | "Game scene renders correctly without entities, no artifacts" |
-| 3      | testRenderDuringMove | Stick figure moving | Position during movement  | "Rendering during movement shows fluid animations and correct positioning" |
 
 This test concept ensures that the game responds correctly to user inputs, the graphical display functions flawlessly, and the game remains stable under various conditions. Mock tests are particularly valuable for isolating and testing specific components without the need for actual dependencies.
 
