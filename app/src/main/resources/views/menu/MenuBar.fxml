@@ -9,8 +9,6 @@
     <Menu text="Game">
         <MenuItem text="Main menu" fx:id="mainMenuItem"/>
         <MenuItem text="Reset game" fx:id="resetGameItem"/>
-        <MenuItem text="Go back" fx:id="goBackItem"/>
-        <MenuItem text="Go next" fx:id="goNextItem"/>
         <MenuItem text="Exit" fx:id="exitMenuItem"/>
     </Menu>
     <Menu text="Help">

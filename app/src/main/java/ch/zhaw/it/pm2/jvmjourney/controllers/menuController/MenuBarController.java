@@ -21,12 +21,6 @@ public class MenuBarController implements Initializable {
     public MenuItem resetGameItem;
 
     @FXML
-    public MenuItem goBackItem;
-
-    @FXML
-    public MenuItem goNextItem;
-
-    @FXML
     public MenuItem activateLegendItem;
 
     @FXML
