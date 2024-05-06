@@ -4,13 +4,22 @@ public class WaterMelon extends ch.zhaw.it.pm2.jvmjourney.GameEngine.MovingObjec
 
     float density = 0.5f;
     Direction direction;
+    private Thread thread;
 
-    public WaterMelon(int x, int y, String path, float scale, Direction initialDirection, PositionVector initialVelocity) {
+    public WaterMelon(int threadNumber, int x, int y, String path, float scale, Direction initialDirection, PositionVector initialVelocity) {
         super(x, y, path, scale);
         this.direction = initialDirection;
         this.currentVelocity = initialVelocity;
         this.inAir = true;
+        thread = new Thread(() -> {
+            while (true) {
+                // System.out.println("Thread started " + threadNumber);
+            }
+
+        });
+        thread.start();
     }
+
 
     @Override
     public void move() {
@@ -39,6 +48,12 @@ public class WaterMelon extends ch.zhaw.it.pm2.jvmjourney.GameEngine.MovingObjec
             hit = true;
         }
         return hit;
+
+    }
+
+    public void getSqhash(){
+        System.out.println("Sqhash");
+
 
     }
 }

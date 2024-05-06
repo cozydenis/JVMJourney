@@ -32,6 +32,7 @@ public class GameController implements Initializable {
         this.gameCanvas = gameCanvas;
     }
 
+
     public int getRandomIntInRange(int min, int max) {
         if (min >= max) {
             throw new IllegalArgumentException("max must be greater than min");
@@ -87,9 +88,8 @@ public class GameController implements Initializable {
                 updatePlayerMovement(secondsSinceLastFrame);
                 player.update();
                 player.updatePunchCooldown(secondsSinceLastFrame); // Update the cooldown
-                for (WaterMelon waterMelon: waterMelon) {
-                    waterMelon.update();
-                }
+                for(WaterMelon waterMelon : waterMelon)
+                {waterMelon.update();}
                 renderer.render();
             }
         };
