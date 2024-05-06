@@ -26,7 +26,8 @@ public class WaterMelon extends MovingObject {
             try {
                 Thread.sleep(Long.MAX_VALUE);
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                System.out.println("Thread interrupted");
+//                throw new RuntimeException(e);
             }
         });
         thread.start();

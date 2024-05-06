@@ -38,7 +38,7 @@ This example showcases effective use of GitHub's review features, ensuring that 
 
 
 ## Test concept
-In our JUnit testing framework, we systematically employ equivalence class partitioning to validate the functionality of the classes Entity, ch.zhaw.it.pm2.jvmjourney.controller.engineController.GameController, and Renderer. We focus on the methods move, rotate, and render, as well as strategies for controlling the stick figure using arrow keys. This method groups input conditions into sets that the program treats equivalently, ensuring comprehensive test coverage with an optimized set of test cases. Additionally, mock tests are utilized to simulate interaction with dependencies, ensuring that our tests can run in isolation and behave as expected under controlled conditions. Each test case is meticulously documented to indicate the equivalence class it represents. Detailed information about these classes and their corresponding tests can be found in the accompanying table.
+In our JUnit testing framework, we systematically employ equivalence class partitioning to validate the functionality of the classes Entity, ch.zhaw.it.pm2.jvmjourney.controllers.gameController.GameController, and Renderer. We focus on the methods move, rotate, and render, as well as strategies for controlling the stick figure using arrow keys. This method groups input conditions into sets that the program treats equivalently, ensuring comprehensive test coverage with an optimized set of test cases. Additionally, mock tests are utilized to simulate interaction with dependencies, ensuring that our tests can run in isolation and behave as expected under controlled conditions. Each test case is meticulously documented to indicate the equivalence class it represents. Detailed information about these classes and their corresponding tests can be found in the accompanying table.
 
 ### Class Entity
 Equivalence tests for methods move() and rotate():
@@ -52,7 +52,7 @@ Equivalence tests for methods move() and rotate():
 | 4      | testRotateAndMove        | Combination       | Position and angle before test  | "Correct updates in position and rotation"                   |
 
 
-### Class ch.zhaw.it.pm2.jvmjourney.controller.engineController.GameController
+### Class ch.zhaw.it.pm2.jvmjourney.controllers.gameController.GameController
 Equivalence tests for controlling the stick figure using arrow keys:
 
 | Number | Name            | Method parameters | Initial object state           | Expected result                                                      |
@@ -85,7 +85,7 @@ Architecture Documentation for the JVMJourney Game Class Diagram
 
 The architecture of the JVMJourney game is designed to support flexibility, extensibility, and maintainability. The individual classes and their relationships were crafted with a focus on modularity and loose coupling. Here are the main reasons for the chosen architecture:
 
-1.  Modularity: By dividing functionalities into specific classes (such as `ch.zhaw.it.pm2.jvmjourney.controller.engineController.GameController`, `Player`, `Object`, `Renderer`), a clear separation of responsibilities is achieved. This facilitates maintenance and testing of individual components.
+1.  Modularity: By dividing functionalities into specific classes (such as `ch.zhaw.it.pm2.jvmjourney.controllers.gameController.GameController`, `Player`, `Object`, `Renderer`), a clear separation of responsibilities is achieved. This facilitates maintenance and testing of individual components.
 
 2.  Extensibility: The use of general classes like `MovingObject` and `Object`, which serve as bases for more specific entities like `Player`, allows the game to be easily expanded with new movable or interactive elements. This structure supports the creation of new classes with minimal changes to existing code.
 
@@ -101,7 +101,7 @@ The architecture of the JVMJourney game is designed to support flexibility, exte
 
 The class diagram is carefully designed to clarify the relationships and dependencies between the classes:
 
--   ch.zhaw.it.pm2.jvmjourney.controller.engineController.GameController: Acts as the central hub that orchestrates the interaction between game objects (`Player`, `Object`), inputs (`KeyPolling`), and rendering (`Renderer`).
+-   ch.zhaw.it.pm2.jvmjourney.controllers.gameController.GameController: Acts as the central hub that orchestrates the interaction between game objects (`Player`, `Object`), inputs (`KeyPolling`), and rendering (`Renderer`).
 -   Player and MovingObject: `Player` inherits from `MovingObject`, which simplifies the implementation of movements and other player-specific actions like jumping and landing.
 -   Renderer: Responsible for drawing all objects in the game, where the "composed of" relationship (`1` to `*`) with `Object` supports the dynamics and diversity of the game world.
 -   StatisticsEngine and GameConfig: These classes are used for configuring and monitoring the game to facilitate adjustments and provide performance statistics.

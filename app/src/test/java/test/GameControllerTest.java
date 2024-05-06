@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.*;
+import ch.zhaw.it.pm2.jvmjourney.controllers.gameController.GameController;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -10,7 +11,6 @@ import javafx.scene.layout.AnchorPane;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import javafx.scene.input.KeyCode;
-import ch.zhaw.it.pm2.jvmjourney.controllers.gameController.GameController;
 import org.junit.jupiter.api.BeforeAll;
 import javafx.embed.swing.JFXPanel;
 import javafx.beans.value.ChangeListener;
