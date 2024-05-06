@@ -6,7 +6,7 @@ public class WaterMelon extends ch.zhaw.it.pm2.jvmjourney.GameEngine.MovingObjec
     Direction direction;
     private Thread thread;
 
-    public WaterMelon(int threadNumber, int x, int y, String path, float scale, Direction initialDirection, PositionVector initialVelocity) {
+    public WaterMelon( int x, int y, String path, float scale, Direction initialDirection, PositionVector initialVelocity) {
         super(x, y, path, scale);
         this.direction = initialDirection;
         this.currentVelocity = initialVelocity;
@@ -51,8 +51,9 @@ public class WaterMelon extends ch.zhaw.it.pm2.jvmjourney.GameEngine.MovingObjec
 
     }
 
-    public void getSqhash(){
+    public void getHit(){
         System.out.println("Sqhash");
+
 
 
     }

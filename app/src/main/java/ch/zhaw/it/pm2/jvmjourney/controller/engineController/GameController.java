@@ -117,18 +117,28 @@ public class GameController implements Initializable {
         while (iterator.hasNext()) {
             GameObject entity = iterator.next();
             if (entity != player) {
-                if (playerLeft < entity.getPosition().getX() + entity.getWidth() &&
-                        playerRight > entity.getPosition().getX() &&
-                        playerTop < entity.getPosition().getY() + entity.getHeight() &&
-                        playerBottom > entity.getPosition().getY()) {
-                    System.out.println("Collision detected");
+                if(player.isGoingRight())
+                {
+                    if (playerLeft < entity.getPosition().getX() + entity.getWidth() && player.getPosition().getX() > entity.getPosition().getX() ) {
+                    //System.out.println("Collision detected");
                     //noinspection SuspiciousMethodCalls
+                    //waterMelon
                     waterMelon.remove(entity);
                     iterator.remove();
+                }
+                }
+                else
+                {
+                    if(playerRight > entity.getPosition().getX() && player.getPosition().getX() < entity.getPosition().getX())
+                    {
+                        waterMelon.remove(entity);
+                        iterator.remove();
+                    }
                 }
             }
         }
     }
+
 
     private void updatePlayerMovement(float frameDuration) {
         if (keys.isDown(KeyCode.UP)) {
