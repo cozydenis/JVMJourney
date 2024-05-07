@@ -1,6 +1,8 @@
 package ch.zhaw.it.pm2.jvmjourney.controllers.gameController;
 
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.*;
+import ch.zhaw.it.pm2.jvmjourney.Logger.LOGGINGLEVEL;
+import ch.zhaw.it.pm2.jvmjourney.Logger.Logger;
 import javafx.scene.canvas.Canvas;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -31,6 +33,7 @@ public class GameController implements Initializable {
 
     // Dependency Injection via Constructor
     public GameController(Renderer renderer, Player player, Canvas gameCanvas) {
+        Logger.log(LOGGINGLEVEL.INFO, "GameController initialized");
         this.renderer = renderer;
         this.player = player;
         this.gameCanvas = gameCanvas;
@@ -108,6 +111,7 @@ public class GameController implements Initializable {
     }
 
     private void triggerTutorial() {
+        Logger.log(LOGGINGLEVEL.INFO, "Tutorial triggered for level: " + level);
         switch (level) {
             case INTRO:
                 showTutorial1();
@@ -175,7 +179,9 @@ public class GameController implements Initializable {
     }
 
     public void detectAndHandleCollisions() {
+        //TODO Remove the debug line and leave the loggerline
         System.out.println(renderer.getEntities().size());
+        Logger.log(LOGGINGLEVEL.DEBUG, "Nuber of entity in the renderer" + renderer.getEntities().size());
         // Define the range around the player's position
         double offsetX = 4; // Example: 10 pixels to the left and right
 
@@ -211,7 +217,10 @@ public class GameController implements Initializable {
 
 
     public void updatePlayerMovement(float frameDuration) {
+
         if (!tutorialTriggered && pressedKeys.containsAll(EnumSet.of(KeyCode.UP, KeyCode.LEFT, KeyCode.RIGHT, KeyCode.SPACE))) {
+            //TODO Clean up the debug line and leave the logger line
+            Logger.log(LOGGINGLEVEL.INFO, "All arrow keys pressed");
             System.out.println("All arrow keys pressed!");
             level = TUTORIAL3;
             triggerTutorial();

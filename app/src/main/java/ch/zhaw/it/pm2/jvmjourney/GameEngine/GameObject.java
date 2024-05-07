@@ -83,8 +83,6 @@ public class GameObject {
         ParticlesController.explosion((int) position.getX(), (int) position.getY(), 10, renderer);
     }
 
-    // TODO: Make for animation
-
     /**
      * Loads the sprite image of the game object from the specified path.
      *

@@ -1,5 +1,7 @@
 package ch.zhaw.it.pm2.jvmjourney.controllers.statisticsController;
 
+import ch.zhaw.it.pm2.jvmjourney.Logger.LOGGINGLEVEL;
+import ch.zhaw.it.pm2.jvmjourney.Logger.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -26,14 +28,14 @@ public class ThreadController {
 
     @FXML
     public void initialize() {
-        // todo log "initializing thread controller"
+        Logger.log(LOGGINGLEVEL.INFO,"Initializing ThreadController");
         setupChart();
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
         executor.scheduleAtFixedRate(this::updateChart, 0, UPDATE_PERIOD, TimeUnit.SECONDS);
     }
 
     private void setupChart() {
-        // todo log "setting up thread chart"
+        Logger.log(LOGGINGLEVEL.INFO, "Setting up thread chart");
         if (xAxis == null) { // If xAxis is not separately defined in FXML, get it from the chart
             xAxis = (NumberAxis) threadCountChart.getXAxis();
             xAxis.setAutoRanging(false);
@@ -50,7 +52,7 @@ public class ThreadController {
      * Calculating -15 to exclude the JavaFX and java native threads.
      */
     private void updateChart() {
-        //todo log "updating thread chart"
+        Logger.log(LOGGINGLEVEL.INFO, "Updating thread chart");
         javafx.application.Platform.runLater(() -> {
             if (series.getData().size() >= maxDataPoints) {
                 series.getData().removeFirst();
@@ -70,7 +72,7 @@ public class ThreadController {
      */
     public int getThreadCount() {
         ThreadMXBean threadBean = ManagementFactory.getThreadMXBean();
-        // todo log "Current thread count: " + threadBean.getThreadCount()
+        Logger.log(LOGGINGLEVEL.INFO, "Current thread count: " + threadBean.getThreadCount());
         return threadBean.getThreadCount();
     }
 

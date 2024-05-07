@@ -1,5 +1,7 @@
 package ch.zhaw.it.pm2.jvmjourney.controllers.statisticsController;
 
+import ch.zhaw.it.pm2.jvmjourney.Logger.LOGGINGLEVEL;
+import ch.zhaw.it.pm2.jvmjourney.Logger.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -35,7 +37,7 @@ public class MemoryController {
     }
 
     public void setupChart() {
-        // todo log "setting up memory chart"
+        Logger.log(LOGGINGLEVEL.INFO, "Setting up memory chart");
         if (xAxis == null) { // If xAxis is not separately defined in FXML, get it from the chart
             xAxis = (NumberAxis) memoryUsageChart.getXAxis();
             xAxis.setAutoRanging(false);
@@ -50,13 +52,13 @@ public class MemoryController {
                 newSeries.setName(pool.getName());
                 seriesList.add(newSeries);
                 memoryUsageChart.getData().add(newSeries);
-                // todo log "added series for pool: " + pool.getName()
+                Logger.log(LOGGINGLEVEL.INFO, "added series for pool: " + pool.getName());
             }
         }
     }
 
     public void updateChart() {
-        // todo log "updating memory chart"
+        Logger.log(LOGGINGLEVEL.INFO, "Updating memory chart");
         List<MemoryPoolMXBean> pools = ManagementFactory.getMemoryPoolMXBeans();
 
         for (MemoryPoolMXBean pool: pools) {

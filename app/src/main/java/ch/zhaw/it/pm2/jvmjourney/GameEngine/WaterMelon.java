@@ -1,5 +1,8 @@
 package ch.zhaw.it.pm2.jvmjourney.GameEngine;
 
+import ch.zhaw.it.pm2.jvmjourney.Logger.LOGGINGLEVEL;
+import ch.zhaw.it.pm2.jvmjourney.Logger.Logger;
+
 /**
  * The WaterMelon class represents a watermelon in the game.
  * It extends the MovingObject class and has properties for its direction.
@@ -26,8 +29,7 @@ public class WaterMelon extends MovingObject {
             try {
                 Thread.sleep(Long.MAX_VALUE);
             } catch (InterruptedException e) {
-                System.out.println("Thread interrupted");
-//                throw new RuntimeException(e);
+                Logger.log(LOGGINGLEVEL.ERROR, e.getMessage());
             }
         });
         thread.start();
