@@ -26,12 +26,14 @@ public class ThreadController {
 
     @FXML
     public void initialize() {
+        // todo log "initializing thread controller"
         setupChart();
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
         executor.scheduleAtFixedRate(this::updateChart, 0, UPDATE_PERIOD, TimeUnit.SECONDS);
     }
 
     private void setupChart() {
+        // todo log "setting up thread chart"
         if (xAxis == null) { // If xAxis is not separately defined in FXML, get it from the chart
             xAxis = (NumberAxis) threadCountChart.getXAxis();
             xAxis.setAutoRanging(false);
@@ -48,6 +50,7 @@ public class ThreadController {
      * Calculating -15 to exclude the JavaFX and java native threads.
      */
     private void updateChart() {
+        //todo log "updating thread chart"
         javafx.application.Platform.runLater(() -> {
             if (series.getData().size() >= maxDataPoints) {
                 series.getData().removeFirst();
@@ -67,6 +70,7 @@ public class ThreadController {
      */
     public int getThreadCount() {
         ThreadMXBean threadBean = ManagementFactory.getThreadMXBean();
+        // todo log "Current thread count: " + threadBean.getThreadCount()
         return threadBean.getThreadCount();
     }
 

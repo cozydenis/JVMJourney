@@ -29,12 +29,14 @@ public class MemoryController {
 
     @FXML
     public void initialize() {
+        // Todo log "initializing memory controller"
         setupChart();
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
         executor.scheduleAtFixedRate(this::updateChart, 0, UPDATE_PERIOD, TimeUnit.SECONDS);
     }
 
     private void setupChart() {
+        // todo log "setting up memory chart"
         if (xAxis == null) { // If xAxis is not separately defined in FXML, get it from the chart
             xAxis = (NumberAxis) memoryUsageChart.getXAxis();
             xAxis.setAutoRanging(false);
@@ -49,11 +51,13 @@ public class MemoryController {
                 newSeries.setName(pool.getName());
                 seriesList.add(newSeries);
                 memoryUsageChart.getData().add(newSeries);
+                // todo log "added series for pool: " + pool.getName()
             }
         }
     }
 
     private void updateChart() {
+        // todo log "updating memory chart"
         List<MemoryPoolMXBean> pools = ManagementFactory.getMemoryPoolMXBeans();
 
         for (MemoryPoolMXBean pool: pools) {
