@@ -156,4 +156,24 @@ public class MovingObject extends GameObject {
     public void update() {
         move();
     }
+
+    public void setCurrentVelocity(PositionVector velocity) {
+        this.currentVelocity = velocity;
+    }
+
+    public boolean inAir() {
+        return inAir;
+    }
+
+    public void setInAir(boolean inAir) {
+        this.inAir = inAir;
+    }
+
+    public void setGoingRight(boolean goingRight) {
+        this.goingRight = goingRight;
+    }
+
+    public boolean goingRight() {
+        return goingRight;
+    }
 }

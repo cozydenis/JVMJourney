@@ -29,13 +29,12 @@ public class MemoryController {
 
     @FXML
     public void initialize() {
-        // Todo log "initializing memory controller"
         setupChart();
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
         executor.scheduleAtFixedRate(this::updateChart, 0, UPDATE_PERIOD, TimeUnit.SECONDS);
     }
 
-    private void setupChart() {
+    public void setupChart() {
         // todo log "setting up memory chart"
         if (xAxis == null) { // If xAxis is not separately defined in FXML, get it from the chart
             xAxis = (NumberAxis) memoryUsageChart.getXAxis();
@@ -56,7 +55,7 @@ public class MemoryController {
         }
     }
 
-    private void updateChart() {
+    public void updateChart() {
         // todo log "updating memory chart"
         List<MemoryPoolMXBean> pools = ManagementFactory.getMemoryPoolMXBeans();
 
@@ -86,5 +85,26 @@ public class MemoryController {
         int lowerBound = Math.max(xSeriesData - maxDataPoints + 1, 0);
         xAxis.setLowerBound(lowerBound);
         xAxis.setUpperBound(lowerBound + maxDataPoints - 1);
+    }
+
+    public void setMemoryUsageChart(LineChart<Number, Number> memoryUsageChart) {
+        this.memoryUsageChart = memoryUsageChart;
+    }
+
+    public void setxAxis(NumberAxis xAxis) {
+        this.xAxis = xAxis;
+    }
+
+
+    public List<XYChart.Series<Number, Number>> getSeriesList() {
+        return seriesList;
+    }
+
+    public NumberAxis getxAxis() {
+        return xAxis;
+    }
+
+    public LineChart<Number, Number> getMemoryUsageChart() {
+        return memoryUsageChart;
     }
 }

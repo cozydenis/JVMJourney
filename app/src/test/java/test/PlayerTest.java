@@ -8,6 +8,7 @@ import ch.zhaw.it.pm2.jvmjourney.GameEngine.PositionVector;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.Direction;
 import ch.zhaw.it.pm2.jvmjourney.GameEngine.GameConfig;
 import javafx.embed.swing.JFXPanel;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -19,6 +20,7 @@ public class PlayerTest {
 
     private Player player;
     private ImageView mockImageView;
+    private Image mockImage;
 
     @BeforeAll
     public static void initToolkit() {
@@ -28,6 +30,8 @@ public class PlayerTest {
     @BeforeEach
     public void setUp() {
         mockImageView = mock(ImageView.class);
+        mockImage = mock(Image.class);
+        when(mockImageView.getImage()).thenReturn(mockImage);
         player = new Player(0, GameConfig.GROUNDLEVEL, "walking.png", 6, 6, 1, 1f);
         player.setPunchingSprite(mockImageView);
         player.setImageView(mockImageView);
@@ -99,4 +103,26 @@ public class PlayerTest {
         player.move();
         assertEquals(GameConfig.GROUNDLEVEL, player.getPosition().getY());
     }
+
+
+    @Test
+    public void testImageFlipWhenChangingDirection() {
+        // Setup the initial state where the player is facing right.
+        player.setGoingRight(true); // initially facing right
+        player.loadSprite("walking.png"); // Load initial sprite
+        Image initialImage = player.getImage(); // Capture the initial image
+
+        // Change direction to left
+        player.setGoingRight(false);
+        player.loadSprite("walking.png"); // This should reload or flip the sprite based on new direction
+        Image flippedImage = player.getImage(); // Capture the image after direction change
+
+
+        assertNotSame(initialImage, flippedImage, "The image should change when direction changes.");
+    }
+
+
+
+
+
 }

@@ -97,4 +97,32 @@ public abstract class GameLoopTimer extends AnimationTimer {
      * @param secondsSinceLastFrame The time in seconds since the last frame.
      */
     public abstract void tick(float secondsSinceLastFrame);
+
+    public boolean isPaused() {
+        return isPaused;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public boolean isRestartScheduled() {
+        return restartScheduled;
+    }
+
+    public DoubleProperty getAnimationDuration() {
+        return animationDuration;
+    }
+
+    public void setPauseScheduled(boolean pauseScheduled) {
+        this.pauseScheduled = pauseScheduled;
+    }
+
+    public void setPlayScheduled(boolean playScheduled) {
+        this.playScheduled = playScheduled;
+    }
+
+    public void setRestartScheduled(boolean restartScheduled) {
+        this.restartScheduled = restartScheduled;
+    }
 }
